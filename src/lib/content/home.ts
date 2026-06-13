@@ -9,8 +9,8 @@ export const HOME = {
     titleA: "Run your whole",
     titleAccent: "business",
     titleB: "from your phone.",
-    sub: "Orders, GST billing, stock and payments — one clean app for your salesmen, warehouse and accounts. No computer. No backups. No tension.",
-    proof: "Built inside a real distribution business — not a software lab.",
+    sub: "Orders, GST billing, stock and payments one clean app for your salesmen, warehouse and accounts. No computer. No backups. No tension.",
+    proof: "Built inside a real distribution business not a software lab.",
     stats: [
       { k: "₹33", v: "per day, all-in" },
       { k: "90 sec", v: "to place an order" },
@@ -33,13 +33,13 @@ export const HOME = {
     label: "Inside Vrikso",
     title: "Not a brochure.",
     titleAccent: "The real screens.",
-    p: "Every screenshot below is the live app — the same one your salesman opens at the shop and your accountant opens at night.",
+    p: "Every screenshot below is the live app the same one your salesman opens at the shop and your accountant opens at night.",
     shots: {
-      order: { cap: "Take an order", sub: "Tap products, set qty, place — 90 seconds." },
+      order: { cap: "Take an order", sub: "Tap products, set qty, place 90 seconds." },
       invoice: { cap: "GST invoice", sub: "Auto-generated, share on WhatsApp." },
       aging: { cap: "Money owed", sub: "Outstanding by shop, by age bucket." },
       products: { cap: "Your catalog", sub: "Every SKU, pack-size, stock & price." },
-      dashboard: { cap: "The whole day, one screen", sub: "Orders, sales, outstanding and top products — live, on any laptop or phone." },
+      dashboard: { cap: "The whole day, one screen", sub: "Orders, sales, outstanding and top products live, on any laptop or phone." },
     },
   },
 
@@ -49,12 +49,12 @@ export const HOME = {
       {
         kicker: "The register",
         h: "Paper ledgers lie.",
-        p: "Outstanding scattered across diaries and memory. Vrikso keeps one live ledger — every order, invoice and payment, per shop, always current.",
+        p: "Outstanding scattered across diaries and memory. Vrikso keeps one live ledger every order, invoice and payment, per shop, always current.",
       },
       {
         kicker: "The desktop",
         h: "Old software is chained to a desk.",
-        p: "Desktop-era tools need a PC, licences and AMC visits. Vrikso runs on the phone already in your pocket — and your salesman's.",
+        p: "Desktop-era tools need a PC, licences and AMC visits. Vrikso runs on the phone already in your pocket and your salesman's.",
       },
       {
         kicker: "The backup",
@@ -70,12 +70,12 @@ export const HOME = {
       {
         k: "01",
         h: "Salesman takes the order at the shop",
-        p: "Pick the shop, tap products, place order — 90 seconds on a phone, even on 2G. Recent shops appear first.",
+        p: "Pick the shop, tap products, place order 90 seconds on a phone, even on 2G. Recent shops appear first.",
       },
       {
         k: "02",
         h: "Warehouse picks and loads",
-        p: "Picking and loading lists generate themselves. Mark delivered — stock decrements and the GST invoice is created automatically.",
+        p: "Picking and loading lists generate themselves. Mark delivered stock decrements and the GST invoice is created automatically.",
       },
       {
         k: "03",

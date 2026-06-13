@@ -1,6 +1,6 @@
 /** All homepage copy in one place — edit copy here, not in JSX. */
 export const HOME = {
-  nav: { home: "Home", product: "Product", pricing: "Pricing", contact: "Contact" },
+  nav: { home: "Home", product: "Product", pricing: "Pricing", blog: "Blog", contact: "Contact" },
   cta: { start: "Start free", demo: "WhatsApp demo", login: "Login" },
   waMessage: "Hi! I want a demo of Vrikso for my business.",
 
@@ -12,9 +12,9 @@ export const HOME = {
     sub: "Orders, GST billing, stock and payments one clean app for your salesmen, warehouse and accounts. No computer. No backups. No tension.",
     proof: "Built inside a real distribution business not a software lab.",
     stats: [
-      { k: "₹33", v: "per day, all-in" },
       { k: "90 sec", v: "to place an order" },
       { k: "10 min", v: "to go live" },
+      { k: "100%", v: "cloud-backed, always" },
     ],
   },
 
@@ -108,7 +108,7 @@ export const HOME = {
       ["Works on any phone", "Needs a Windows PC"],
       ["Automatic cloud backup", "Manual backups, local files"],
       ["Salesmen take orders in the field", "Orders dictated over phone calls"],
-      ["₹33 per day", "₹8,000+ per year plus AMC"],
+      ["Updates & support included", "Paid AMC for every update"],
     ],
     us: "Vrikso",
     them: "Desktop software",
@@ -139,6 +139,7 @@ export const HOME = {
     links: {
       distribution: "Vrikso Distribution",
       pricing: "Pricing",
+      blog: "Blog",
       contact: "Contact",
       privacy: "Privacy",
       terms: "Terms",

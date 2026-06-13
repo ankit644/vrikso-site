@@ -21,7 +21,7 @@ export const DISTRIBUTION: VerticalContent = {
 
   stats: [
     { k: "90 sec", v: "to place an order, even on 2G" },
-    { k: "₹33", v: "per day no licence, no AMC" },
+    { k: "10 min", v: "to set up and go live" },
     { k: "100%", v: "of orders backed up to the cloud" },
     { k: "2", v: "languages English & हिन्दी" },
   ],

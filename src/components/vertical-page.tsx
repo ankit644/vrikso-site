@@ -1,19 +1,37 @@
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
-import { PhoneShot } from "@/components/device";
+import { PhoneShot, BrowserShot } from "@/components/device";
 import { SITE, waLink } from "@/lib/site";
 import shotOrder from "../../public/app/m-order-new.png";
+import shotInvoice from "../../public/app/m-invoice.png";
 import shotAging from "../../public/app/m-aging.png";
+import shotProducts from "../../public/app/m-products.png";
+import shotDashboardD from "../../public/app/d-dashboard.png";
 
-/** Shape of a vertical's content file — one file per industry, one template. */
+const SCREENS = {
+  order: shotOrder,
+  invoice: shotInvoice,
+  aging: shotAging,
+  products: shotProducts,
+} as const;
+type ScreenKey = keyof typeof SCREENS;
+
+/** Shape of a vertical's content file — one file per industry, one template.
+    Sections marked optional render only when the content file provides them. */
 export type VerticalContent = {
   slug: string;
   metaTitle: string;
   metaDescription: string;
   hero: { eyebrow: string; title: string; titleAccent: string; sub: string };
   waMessage: string;
+  stats?: { k: string; v: string }[];
   features: { h: string; p: string; icon?: FeatureIconName }[];
+  featuresHeading?: string;
+  screens?: { label: string; title: string; titleAccent: string; p: string; shots: { key: ScreenKey; cap: string; sub: string }[]; dashboardCap?: string };
+  workflow?: { label: string; title: string; steps: { h: string; p: string }[] };
+  audience?: { label: string; title: string; items: { h: string; p: string }[] };
+  outcomes?: { label: string; title: string; items: { stat: string; h: string; p: string }[] };
   faqs: { q: string; a: string }[];
   finalCta: { title: string; p: string };
 };
@@ -68,6 +86,22 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
           </div>
         </section>
 
+        {/* Stats band */}
+        {v.stats && (
+          <section className="border-b border-line bg-paper-2">
+            <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-4 py-12 sm:px-6 md:grid-cols-4 md:py-14">
+              {v.stats.map((s, i) => (
+                <Reveal key={s.v} delay={i * 80}>
+                  <div className="text-center md:text-left">
+                    <p className="font-display text-brand-gradient text-4xl font-semibold md:text-5xl">{s.k}</p>
+                    <p className="mt-1.5 text-[0.82rem] leading-snug text-ink-soft">{s.v}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* Features — attractive icon-card grid */}
         <section className="relative overflow-hidden border-b border-line bg-paper">
           <div className="dotgrid absolute inset-0 opacity-50" aria-hidden />
@@ -75,7 +109,11 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
             <Reveal>
               <p className="rule-label text-violet-deep">Everything the day needs</p>
               <h2 className="font-display display-md mt-7 max-w-2xl font-medium">
-                From the first order to the last rupee, <em className="text-brand-gradient not-italic">one app does it all.</em>
+                {v.featuresHeading ? (
+                  <>{v.featuresHeading}</>
+                ) : (
+                  <>From the first order to the last rupee, <em className="text-brand-gradient not-italic">one app does it all.</em></>
+                )}
               </h2>
             </Reveal>
             <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -93,6 +131,118 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
             </div>
           </div>
         </section>
+
+        {/* App screens gallery — real product */}
+        {v.screens && (
+          <section className="relative overflow-hidden border-b border-line bg-paper-2">
+            <div className="dotgrid absolute inset-0 opacity-50" aria-hidden />
+            <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+              <Reveal>
+                <p className="rule-label text-violet-deep">{v.screens.label}</p>
+                <h2 className="font-display display-md mt-7 max-w-2xl font-medium">
+                  {v.screens.title} <em className="text-brand-gradient not-italic">{v.screens.titleAccent}</em>
+                </h2>
+                <p className="mt-4 max-w-xl text-[0.97rem] leading-relaxed text-ink-soft">{v.screens.p}</p>
+              </Reveal>
+
+              <Reveal delay={120}>
+                <div className="relative mt-12">
+                  <div className="absolute -inset-x-8 -top-8 bottom-8 -z-0 rounded-[32px] bg-violet/10 blur-2xl" aria-hidden />
+                  <BrowserShot src={shotDashboardD} alt="The Vrikso admin dashboard on a laptop" className="relative z-10" />
+                  {v.screens.dashboardCap && (
+                    <p className="mt-4 max-w-md text-sm text-ink-soft">{v.screens.dashboardCap}</p>
+                  )}
+                </div>
+              </Reveal>
+
+              <div className="mt-16 grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
+                {v.screens.shots.map((s, i) => (
+                  <Reveal key={s.cap} delay={i * 90}>
+                    <figure className="flex flex-col items-center text-center">
+                      <PhoneShot src={SCREENS[s.key]} alt={`${s.cap} — Vrikso`} width={210} />
+                      <figcaption className="mt-5">
+                        <p className="font-display text-lg font-medium">{s.cap}</p>
+                        <p className="mt-1 text-[0.82rem] leading-snug text-ink-faint">{s.sub}</p>
+                      </figcaption>
+                    </figure>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* How it works — operational flow */}
+        {v.workflow && (
+          <section className="border-b border-line bg-paper">
+            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+              <Reveal>
+                <p className="rule-label text-violet-deep">{v.workflow.label}</p>
+                <h2 className="font-display display-md mt-7 max-w-2xl font-medium">{v.workflow.title}</h2>
+              </Reveal>
+              <div className="mt-14 grid gap-y-10 sm:grid-cols-2 sm:gap-x-10 lg:grid-cols-4">
+                {v.workflow.steps.map((s, i) => (
+                  <Reveal key={s.h} delay={i * 90}>
+                    <div className="relative">
+                      <span className="font-display text-brand-gradient text-5xl font-semibold">{`0${i + 1}`}</span>
+                      <span
+                        aria-hidden
+                        className="mt-3 hidden h-px w-full bg-gradient-to-r from-lilac-line to-transparent lg:block"
+                      />
+                      <h3 className="font-display mt-4 text-xl leading-snug font-medium">{s.h}</h3>
+                      <p className="mt-2 text-[0.92rem] leading-relaxed text-ink-soft">{s.p}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Who it's for */}
+        {v.audience && (
+          <section className="border-b border-line bg-paper-2">
+            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+              <Reveal>
+                <p className="rule-label text-violet-deep">{v.audience.label}</p>
+                <h2 className="font-display display-md mt-7 max-w-2xl font-medium">{v.audience.title}</h2>
+              </Reveal>
+              <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {v.audience.items.map((a, i) => (
+                  <Reveal key={a.h} delay={i * 80}>
+                    <div className="h-full rounded-[var(--radius-card)] border border-line bg-paper-3 p-6 shadow-[var(--shadow-sm)]">
+                      <h3 className="font-display text-lg font-medium">{a.h}</h3>
+                      <p className="mt-2 text-[0.9rem] leading-relaxed text-ink-soft">{a.p}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Outcomes — why distributors switch */}
+        {v.outcomes && (
+          <section className="border-b border-line bg-paper">
+            <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+              <Reveal>
+                <p className="rule-label text-violet-deep">{v.outcomes.label}</p>
+                <h2 className="font-display display-md mt-7 max-w-2xl font-medium">{v.outcomes.title}</h2>
+              </Reveal>
+              <div className="mt-12 grid gap-5 md:grid-cols-3">
+                {v.outcomes.items.map((o, i) => (
+                  <Reveal key={o.h} delay={i * 100}>
+                    <div className="hero-night grain relative h-full overflow-hidden rounded-[var(--radius-card)] p-7 text-on-hero shadow-[var(--shadow-lg)]">
+                      <p className="font-display relative z-10 text-brand-gradient text-4xl font-semibold">{o.stat}</p>
+                      <h3 className="font-display relative z-10 mt-3 text-xl font-medium">{o.h}</h3>
+                      <p className="relative z-10 mt-2 text-[0.92rem] leading-relaxed text-on-hero-dim">{o.p}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* FAQs */}
         <section className="border-b border-line bg-paper-2">

@@ -19,6 +19,13 @@ export const DISTRIBUTION: VerticalContent = {
 
   waMessage: "Hi! I run a distribution business and want a demo of Vrikso Distribution.",
 
+  stats: [
+    { k: "90 sec", v: "to place an order, even on 2G" },
+    { k: "₹33", v: "per day — no licence, no AMC" },
+    { k: "100%", v: "of orders backed up to the cloud" },
+    { k: "2", v: "languages — English & हिन्दी" },
+  ],
+
   features: [
     {
       icon: "order",
@@ -62,6 +69,53 @@ export const DISTRIBUTION: VerticalContent = {
     },
   ],
 
+  screens: {
+    label: "See the real app",
+    title: "Not screenshots from a brochure.",
+    titleAccent: "The actual app.",
+    p: "This is the live Vrikso app — the same screens your salesman opens at the shop and you open at night to see where the day landed.",
+    dashboardCap:
+      "Your control room. Today's orders, sales and outstanding, top products and company-wise sales — live, on any laptop or phone.",
+    shots: [
+      { key: "order", cap: "Take an order", sub: "Tap products, set qty, place — 90 seconds." },
+      { key: "invoice", cap: "GST invoice", sub: "Auto-generated, shared on WhatsApp." },
+      { key: "aging", cap: "Outstanding", sub: "Who owes what, by age bucket." },
+      { key: "products", cap: "Catalog", sub: "Every SKU, pack-size, stock & price." },
+    ],
+  },
+
+  workflow: {
+    label: "How a day runs",
+    title: "One unbroken flow — order to cash.",
+    steps: [
+      { h: "Salesman books the order", p: "At the counter, on his own phone. Recent shops first, schemes applied, works on the weakest network." },
+      { h: "Warehouse picks & loads", p: "Picking and loading lists build themselves from the day's orders. Nothing is typed twice." },
+      { h: "Invoice on delivery", p: "Marking delivered creates the GST invoice and drops stock. The PDF goes to the shop on WhatsApp." },
+      { h: "Payment & ledger update", p: "Record cash, UPI or cheque against the bill. The shop's outstanding and your aging report update instantly." },
+    ],
+  },
+
+  audience: {
+    label: "Built for your trade",
+    title: "Made for every link in the distribution chain.",
+    items: [
+      { h: "FMCG distributors", p: "Multi-brand, multi-route operations with salesmen in the field every morning." },
+      { h: "Wholesalers", p: "High-volume counters that need fast billing, clean ledgers and live stock." },
+      { h: "Super-stockists", p: "Serving sub-distributors and retailers across a territory, with credit to track." },
+      { h: "C&F agents", p: "Stock, dispatch and statutory paperwork for the brands you carry — in one place." },
+    ],
+  },
+
+  outcomes: {
+    label: "Why distributors switch",
+    title: "What changes once you're on Vrikso.",
+    items: [
+      { stat: "₹0", h: "Leakage from lost orders", p: "Every order is captured digitally the second it's taken — nothing slips through a diary or a phone call." },
+      { stat: "Day 1", h: "Outstanding you can see", p: "A live, per-shop ledger and an aging report replace guesswork. You always know where your money is stuck." },
+      { stat: "No PC", h: "Nothing to install or maintain", p: "No Windows machine, no licence, no AMC engineer. It runs on the phones your team already carries." },
+    ],
+  },
+
   faqs: [
     {
       q: "Will it work on my salesmen's cheap Android phones?",
@@ -78,6 +132,18 @@ export const DISTRIBUTION: VerticalContent = {
     {
       q: "Do I need a computer at all?",
       a: "No. Admin, salesmen, warehouse and accounts all work from phones. A laptop is optional for big-screen comfort.",
+    },
+    {
+      q: "Does it handle schemes, discounts and GST returns?",
+      a: "Yes. Scheme and quantity discounts apply automatically on the order, GST is split correctly on every invoice, and you can export GSTR-1 in the government format for your CA.",
+    },
+    {
+      q: "Can I see which salesman took which order, on which route?",
+      a: "Every order is tagged to its salesman and route. You see each route's coverage, order value and outstanding — and each salesman sees only his own beat.",
+    },
+    {
+      q: "Can different people have different access?",
+      a: "Yes. Admin, salesman, warehouse and accounts each get a role that shows only what they need — orders, picking, billing or ledgers.",
     },
   ],
 

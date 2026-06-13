@@ -7,6 +7,7 @@ export type BlogBlock =
   | { t: "ul"; items: string[] }
   | { t: "quote"; x: string }
   | { t: "callout"; x: string }
+  | { t: "image"; src: string; cap?: string }
   | { t: "shot"; name: "order" | "invoice" | "aging" | "products" | "dashboard"; cap?: string };
 
 export type BlogPost = {
@@ -17,7 +18,8 @@ export type BlogPost = {
   author: string;
   date: string; // ISO yyyy-mm-dd
   readMins: number;
-  cover: number; // 0-5 palette selector for BlogCover
+  cover: number; // 0-5 palette selector for the SVG fallback cover
+  image?: string; // optional real cover image under /public (overrides the SVG)
   tags: string[];
   body: BlogBlock[];
 };
@@ -40,6 +42,7 @@ export const POSTS: BlogPost[] = [
     date: "2026-05-28",
     readMins: 7,
     cover: 0,
+    image: "/abstract_blog_4.png",
     tags: ["distribution", "digitisation", "small business"],
     body: [
       { t: "p", x: "For most distributors, the business already works. Orders come in, goods go out, money comes back. The problem is that it all lives in three places at once: a diary, a desktop in the corner, and the owner's head. The day that memory takes a holiday, the business limps." },
@@ -51,6 +54,7 @@ export const POSTS: BlogPost[] = [
       { t: "shot", name: "order", cap: "Field order entry — recent shops first, schemes applied automatically." },
       { t: "h2", x: "Step 3 — Let billing and stock follow automatically" },
       { t: "p", x: "The whole point of one system is that you stop typing the same thing twice. When the warehouse marks an order delivered, stock should drop and a GST invoice should generate on its own. No re-keying, no mismatch between the bill and the godown." },
+      { t: "image", src: "/abstract_blog_2.png", cap: "One phone, one record — orders, invoices and reports flowing from the same source." },
       { t: "h2", x: "Step 4 — Make outstanding visible to everyone who needs it" },
       { t: "p", x: "A live, per-shop ledger turns 'how much does Sharma Store owe?' from a 20-minute hunt into a two-second glance. That single change is usually what pays for the software in the first month." },
       { t: "callout", x: "Rule of thumb: if a step needs a computer, a licence key or an engineer visit, it will slow you down. Pick tools that run in a browser and update themselves." },
@@ -69,9 +73,11 @@ export const POSTS: BlogPost[] = [
     date: "2026-05-12",
     readMins: 8,
     cover: 1,
+    image: "/gst_abstract_2.png",
     tags: ["GST", "invoicing", "compliance"],
     body: [
       { t: "p", x: "A GST invoice is not just a bill — it is the document your buyer uses to claim input tax credit, and the record the department checks against your returns. Get the basics right and filing becomes routine. Get them wrong and you spend month-end fixing mismatches." },
+      { t: "image", src: "/gst_blog_abstract_1.png", cap: "Every invoice is a node in your GST trail — keep them clean and the returns take care of themselves." },
       { t: "h2", x: "What every tax invoice must show" },
       { t: "ul", items: [
         "Your name, address and GSTIN",

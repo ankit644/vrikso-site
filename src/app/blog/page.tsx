@@ -3,7 +3,7 @@ import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
-import BlogCover from "@/components/blog-cover";
+import PostCover from "@/components/post-cover";
 import { BLOG_INDEX, POSTS_BY_DATE, CATEGORIES, formatDate } from "@/lib/content/blog";
 import { SITE } from "@/lib/site";
 
@@ -59,7 +59,7 @@ export default function BlogIndexPage() {
                 className="group grid items-center gap-8 overflow-hidden rounded-[var(--radius-card)] border border-line bg-paper-3 shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lg)] md:grid-cols-2"
               >
                 <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto md:h-full md:min-h-[320px]">
-                  <BlogCover cover={featured.cover} category={featured.category} className="h-full transition-transform duration-500 group-hover:scale-[1.04]" priority />
+                  <PostCover image={featured.image} cover={featured.cover} category={featured.category} alt={featured.title} sizes="(min-width: 768px) 50vw, 100vw" className="transition-transform duration-500 group-hover:scale-[1.04]" priority />
                 </div>
                 <div className="p-7 md:p-10">
                   <div className="flex items-center gap-3 text-xs font-medium text-ink-faint">
@@ -94,7 +94,7 @@ export default function BlogIndexPage() {
                     className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-paper-3 shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-md)]"
                   >
                     <div className="relative aspect-[16/10] overflow-hidden">
-                      <BlogCover cover={post.cover} category={post.category} className="h-full transition-transform duration-500 group-hover:scale-[1.05]" />
+                      <PostCover image={post.image} cover={post.cover} category={post.category} alt={post.title} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="transition-transform duration-500 group-hover:scale-[1.05]" />
                     </div>
                     <div className="flex flex-1 flex-col p-6">
                       <div className="flex items-center gap-2.5 text-[0.72rem] font-medium text-ink-faint">

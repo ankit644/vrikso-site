@@ -5,7 +5,7 @@ import Image, { type StaticImageData } from "next/image";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
-import BlogCover from "@/components/blog-cover";
+import PostCover from "@/components/post-cover";
 import { POSTS, getPost, relatedPosts, formatDate, type BlogBlock } from "@/lib/content/blog";
 import { SITE, waLink } from "@/lib/site";
 
@@ -117,7 +117,7 @@ export default async function BlogPostPage({
         <div className="bg-paper">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <div className="relative -mb-px aspect-[16/8] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-lg)]">
-              <BlogCover cover={post.cover} category={post.category} className="h-full" priority />
+              <PostCover image={post.image} cover={post.cover} category={post.category} alt={post.title} sizes="(min-width: 896px) 896px, 100vw" priority />
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ export default async function BlogPostPage({
                   className="group flex h-full flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-paper-3 shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-md)]"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden">
-                    <BlogCover cover={r.cover} category={r.category} className="h-full transition-transform duration-500 group-hover:scale-[1.05]" />
+                    <PostCover image={r.image} cover={r.cover} category={r.category} alt={r.title} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="transition-transform duration-500 group-hover:scale-[1.05]" />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
                     <span className="text-[0.72rem] font-semibold text-violet-deep">{r.category}</span>
@@ -212,6 +212,15 @@ function Block({ block }: { block: BlogBlock }) {
         <aside className="my-8 rounded-[var(--radius-card)] border border-lilac-line bg-lilac px-6 py-5">
           <p className="text-[1rem] leading-relaxed font-medium text-ink">{block.x}</p>
         </aside>
+      );
+    case "image":
+      return (
+        <figure className="my-10">
+          <div className="relative aspect-[16/7] overflow-hidden rounded-[var(--radius-card)] shadow-[var(--shadow-md)]">
+            <Image src={block.src} alt={block.cap ?? "Illustration"} fill sizes="(min-width: 768px) 672px, 100vw" className="object-cover" />
+          </div>
+          {block.cap && <figcaption className="mt-3 text-center text-sm text-ink-faint">{block.cap}</figcaption>}
+        </figure>
       );
     case "shot": {
       const shot = SHOTS[block.name];

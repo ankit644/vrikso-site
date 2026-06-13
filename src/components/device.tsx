@@ -21,7 +21,7 @@ export function PhoneShot({
   className?: string;
 }) {
   return (
-    <div className={`phone-frame ${className}`} style={{ width }}>
+    <div className={`phone-frame mx-auto ${className}`} style={{ width: "100%", maxWidth: width }}>
       <div className="phone-island" aria-hidden />
       <div className="phone-screen">
         {/* faux status bar — keeps the real app header fully visible below */}

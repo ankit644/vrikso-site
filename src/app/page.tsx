@@ -71,30 +71,33 @@ function Hero() {
           </p>
         </div>
 
-        {/* device cluster */}
-        <div className="rise relative mx-auto h-[440px] w-full max-w-[420px] md:h-[600px]" style={d(300)}>
+        {/* device cluster — mobile: single phone in flow; sm+: floating cluster */}
+        <div className="rise relative mx-auto w-full max-w-[420px]" style={d(300)}>
           <div className="absolute -inset-6 rounded-full bg-violet/25 blur-3xl" aria-hidden />
 
-          {/* back phone — invoice, offset + rotated */}
-          <div
-            className="floaty-slow absolute top-6 left-1 z-0 hidden opacity-95 sm:block md:top-16 md:left-0"
-            style={{ ["--rot" as string]: "-7deg" }}
-          >
-            <PhoneShot src={shotInvoice} alt="GST invoice in the Vrikso app" width={208} />
+          {/* mobile: one full, un-clipped phone */}
+          <div className="relative z-10 mx-auto w-[68%] min-w-[220px] max-w-[280px] pb-2 sm:hidden">
+            <PhoneShot src={shotOrder} alt="Taking an order in the Vrikso app" width={280} priority />
           </div>
 
-          {/* front phone — order screen */}
-          <div
-            className="floaty absolute top-0 right-0 z-10 sm:right-2 md:right-6"
-            style={{ ["--rot" as string]: "3deg" }}
-          >
-            <PhoneShot src={shotOrder} alt="Taking an order in the Vrikso app" width={272} priority />
-          </div>
-
-          {/* floating glass chip */}
-          <div className="glass absolute bottom-4 left-2 z-20 hidden rounded-2xl px-4 py-3 text-on-hero shadow-lg sm:block md:bottom-12 md:left-6">
-            <p className="text-[0.6rem] font-semibold tracking-widest text-on-hero-dim uppercase">Total outstanding</p>
-            <p className="font-display text-xl font-semibold">₹6,133.00</p>
+          {/* sm+: layered floating cluster */}
+          <div className="relative hidden h-[520px] sm:block md:h-[600px]">
+            <div
+              className="floaty-slow absolute top-6 left-0 z-0 w-[200px] opacity-95 md:top-16"
+              style={{ ["--rot" as string]: "-7deg" }}
+            >
+              <PhoneShot src={shotInvoice} alt="GST invoice in the Vrikso app" width={200} />
+            </div>
+            <div
+              className="floaty absolute top-0 right-0 z-10 w-[240px] md:right-6 md:w-[272px]"
+              style={{ ["--rot" as string]: "3deg" }}
+            >
+              <PhoneShot src={shotOrder} alt="Taking an order in the Vrikso app" width={272} />
+            </div>
+            {/* <div className="glass absolute bottom-4 left-0 z-20 rounded-2xl px-4 py-3 text-on-hero shadow-lg md:bottom-12 md:left-6">
+              <p className="text-[0.6rem] font-semibold tracking-widest text-on-hero-dim uppercase">Total outstanding</p>
+              <p className="font-display text-xl font-semibold">₹6,133.00</p>
+            </div> */}
           </div>
         </div>
       </div>

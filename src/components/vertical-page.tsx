@@ -47,13 +47,22 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
               </div>
             </div>
 
-            <div className="rise relative mx-auto h-[400px] w-full max-w-[360px]" style={{ ["--rise-delay" as string]: "300ms" }}>
+            <div className="rise relative mx-auto w-full max-w-[380px]" style={{ ["--rise-delay" as string]: "300ms" }}>
               <div className="absolute -inset-6 rounded-full bg-violet/25 blur-3xl" aria-hidden />
-              <div className="floaty-slow absolute top-10 left-0 z-0 hidden sm:block" style={{ ["--rot" as string]: "-7deg" }}>
-                <PhoneShot src={shotAging} alt="Payment aging report" width={196} />
+
+              {/* mobile: one full phone in flow */}
+              <div className="relative z-10 mx-auto w-[68%] min-w-[220px] max-w-[280px] sm:hidden">
+                <PhoneShot src={shotOrder} alt="Taking an order in Vrikso" width={280} priority />
               </div>
-              <div className="floaty absolute top-0 right-0 z-10" style={{ ["--rot" as string]: "4deg" }}>
-                <PhoneShot src={shotOrder} alt="Taking an order in Vrikso" width={260} priority />
+
+              {/* sm+: floating cluster */}
+              <div className="relative hidden h-[440px] sm:block">
+                <div className="floaty-slow absolute top-10 left-0 z-0 w-[190px]" style={{ ["--rot" as string]: "-7deg" }}>
+                  <PhoneShot src={shotAging} alt="Payment aging report" width={190} />
+                </div>
+                <div className="floaty absolute top-0 right-0 z-10 w-[240px] md:w-[260px]" style={{ ["--rot" as string]: "4deg" }}>
+                  <PhoneShot src={shotOrder} alt="Taking an order in Vrikso" width={260} />
+                </div>
               </div>
             </div>
           </div>

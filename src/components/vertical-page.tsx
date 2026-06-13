@@ -1,7 +1,10 @@
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
+import { PhoneShot } from "@/components/device";
 import { SITE, waLink } from "@/lib/site";
+import shotOrder from "../../public/app/m-order-new.png";
+import shotAging from "../../public/app/m-aging.png";
 
 /** Shape of a vertical's content file — one file per industry, one template. */
 export type VerticalContent = {
@@ -22,34 +25,36 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
       <main>
         {/* Hero */}
         <section className="hero-night grain relative overflow-hidden text-on-hero">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-            <p className="rise rule-label max-w-md text-on-hero-dim">{v.hero.eyebrow}</p>
-            <h1
-              className="font-display rise mt-6 max-w-3xl text-4xl leading-[1.08] font-medium sm:text-5xl md:text-6xl"
-              style={{ ["--rise-delay" as string]: "120ms" }}
-            >
-              {v.hero.title}{" "}
-              <em className="text-brand-gradient not-italic">{v.hero.titleAccent}</em>
-            </h1>
-            <p
-              className="rise mt-6 max-w-2xl text-base leading-relaxed text-on-hero-dim sm:text-lg"
-              style={{ ["--rise-delay" as string]: "240ms" }}
-            >
-              {v.hero.sub}
-            </p>
-            <div className="rise mt-9 flex flex-wrap gap-3" style={{ ["--rise-delay" as string]: "360ms" }}>
-              <a
-                href={SITE.appUrl}
-                className="bg-brand-gradient inline-flex min-h-12 items-center rounded-full px-7 font-semibold text-white shadow-[0_12px_32px_-8px_rgba(124,58,237,0.55)] transition-transform hover:scale-[1.03] active:scale-95"
+          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:py-28">
+            <div className="relative z-10">
+              <p className="rise rule-label max-w-md text-on-hero-dim">{v.hero.eyebrow}</p>
+              <h1
+                className="font-display display-lg rise mt-6 max-w-3xl font-medium"
+                style={{ ["--rise-delay" as string]: "120ms" }}
               >
-                Start free
-              </a>
-              <a
-                href={waLink(v.waMessage)}
-                className="inline-flex min-h-12 items-center rounded-full border border-white/25 px-7 font-semibold transition-colors hover:bg-white/10"
+                {v.hero.title}{" "}
+                <em className="text-brand-gradient not-italic">{v.hero.titleAccent}</em>
+              </h1>
+              <p
+                className="rise mt-6 max-w-2xl text-base leading-relaxed text-on-hero-dim sm:text-lg"
+                style={{ ["--rise-delay" as string]: "240ms" }}
               >
-                WhatsApp demo
-              </a>
+                {v.hero.sub}
+              </p>
+              <div className="rise mt-9 flex flex-wrap gap-3" style={{ ["--rise-delay" as string]: "360ms" }}>
+                <a href={SITE.appUrl} className="btn-primary">Start free</a>
+                <a href={waLink(v.waMessage)} className="btn-ghost-light">WhatsApp demo</a>
+              </div>
+            </div>
+
+            <div className="rise relative mx-auto h-[400px] w-full max-w-[360px]" style={{ ["--rise-delay" as string]: "300ms" }}>
+              <div className="absolute -inset-6 rounded-full bg-violet/25 blur-3xl" aria-hidden />
+              <div className="floaty-slow absolute top-10 left-0 z-0 hidden sm:block" style={{ ["--rot" as string]: "-7deg" }}>
+                <PhoneShot src={shotAging} alt="Payment aging report" width={196} />
+              </div>
+              <div className="floaty absolute top-0 right-0 z-10" style={{ ["--rot" as string]: "4deg" }}>
+                <PhoneShot src={shotOrder} alt="Taking an order in Vrikso" width={260} priority />
+              </div>
             </div>
           </div>
         </section>
@@ -105,12 +110,7 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
                 {v.finalCta.title}
               </h2>
               <p className="mt-4 text-on-hero-dim">{v.finalCta.p}</p>
-              <a
-                href={waLink(v.waMessage)}
-                className="bg-brand-gradient mt-8 inline-flex min-h-12 items-center rounded-full px-8 font-semibold text-white shadow-[0_12px_32px_-8px_rgba(124,58,237,0.55)] transition-transform hover:scale-[1.03] active:scale-95"
-              >
-                WhatsApp demo
-              </a>
+              <a href={waLink(v.waMessage)} className="btn-primary mt-8">WhatsApp demo</a>
             </Reveal>
           </div>
         </section>

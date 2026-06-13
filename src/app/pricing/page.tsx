@@ -75,7 +75,7 @@ export default function PricingPage() {
           <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
             <Reveal>
               <p className="rule-label text-violet-deep">Pricing</p>
-              <h1 className="font-display mt-6 max-w-2xl text-4xl leading-[1.08] font-medium md:text-5xl">
+              <h1 className="font-display display-lg mt-6 max-w-2xl font-medium">
                 Simple prices, in <em className="text-brand-gradient not-italic">plain rupees.</em>
               </h1>
               <p className="mt-4 max-w-xl text-ink-soft">
@@ -90,8 +90,8 @@ export default function PricingPage() {
                   <div
                     className={`flex h-full flex-col rounded-[var(--radius-card)] border p-7 ${
                       p.featured
-                        ? "hero-night relative border-transparent text-on-hero shadow-[0_28px_56px_-20px_rgba(20,14,38,0.55)]"
-                        : "border-line bg-paper-2/50"
+                        ? "hero-night relative overflow-hidden border-transparent text-on-hero shadow-[var(--shadow-lg)]"
+                        : "border-line bg-paper-3 shadow-[var(--shadow-sm)]"
                     }`}
                   >
                     {p.featured && (

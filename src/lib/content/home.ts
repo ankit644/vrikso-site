@@ -11,6 +11,36 @@ export const HOME = {
     titleB: "from your phone.",
     sub: "Orders, GST billing, stock and payments — one clean app for your salesmen, warehouse and accounts. No computer. No backups. No tension.",
     proof: "Built inside a real distribution business — not a software lab.",
+    stats: [
+      { k: "₹33", v: "per day, all-in" },
+      { k: "90 sec", v: "to place an order" },
+      { k: "10 min", v: "to go live" },
+    ],
+  },
+
+  /* Honest value-props that scroll in the trust strip (no false endorsements). */
+  strip: [
+    "GST invoices, automatically",
+    "Works on any Android phone",
+    "Automatic cloud backup",
+    "Hindi + English",
+    "Live outstanding, per shop",
+    "No PC · No licence · No AMC",
+    "Built for Bharat's trade",
+  ],
+
+  gallery: {
+    label: "Inside Vrikso",
+    title: "Not a brochure.",
+    titleAccent: "The real screens.",
+    p: "Every screenshot below is the live app — the same one your salesman opens at the shop and your accountant opens at night.",
+    shots: {
+      order: { cap: "Take an order", sub: "Tap products, set qty, place — 90 seconds." },
+      invoice: { cap: "GST invoice", sub: "Auto-generated, share on WhatsApp." },
+      aging: { cap: "Money owed", sub: "Outstanding by shop, by age bucket." },
+      products: { cap: "Your catalog", sub: "Every SKU, pack-size, stock & price." },
+      dashboard: { cap: "The whole day, one screen", sub: "Orders, sales, outstanding and top products — live, on any laptop or phone." },
+    },
   },
 
   pains: {

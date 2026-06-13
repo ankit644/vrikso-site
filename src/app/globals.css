@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
+/* ── Vrikso site design tokens ──────────────────────────────────────────
+   Brand accent mirrors My-business-crm/src/app/globals.css — keep in sync.
+   The site's own voice: warm paper + deep ink-violet, editorial serif
+   display. Violet is used with restraint: hero, CTAs, accents only.     */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper:      #FAF8F4; /* warm off-white canvas */
+  --paper-2:    #F2EFE8; /* deeper paper for alt sections */
+  --ink:        #18102B; /* violet-black, near-ink */
+  --ink-soft:   #564D6E; /* secondary text on paper */
+  --ink-faint:  #8B84A0;
+  --line:       #E6E1D6; /* warm hairline */
+
+  --violet:     #7C3AED; /* brand accent (mirror of app) */
+  --violet-deep:#6D28D9;
+  --purple:     #9333EA;
+  --lilac:      #F0EAFB; /* soft violet tint on paper */
+  --lilac-line: #DCD0F2;
+
+  --hero:       #140E26; /* hero/night sections */
+  --hero-2:     #1D1438;
+  --on-hero:    #F4F1FA;
+  --on-hero-dim:#A89DC8;
+
+  --radius-card: 18px;
+  --radius-ctrl: 12px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-body: var(--font-schibsted), ui-sans-serif, sans-serif;
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-violet: var(--violet);
+  --color-violet-deep: var(--violet-deep);
+  --color-purple: var(--purple);
+  --color-lilac: var(--lilac);
+  --color-lilac-line: var(--lilac-line);
+  --color-hero: var(--hero);
+  --color-hero-2: var(--hero-2);
+  --color-on-hero: var(--on-hero);
+  --color-on-hero-dim: var(--on-hero-dim);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--violet);
+  color: #fff;
+}
+
+/* Display type — editorial serif with tight leading */
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 72;
+  letter-spacing: -0.015em;
+}
+
+/* Brand gradient (mirror of app) */
+.bg-brand-gradient {
+  background-image: linear-gradient(120deg, var(--violet), var(--purple));
+}
+.text-brand-gradient {
+  background-image: linear-gradient(120deg, var(--violet), var(--purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Hero atmosphere: layered violet glows + faint grain on near-black */
+.hero-night {
+  background-color: var(--hero);
+  background-image:
+    radial-gradient(900px 540px at 85% -10%, rgba(124, 58, 237, 0.28), transparent 62%),
+    radial-gradient(700px 460px at -10% 110%, rgba(147, 51, 234, 0.16), transparent 60%);
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Hairline-ruled section headers, editorial style */
+.rule-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.rule-label::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: currentColor;
+  opacity: 0.25;
+}
+
+/* Load + scroll reveals (CSS-only animation; JS only toggles a class) */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.rise {
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--rise-delay, 0ms);
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Phone mockup frame */
+.phone-frame {
+  border-radius: 2.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(160deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02));
+  box-shadow:
+    0 40px 80px -24px rgba(10, 5, 30, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }

@@ -23,7 +23,7 @@ export default function ContactPage() {
               <em className="text-brand-gradient not-italic">not a ticket.</em>
             </h1>
             <p className="mt-4 max-w-md text-ink-soft">
-              Demos, pricing, migration from your current software — message us and a
+              Demos, pricing, migration from your current software message us and a
               real human replies, usually within the hour.
             </p>
           </Reveal>
@@ -44,7 +44,7 @@ export default function ContactPage() {
                 </div>
                 <h2 className="font-display relative z-10 mt-6 text-3xl font-medium">WhatsApp us</h2>
                 <p className="relative z-10 mt-2 max-w-xs text-sm leading-relaxed text-on-hero-dim">
-                  The way you already talk to your suppliers. Tap, type, done — a real human replies, usually within the hour.
+                  The way you already talk to your suppliers. Tap, type, done a real human replies, usually within the hour.
                 </p>
                 <span className="btn-primary relative z-10 mt-7 self-start">
                   Open WhatsApp

@@ -21,34 +21,42 @@ export const DISTRIBUTION: VerticalContent = {
 
   features: [
     {
+      icon: "order",
       h: "Orders from the field",
       p: "Salesmen pick the shop, tap products, place the order — 90 seconds on any phone. Recent shops first, pack-size variants grouped, works on slow networks.",
     },
     {
+      icon: "route",
       h: "Routes & beats",
       p: "Shops organised by route. Each salesman sees his beat; you see every route's orders, value and coverage.",
     },
     {
+      icon: "warehouse",
       h: "Warehouse that runs itself",
       p: "Picking lists and loading lists generate automatically from the day's orders. Mark delivered and stock decrements — no double entry, ever.",
     },
     {
+      icon: "invoice",
       h: "GST invoices, automatically",
       p: "Delivery creates the GST invoice — CGST/SGST split, scheme discounts, round-off, your business details. Print A4 or share the PDF on WhatsApp in one tap.",
     },
     {
+      icon: "payments",
       h: "Payments & outstanding",
       p: "Record cash, UPI, cheque or bank against any invoice. Per-shop ledger, credit limits, and an aging report that shows exactly where your money is stuck.",
     },
     {
+      icon: "reports",
       h: "Reports your CA will love",
       p: "GSTR-1 export in the government format, sales by company and product, day books — Excel downloads included.",
     },
     {
+      icon: "wishlist",
       h: "Stock wishlist",
       p: "Shop asked for something you don't carry? Salesman logs it on the spot; you see demand before you buy.",
     },
     {
+      icon: "language",
       h: "English + हिन्दी app",
       p: "Every screen of the app switches between English and Hindi — your team uses whichever is comfortable.",
     },

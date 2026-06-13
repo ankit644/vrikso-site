@@ -13,7 +13,7 @@ export type VerticalContent = {
   metaDescription: string;
   hero: { eyebrow: string; title: string; titleAccent: string; sub: string };
   waMessage: string;
-  features: { h: string; p: string }[];
+  features: { h: string; p: string; icon?: FeatureIconName }[];
   faqs: { q: string; a: string }[];
   finalCta: { title: string; p: string };
 };
@@ -68,18 +68,25 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
           </div>
         </section>
 
-        {/* Features — editorial two-column list */}
-        <section className="border-b border-line bg-paper">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+        {/* Features — attractive icon-card grid */}
+        <section className="relative overflow-hidden border-b border-line bg-paper">
+          <div className="dotgrid absolute inset-0 opacity-50" aria-hidden />
+          <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
             <Reveal>
               <p className="rule-label text-violet-deep">Everything the day needs</p>
+              <h2 className="font-display display-md mt-7 max-w-2xl font-medium">
+                From the first order to the last rupee, <em className="text-brand-gradient not-italic">one app does it all.</em>
+              </h2>
             </Reveal>
-            <div className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-2">
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {v.features.map((f, i) => (
-                <Reveal key={f.h} delay={(i % 2) * 100}>
-                  <article className="border-t border-line pt-5">
-                    <h3 className="font-display text-xl font-medium">{f.h}</h3>
-                    <p className="mt-2.5 text-[0.95rem] leading-relaxed text-ink-soft">{f.p}</p>
+                <Reveal key={f.h} delay={(i % 3) * 90}>
+                  <article className="group flex h-full flex-col rounded-[var(--radius-card)] border border-line bg-paper-3 p-6 shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1.5 hover:border-lilac-line hover:shadow-[var(--shadow-md)]">
+                    <span className="bg-brand-gradient grid h-12 w-12 place-items-center rounded-2xl text-white shadow-[0_10px_24px_-10px_rgba(124,58,237,0.8)] transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
+                      <FeatureIcon name={f.icon} index={i} />
+                    </span>
+                    <h3 className="font-display mt-5 text-xl leading-snug font-medium">{f.h}</h3>
+                    <p className="mt-2.5 text-[0.93rem] leading-relaxed text-ink-soft">{f.p}</p>
                   </article>
                 </Reveal>
               ))}
@@ -127,4 +134,82 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
       <SiteFooter />
     </>
   );
+}
+
+/* ── Feature icons ──────────────────────────────────────────────────────
+   Clean 24px line icons, drawn in currentColor (white on the gradient chip). */
+const ICON_PROPS = {
+  width: 24,
+  height: 24,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.7,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  "aria-hidden": true,
+};
+
+const FEATURE_ICONS = {
+  order: (
+    <svg {...ICON_PROPS}>
+      <path d="M3 4h2l1.6 9.2a1.5 1.5 0 0 0 1.5 1.3h8a1.5 1.5 0 0 0 1.5-1.2L20 7H6" />
+      <circle cx="9" cy="19" r="1.3" />
+      <circle cx="17" cy="19" r="1.3" />
+      <path d="M13 5.5h4M15 3.5v4" />
+    </svg>
+  ),
+  route: (
+    <svg {...ICON_PROPS}>
+      <circle cx="6" cy="5.5" r="2.2" />
+      <circle cx="18" cy="18.5" r="2.2" />
+      <path d="M6 7.7v4.3a4 4 0 0 0 4 4h4a2 2 0 0 1 0 0" />
+      <path d="M18 7.5c0 2.5-2.4 3.8-2.4 3.8S13.2 10 13.2 7.5a2.4 2.4 0 0 1 4.8 0Z" />
+    </svg>
+  ),
+  warehouse: (
+    <svg {...ICON_PROPS}>
+      <path d="M3 9.5 12 4l9 5.5V20a.8.8 0 0 1-.8.8H3.8A.8.8 0 0 1 3 20Z" />
+      <path d="M7 20.5v-6h10v6M7 17.5h10" />
+    </svg>
+  ),
+  invoice: (
+    <svg {...ICON_PROPS}>
+      <path d="M6 2.5h8.5L19 7v13.2a1.3 1.3 0 0 1-1.3 1.3H6a1.3 1.3 0 0 1-1.3-1.3V3.8A1.3 1.3 0 0 1 6 2.5Z" />
+      <path d="M14 2.5V7h4.5M8 12h8M8 15.5h8M8 8.5h3" />
+    </svg>
+  ),
+  payments: (
+    <svg {...ICON_PROPS}>
+      <rect x="3" y="6" width="18" height="13" rx="2" />
+      <path d="M3 10h18" />
+      <path d="M7.5 14.5h2.5M14.5 14.5h2.5" />
+    </svg>
+  ),
+  reports: (
+    <svg {...ICON_PROPS}>
+      <path d="M4 4v15.5a.5.5 0 0 0 .5.5H20" />
+      <path d="M8 16v-3M12 16V8M16 16v-5" />
+    </svg>
+  ),
+  wishlist: (
+    <svg {...ICON_PROPS}>
+      <path d="m12 4 2.3 4.7 5.2.8-3.7 3.6.9 5.1L12 15.8 7.3 18.3l.9-5.1L4.5 9.5l5.2-.8Z" />
+    </svg>
+  ),
+  language: (
+    <svg {...ICON_PROPS}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M3.5 12h17M12 3.5c2.3 2.3 3.5 5.3 3.5 8.5s-1.2 6.2-3.5 8.5c-2.3-2.3-3.5-5.3-3.5-8.5S9.7 5.8 12 3.5Z" />
+    </svg>
+  ),
+} as const;
+
+export type FeatureIconName = keyof typeof FEATURE_ICONS;
+
+/** Resolve an icon by explicit name, else fall back to a sensible order by index. */
+function FeatureIcon({ name, index }: { name?: FeatureIconName; index: number }) {
+  const order = Object.keys(FEATURE_ICONS) as FeatureIconName[];
+  const key = name ?? order[index % order.length];
+  return FEATURE_ICONS[key];
 }

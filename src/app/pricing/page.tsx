@@ -94,14 +94,16 @@ export default function PricingPage() {
                         : "border-line bg-paper-3 shadow-[var(--shadow-sm)]"
                     }`}
                   >
-                    {p.featured && (
-                      <span className="bg-brand-gradient absolute -top-3 left-7 rounded-full px-3 py-1 text-[0.65rem] font-bold tracking-wider text-white uppercase">
-                        Most chosen
-                      </span>
-                    )}
-                    <p className={`text-sm font-bold tracking-wide uppercase ${p.featured ? "text-on-hero-dim" : "text-ink-faint"}`}>
-                      {p.name}
-                    </p>
+                    <div className="flex items-center justify-between gap-3">
+                      <p className={`text-sm font-bold tracking-wide uppercase ${p.featured ? "text-on-hero-dim" : "text-ink-faint"}`}>
+                        {p.name}
+                      </p>
+                      {p.featured && (
+                        <span className="bg-brand-gradient rounded-full px-3 py-1 text-[0.62rem] font-bold tracking-wider text-white uppercase shadow-[0_8px_20px_-8px_rgba(124,58,237,0.7)]">
+                          Most chosen
+                        </span>
+                      )}
+                    </div>
                     <p className="font-display mt-3 text-5xl font-semibold">
                       {p.price}
                       <span className={`ml-1 text-base font-normal ${p.featured ? "text-on-hero-dim" : "text-ink-faint"}`}>
@@ -118,11 +120,11 @@ export default function PricingPage() {
                     </ul>
                     <a
                       href={SITE.appUrl}
-                      className={`mt-8 inline-flex min-h-11 items-center justify-center rounded-full font-semibold transition-transform hover:scale-[1.02] active:scale-95 ${
+                      className={
                         p.featured
-                          ? "bg-brand-gradient text-white shadow-[0_12px_28px_-8px_rgba(124,58,237,0.5)]"
-                          : "border border-ink/20 text-ink hover:bg-paper"
-                      }`}
+                          ? "btn-primary relative z-10 mt-8 w-full"
+                          : "mt-8 inline-flex min-h-11 w-full items-center justify-center rounded-full border border-ink/20 font-semibold text-ink transition-transform hover:scale-[1.02] hover:bg-paper active:scale-95"
+                      }
                     >
                       {p.cta}
                     </a>

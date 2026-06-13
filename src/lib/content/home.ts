@@ -1,6 +1,6 @@
 /** All homepage copy in one place — edit copy here, not in JSX. */
 export const HOME = {
-  nav: { product: "Product", pricing: "Pricing", contact: "Contact" },
+  nav: { home: "Home", product: "Product", pricing: "Pricing", contact: "Contact" },
   cta: { start: "Start free", demo: "WhatsApp demo", login: "Login" },
   waMessage: "Hi! I want a demo of Vrikso for my business.",
 

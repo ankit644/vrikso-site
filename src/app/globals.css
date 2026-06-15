@@ -302,9 +302,86 @@ body {
   animation: marquee 32s linear infinite;
 }
 
+/* ── Form fields — premium inputs with a violet focus glow ─────────────── */
+.field-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  margin-bottom: 0.45rem;
+}
+.field-req { color: var(--violet); }
+
+.field-input {
+  width: 100%;
+  border-radius: var(--radius-ctrl);
+  border: 1px solid var(--line);
+  background: var(--paper-3);
+  padding: 0.8rem 0.95rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  appearance: none;
+}
+.field-input::placeholder { color: var(--ink-faint); }
+.field-input:hover { border-color: var(--lilac-line); }
+.field-input:focus {
+  outline: none;
+  border-color: var(--violet);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.14);
+}
+textarea.field-input { min-height: 8rem; resize: vertical; }
+
+/* native select chevron */
+.field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 6 8 10.5 12.5 6' stroke='%23897F9C' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.4rem;
+}
+
+/* invalid state (only after the user has interacted / submitted) */
+.field-input.is-invalid {
+  border-color: #d4493f;
+  box-shadow: 0 0 0 4px rgba(212, 73, 63, 0.12);
+}
+.field-error {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #c2392f;
+}
+
+/* success check pop-in */
+@keyframes check-pop {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+.check-pop { animation: check-pop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes ring-draw {
+  to { stroke-dashoffset: 0; }
+}
+.ring-draw {
+  stroke-dasharray: 170;
+  stroke-dashoffset: 170;
+  animation: ring-draw 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+.tick-draw {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: ring-draw 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.55s forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .rise { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .floaty, .floaty-slow, .marquee-track { animation: none; }
+  .check-pop { animation: none; }
+  .ring-draw, .tick-draw { animation: none; stroke-dashoffset: 0; }
 }

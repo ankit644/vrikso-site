@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Fraunces, Schibsted_Grotesk } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -37,6 +40,7 @@ export default function RootLayout({
       className={`${fraunces.variable} ${schibsted.variable} antialiased`}
     >
       <body>{children}</body>
+      {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   );
 }

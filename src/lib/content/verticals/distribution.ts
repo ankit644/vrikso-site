@@ -1,4 +1,9 @@
 import type { VerticalContent } from "@/components/vertical-page";
+import shotOrder from "../../../../public/app/m-order-new.png";
+import shotInvoice from "../../../../public/app/m-invoice.png";
+import shotAging from "../../../../public/app/m-aging.png";
+import shotProducts from "../../../../public/app/m-products.png";
+import shotDashboardD from "../../../../public/app/d-dashboard.png";
 
 /**
  * Vrikso Distribution — the flagship vertical.
@@ -16,6 +21,11 @@ export const DISTRIBUTION: VerticalContent = {
     titleAccent: "by the distribution trade.",
     sub: "From the salesman's first order of the morning to the evening's outstanding report one app runs the whole day. Born inside a real FMCG distribution business.",
   },
+
+  heroShots: [
+    { src: shotOrder, alt: "Taking an order in Vrikso" },
+    { src: shotAging, alt: "Payment aging report" },
+  ],
 
   waMessage: "Hi! I run a distribution business and want a demo of Vrikso Distribution.",
 
@@ -74,13 +84,15 @@ export const DISTRIBUTION: VerticalContent = {
     title: "Not screenshots from a brochure.",
     titleAccent: "The actual app.",
     p: "This is the live Vrikso app the same screens your salesman opens at the shop and you open at night to see where the day landed.",
+    dashboard: shotDashboardD,
+    dashboardAlt: "The Vrikso admin dashboard on a laptop",
     dashboardCap:
       "Your control room. Today's orders, sales and outstanding, top products and company-wise sales live, on any laptop or phone.",
     shots: [
-      { key: "order", cap: "Take an order", sub: "Tap products, set qty, place 90 seconds." },
-      { key: "invoice", cap: "GST invoice", sub: "Auto-generated, shared on WhatsApp." },
-      { key: "aging", cap: "Outstanding", sub: "Who owes what, by age bucket." },
-      { key: "products", cap: "Catalog", sub: "Every SKU, pack-size, stock & price." },
+      { img: shotOrder, cap: "Take an order", sub: "Tap products, set qty, place 90 seconds." },
+      { img: shotInvoice, cap: "GST invoice", sub: "Auto-generated, shared on WhatsApp." },
+      { img: shotAging, cap: "Outstanding", sub: "Who owes what, by age bucket." },
+      { img: shotProducts, cap: "Catalog", sub: "Every SKU, pack-size, stock & price." },
     ],
   },
 

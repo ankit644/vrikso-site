@@ -22,6 +22,8 @@ export default function SiteFooter() {
           <p className="rule-label text-ink-faint">{f.product}</p>
           <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
             <li><Link className="hover:text-ink" href="/distribution">{f.links.distribution}</Link></li>
+            <li><Link className="hover:text-ink" href="/billing">{f.links.billing}</Link></li>
+            <li><Link className="hover:text-ink" href="/restaurant">{f.links.restaurant}</Link></li>
             <li><Link className="hover:text-ink" href="/pricing">{f.links.pricing}</Link></li>
             <li><Link className="hover:text-ink" href="/blog">{f.links.blog}</Link></li>
             <li><a className="hover:text-ink" href={SITE.appUrl}>Login</a></li>

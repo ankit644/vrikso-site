@@ -3,7 +3,7 @@ import { SITE } from "@/lib/site";
 import { POSTS_BY_DATE } from "@/lib/content/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/distribution", "/pricing", "/contact", "/blog", "/privacy", "/terms"];
+  const pages = ["", "/distribution", "/billing", "/restaurant", "/pricing", "/contact", "/blog", "/privacy", "/terms"];
   const staticEntries: MetadataRoute.Sitemap = pages.map((p) => ({
     url: `${SITE.url}${p}`,
     changeFrequency: p === "" ? "weekly" : "monthly",

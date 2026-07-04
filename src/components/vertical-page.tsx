@@ -1,34 +1,34 @@
+import type { StaticImageData } from "next/image";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
 import { PhoneShot, BrowserShot } from "@/components/device";
 import { SITE, waLink } from "@/lib/site";
-import shotOrder from "../../public/app/m-order-new.png";
-import shotInvoice from "../../public/app/m-invoice.png";
-import shotAging from "../../public/app/m-aging.png";
-import shotProducts from "../../public/app/m-products.png";
-import shotDashboardD from "../../public/app/d-dashboard.png";
-
-const SCREENS = {
-  order: shotOrder,
-  invoice: shotInvoice,
-  aging: shotAging,
-  products: shotProducts,
-} as const;
-type ScreenKey = keyof typeof SCREENS;
 
 /** Shape of a vertical's content file — one file per industry, one template.
-    Sections marked optional render only when the content file provides them. */
+    Each vertical supplies its own screenshots (statically imported in its
+    content file). Sections marked optional render only when provided. */
 export type VerticalContent = {
   slug: string;
   metaTitle: string;
   metaDescription: string;
   hero: { eyebrow: string; title: string; titleAccent: string; sub: string };
+  /** 1–2 phone screenshots floated in the hero; [0] is the main (front) one. */
+  heroShots: { src: StaticImageData; alt: string }[];
   waMessage: string;
   stats?: { k: string; v: string }[];
   features: { h: string; p: string; icon?: FeatureIconName }[];
   featuresHeading?: string;
-  screens?: { label: string; title: string; titleAccent: string; p: string; shots: { key: ScreenKey; cap: string; sub: string }[]; dashboardCap?: string };
+  screens?: {
+    label: string;
+    title: string;
+    titleAccent: string;
+    p: string;
+    dashboard: StaticImageData;
+    dashboardAlt: string;
+    dashboardCap?: string;
+    shots: { img: StaticImageData; cap: string; sub: string }[];
+  };
   workflow?: { label: string; title: string; steps: { h: string; p: string }[] };
   audience?: { label: string; title: string; items: { h: string; p: string }[] };
   outcomes?: { label: string; title: string; items: { stat: string; h: string; p: string }[] };
@@ -70,16 +70,18 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
 
               {/* mobile: one full phone in flow */}
               <div className="relative z-10 mx-auto w-[68%] min-w-[220px] max-w-[280px] sm:hidden">
-                <PhoneShot src={shotOrder} alt="Taking an order in Vrikso" width={280} priority />
+                <PhoneShot src={v.heroShots[0].src} alt={v.heroShots[0].alt} width={280} priority />
               </div>
 
               {/* sm+: floating cluster */}
               <div className="relative hidden h-[440px] sm:block">
-                <div className="floaty-slow absolute top-10 left-0 z-0 w-[190px]" style={{ ["--rot" as string]: "-7deg" }}>
-                  <PhoneShot src={shotAging} alt="Payment aging report" width={190} />
-                </div>
+                {v.heroShots[1] && (
+                  <div className="floaty-slow absolute top-10 left-0 z-0 w-[190px]" style={{ ["--rot" as string]: "-7deg" }}>
+                    <PhoneShot src={v.heroShots[1].src} alt={v.heroShots[1].alt} width={190} />
+                  </div>
+                )}
                 <div className="floaty absolute top-0 right-0 z-10 w-[240px] md:w-[260px]" style={{ ["--rot" as string]: "4deg" }}>
-                  <PhoneShot src={shotOrder} alt="Taking an order in Vrikso" width={260} />
+                  <PhoneShot src={v.heroShots[0].src} alt={v.heroShots[0].alt} width={260} />
                 </div>
               </div>
             </div>
@@ -148,7 +150,7 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
               <Reveal delay={120}>
                 <div className="relative mt-12">
                   <div className="absolute -inset-x-8 -top-8 bottom-8 -z-0 rounded-[32px] bg-violet/10 blur-2xl" aria-hidden />
-                  <BrowserShot src={shotDashboardD} alt="The Vrikso admin dashboard on a laptop" className="relative z-10" />
+                  <BrowserShot src={v.screens.dashboard} alt={v.screens.dashboardAlt} className="relative z-10" />
                   {v.screens.dashboardCap && (
                     <p className="mt-4 max-w-md text-sm text-ink-soft">{v.screens.dashboardCap}</p>
                   )}
@@ -159,7 +161,7 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
                 {v.screens.shots.map((s, i) => (
                   <Reveal key={s.cap} delay={i * 90}>
                     <figure className="flex flex-col items-center text-center">
-                      <PhoneShot src={SCREENS[s.key]} alt={`${s.cap} — Vrikso`} width={210} />
+                      <PhoneShot src={s.img} alt={`${s.cap} — Vrikso`} width={210} />
                       <figcaption className="mt-5">
                         <p className="font-display text-lg font-medium">{s.cap}</p>
                         <p className="mt-1 text-[0.82rem] leading-snug text-ink-faint">{s.sub}</p>
@@ -351,6 +353,57 @@ const FEATURE_ICONS = {
     <svg {...ICON_PROPS}>
       <circle cx="12" cy="12" r="8.5" />
       <path d="M3.5 12h17M12 3.5c2.3 2.3 3.5 5.3 3.5 8.5s-1.2 6.2-3.5 8.5c-2.3-2.3-3.5-5.3-3.5-8.5S9.7 5.8 12 3.5Z" />
+    </svg>
+  ),
+  docs: (
+    <svg {...ICON_PROPS}>
+      <path d="M8 6.5h9.5a1.3 1.3 0 0 1 1.3 1.3v12a1.3 1.3 0 0 1-1.3 1.3H8a1.3 1.3 0 0 1-1.3-1.3v-12A1.3 1.3 0 0 1 8 6.5Z" />
+      <path d="M5 17.5V4.3A1.3 1.3 0 0 1 6.3 3H16M10 11h5.5M10 14.5h5.5" />
+    </svg>
+  ),
+  recurring: (
+    <svg {...ICON_PROPS}>
+      <path d="M4 12a8 8 0 0 1 13.6-5.7L20 8.5M20 12a8 8 0 0 1-13.6 5.7L4 15.5" />
+      <path d="M20 4.5v4h-4M4 19.5v-4h4" />
+    </svg>
+  ),
+  customers: (
+    <svg {...ICON_PROPS}>
+      <circle cx="9" cy="8.5" r="3.2" />
+      <path d="M3.5 19.5c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5" />
+      <path d="M15.5 5.7a3.2 3.2 0 0 1 0 5.6M17.6 14.9c1.6.7 2.6 2.2 2.9 4.1" />
+    </svg>
+  ),
+  template: (
+    <svg {...ICON_PROPS}>
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <path d="M4 9.5h16M9.5 9.5V20" />
+    </svg>
+  ),
+  tables: (
+    <svg {...ICON_PROPS}>
+      <ellipse cx="12" cy="7.5" rx="8" ry="3" />
+      <path d="M5.5 9.8 4 19M18.5 9.8 20 19M12 10.5V19M8.5 19h7" />
+    </svg>
+  ),
+  kitchen: (
+    <svg {...ICON_PROPS}>
+      <path d="M7.5 13.5a4.5 4.5 0 1 1 1-8.9 5 5 0 0 1 7 0 4.5 4.5 0 1 1 1 8.9" />
+      <path d="M7.5 13.5V19a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5v-5.5M7.5 16.5h9" />
+    </svg>
+  ),
+  qr: (
+    <svg {...ICON_PROPS}>
+      <rect x="4" y="4" width="6.5" height="6.5" rx="1" />
+      <rect x="13.5" y="4" width="6.5" height="6.5" rx="1" />
+      <rect x="4" y="13.5" width="6.5" height="6.5" rx="1" />
+      <path d="M13.5 13.5h2.8v2.8h-2.8zM17.2 17.2h2.8v2.8h-2.8z" />
+    </svg>
+  ),
+  menu: (
+    <svg {...ICON_PROPS}>
+      <path d="M12 5.5c-1.8-1.6-4.4-2-7.5-1.8v14.5c3.1-.2 5.7.2 7.5 1.8 1.8-1.6 4.4-2 7.5-1.8V3.7c-3.1-.2-5.7.2-7.5 1.8Z" />
+      <path d="M12 5.5V20M7 8.5c1 0 1.8.1 2.5.3M7 12c1 0 1.8.1 2.5.3M14.5 8.8c.7-.2 1.5-.3 2.5-.3M14.5 12.3c.7-.2 1.5-.3 2.5-.3" />
     </svg>
   ),
 } as const;

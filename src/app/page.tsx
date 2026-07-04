@@ -263,13 +263,12 @@ function Tree() {
             <div className="relative pl-7">
               <span aria-hidden className="absolute top-1 bottom-1 left-0 w-[3px] rounded-full bg-gradient-to-b from-violet to-purple/30" />
               <ul className="space-y-3.5">
-                {c.tree.branches.map((b) => (
-                  <li key={b.name} className="relative">
-                    <span aria-hidden className="absolute top-1/2 -left-7 h-px w-7 bg-lilac-line" />
+                {c.tree.branches.map((b) => {
+                  const card = (
                     <div
                       className={`flex items-center justify-between rounded-2xl border px-5 py-3.5 transition-shadow ${
                         b.live
-                          ? "border-violet/40 bg-lilac shadow-[0_8px_24px_-12px_rgba(124,58,237,0.45)]"
+                          ? "border-violet/40 bg-lilac shadow-[0_8px_24px_-12px_rgba(124,58,237,0.45)] hover:shadow-[0_12px_32px_-12px_rgba(124,58,237,0.6)]"
                           : "border-line bg-paper/70"
                       }`}
                     >
@@ -284,8 +283,14 @@ function Tree() {
                         {b.live ? c.tree.live : c.tree.soon}
                       </span>
                     </div>
-                  </li>
-                ))}
+                  );
+                  return (
+                    <li key={b.name} className="relative">
+                      <span aria-hidden className="absolute top-1/2 -left-7 h-px w-7 bg-lilac-line" />
+                      {"href" in b && b.href ? <Link href={b.href}>{card}</Link> : card}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </Reveal>

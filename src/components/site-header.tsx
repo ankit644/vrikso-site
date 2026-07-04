@@ -8,7 +8,6 @@ import { SITE, waLink } from "@/lib/site";
 
 const NAV = [
   { href: "/", label: HOME.nav.home },
-  { href: "/distribution", label: HOME.nav.product },
   { href: "/pricing", label: HOME.nav.pricing },
   { href: "/blog", label: HOME.nav.blog },
   { href: "/contact", label: HOME.nav.contact },
@@ -32,7 +31,53 @@ export default function SiteHeader() {
 
         {/* desktop nav */}
         <nav className="hidden items-center gap-8 text-sm font-medium text-ink-soft md:flex">
-          {NAV.map((l) => (
+          {NAV.slice(0, 1).map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="relative transition-colors hover:text-ink after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-violet after:transition-all hover:after:w-full"
+            >
+              {l.label}
+            </Link>
+          ))}
+
+          {/* Software dropdown — opens on hover / keyboard focus */}
+          <div className="group relative">
+            <button
+              type="button"
+              className="flex items-center gap-1.5 transition-colors group-hover:text-ink group-focus-within:text-ink"
+              aria-haspopup="true"
+            >
+              {c.nav.software}
+              <svg
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                aria-hidden
+                className="transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+              >
+                <path d="m1 1 4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+            {/* pt-3 bridges the hover gap between the trigger and the panel */}
+            <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              <div className="w-72 overflow-hidden rounded-2xl border border-line bg-paper p-2 shadow-[var(--shadow-md)]">
+                {c.softwareMenu.map((s) => (
+                  <Link
+                    key={s.href}
+                    href={s.href}
+                    className="block rounded-xl px-3.5 py-3 transition-colors hover:bg-paper-2"
+                  >
+                    <span className="block font-semibold text-ink">{s.name}</span>
+                    <span className="mt-0.5 block text-[0.8rem] leading-snug text-ink-faint">{s.desc}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {NAV.slice(1).map((l) => (
             <Link
               key={l.href}
               href={l.href}
@@ -89,11 +134,34 @@ export default function SiteHeader() {
       {/* mobile menu panel */}
       <div
         className={`overflow-hidden border-line bg-paper/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out md:hidden ${
-          open ? "max-h-96 border-t opacity-100" : "max-h-0 opacity-0"
+          open ? "max-h-[34rem] border-t opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 sm:px-6">
-          {NAV.map((l) => (
+          {NAV.slice(0, 1).map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-3 text-[0.97rem] font-medium text-ink-soft transition-colors hover:bg-paper-2 hover:text-ink"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <p className="px-3 pt-2 pb-1 text-[0.7rem] font-bold tracking-wide text-ink-faint uppercase">
+            {c.nav.software}
+          </p>
+          {c.softwareMenu.map((s) => (
+            <Link
+              key={s.href}
+              href={s.href}
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-3 py-3 text-[0.97rem] font-medium text-ink-soft transition-colors hover:bg-paper-2 hover:text-ink"
+            >
+              {s.name}
+            </Link>
+          ))}
+          {NAV.slice(1).map((l) => (
             <Link
               key={l.href}
               href={l.href}

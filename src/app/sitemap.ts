@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/lib/site";
-import { POSTS_BY_DATE } from "@/lib/content/blog";
+import { POSTS_BY_DATE, BLOG_PAGE_COUNT } from "@/lib/content/blog";
 
 const APP_DIR = path.join(process.cwd(), "src", "app");
 const PAGE_FILE = /^page\.(tsx|ts|jsx|js|mdx)$/;
@@ -53,5 +53,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...postEntries];
+  // Paginated blog index pages (/blog/page/2 .. N); page 1 is /blog above.
+  const pageEntries: MetadataRoute.Sitemap = Array.from(
+    { length: Math.max(0, BLOG_PAGE_COUNT - 1) },
+    (_, i) => ({
+      url: `${SITE.url}/blog/page/${i + 2}`,
+      changeFrequency: "weekly",
+      priority: 0.5,
+    }),
+  );
+
+  return [...staticEntries, ...postEntries, ...pageEntries];
 }

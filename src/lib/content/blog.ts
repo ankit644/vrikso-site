@@ -33,6 +33,198 @@ export const BLOG_INDEX = {
 
 export const POSTS: BlogPost[] = [
   {
+    slug: "restaurant-pos-software-india-buyers-guide",
+    title: "Restaurant POS Software in India: The 2026 Buyer's Guide",
+    description:
+      "Before you pay for a restaurant POS, run it through this 7-point checklist — KOTs, tables, Zomato/Swiggy orders, GST bills and offline mode. Buy the one built for an Indian kitchen, not a foreign demo.",
+    category: "Buyer's Guide",
+    author: "Vrikso Team",
+    date: "2026-07-18",
+    readMins: 8,
+    cover: 0,
+    image: "/post-restaurant-pos.png",
+    tags: ["restaurant POS", "buyer's guide", "restaurant software"],
+    body: [
+      { t: "p", x: "Most restaurant owners choose a POS the way they choose a supplier at a trade fair — on a smooth demo and a good price. Then the first Saturday dinner rush arrives, the kitchen misses three tickets, a table waits twenty minutes for its bill, and the 'smart' system becomes the thing everyone works around. The demo is calm. Your restaurant is not." },
+      { t: "p", x: "A restaurant POS is not billing software with a food menu bolted on. It has to run the floor, the kitchen and the cash counter at the same time, on a busy night, on the phones your staff already carry. Here is the checklist to judge one before you sign anything." },
+      { t: "h2", x: "Judge it against your busiest 30 minutes" },
+      { t: "p", x: "Any POS looks good when one waiter places one order in a quiet showroom. The real test is peak service: ten tables turning, two waiters punching orders, the kitchen firing continuously, and three bills being settled by cash, UPI and card at once. Every question below is really asking the same thing — will it hold up then?" },
+      { t: "h2", x: "1. Do the floor, the kitchen and the bill actually talk to each other?" },
+      { t: "p", x: "This is the whole game. When a waiter punches an order, the kitchen should see it instantly as a KOT — no shouting, no paper chits, no walking to the pass. When the food is served and the guest asks for the bill, it should already reflect exactly what was ordered, including that extra portion added mid-meal. If order-taking, the kitchen board and billing are three separate steps someone re-enters, you have bought three problems, not one solution." },
+      { t: "image", src: "/app/restaurant/d-dashboard.png", cap: "One system for the floor, the kitchen and the counter — orders, KOTs and bills from the same source." },
+      { t: "h2", x: "2. Can a waiter punch an order in seconds — on a phone?" },
+      { t: "p", x: "Your waiters are not typists. If placing an order means squinting at a tiny screen and hunting through nested menus, they will go back to a notepad and enter it later — which is when items get missed and the kitchen gets it wrong. The test: can a new waiter pick a table, add five items with variations and modifiers, and fire it to the kitchen in under a minute, on the same phone he already owns?" },
+      { t: "h2", x: "3. Does it handle Zomato and Swiggy without double entry?" },
+      { t: "p", x: "Delivery is now a real chunk of most menus, and it is where POS systems quietly fail. If online orders land on a separate tablet and someone re-punches them into your POS, you get missed items, wrong totals and a reconciliation nightmare at month-end. The right system pulls dine-in, takeaway, delivery and aggregator orders into one screen, so the kitchen and your reports see everything in one place." },
+      { t: "h2", x: "4. Are the bills genuinely GST-correct?" },
+      { t: "p", x: "Most standalone restaurants charge 5% GST on food, and the bill must show your GSTIN, the right tax split and a clean breakup. If the POS gets this wrong, or makes you set it by hand for every item, the mistakes surface exactly when you least want them — at filing time. GST handling should be automatic and invisible, not a setting you babysit." },
+      { t: "h2", x: "5. What happens the moment the internet drops?" },
+      { t: "p", x: "Internet dies mid-service more often than any vendor admits. If your POS freezes when the connection blinks, service stops and guests wait. Order-taking and billing must keep working offline and sync quietly when the line returns. Ask the vendor to show you the app with Wi-Fi switched off — not to tell you about it." },
+      { t: "h2", x: "6. Khata, splits and part-payments — the Indian reality" },
+      { t: "p", x: "Regulars run a tab. Groups split the bill four ways. Someone pays half in cash and half on UPI. A foreign-built POS often can't handle these gracefully, and your cashier ends up doing mental math at the counter. Make sure splits, part-payments and a running khata for trusted guests are built in, not workarounds." },
+      { t: "h2", x: "7. What is the true monthly cost?" },
+      { t: "p", x: "Add it all up: the licence, per-device charges, the printer and hardware you're forced to buy, the setup fee, and the AMC for support. A clear monthly price that runs on phones you already own almost always beats a 'cheap' licence that needs a counter full of hardware to work." },
+      { t: "callout", x: "Score each POS out of 7. Anything that fails on the floor-kitchen-bill link, waiter speed, or offline mode should be off your list — those three decide whether tonight's dinner rush runs smoothly or falls apart." },
+      { t: "p", x: "The best restaurant POS is the one your staff forget they are using. They seat guests, punch orders and settle bills the way they always have — only now the kitchen never misses a ticket, the bill is always right, and by closing time you know exactly what the night earned." },
+    ],
+  },
+  {
+    slug: "zomato-swiggy-reconciliation-for-restaurants",
+    title: "Zomato & Swiggy Reconciliation: Where Your Online Profit Leaks",
+    description:
+      "Commissions, funded discounts, cancelled orders and mismatched payouts quietly eat your delivery margin. A practical system to reconcile every aggregator order and collect exactly what you're owed.",
+    category: "Operations",
+    author: "Vrikso Team",
+    date: "2026-07-08",
+    readMins: 7,
+    cover: 1,
+    image: "/post-zomato-swiggy.png",
+    tags: ["Zomato", "Swiggy", "reconciliation", "restaurant"],
+    body: [
+      { t: "p", x: "Aggregators bring you covers you would never reach on your own — a customer three kilometres away, at 11pm, who has never seen your board. That reach is real. So is the payout statement at the end of the week that nobody in the restaurant fully understands. Orders worth a lakh went out; far less landed in the bank. Where did the rest go?" },
+      { t: "p", x: "Some of that gap is legitimate — commission is the price of the reach. But a meaningful slice is leakage: orders you were never paid for, discounts you funded twice, deductions that don't match the deal you signed. You cannot plug a leak you cannot see. Here is how to see it." },
+      { t: "h2", x: "Why the money never matches the orders" },
+      { t: "p", x: "The number a guest pays on the app is not the number that reaches you. Between the two sit a stack of deductions, each reasonable on its own and confusing in a pile:" },
+      { t: "ul", items: [
+        "Commission on the order value — the platform's cut, your biggest and most predictable deduction",
+        "Payment gateway and processing charges on the transaction",
+        "Discounts and offers, part of which you agreed to fund",
+        "GST and TCS handled by the platform, which changes what actually settles to you",
+        "Cancellations and rejections — where the food was made but the payout is disputed",
+        "Packaging or ad-service charges, if you opted into them",
+      ] },
+      { t: "p", x: "None of these is hidden. But spread across a weekly statement with hundreds of orders, they blur into one net figure — and 'the net looked a bit low this week' is not something you can act on." },
+      { t: "h2", x: "Reconcile at the order level, not the payout level" },
+      { t: "p", x: "The single habit that changes everything: check the payout order by order, not as one lump sum. For each order, you want three things side by side — what the platform says the order was, what it says it deducted, and what your own kitchen recorded. When those three agree, move on. When they don't, you have found a leak worth a real amount of money." },
+      { t: "image", src: "/app/restaurant/d-dashboard.png", cap: "Dine-in and aggregator orders in one place — so the payout can be checked against what the kitchen actually made." },
+      { t: "h2", x: "Bring aggregator orders into the same system as dine-in" },
+      { t: "p", x: "If your Zomato orders live only in the Zomato dashboard and your Swiggy orders only in Swiggy's, reconciliation means logging into three places and matching by hand. When every channel — dine-in, takeaway, delivery and both aggregators — flows into one POS, your own record becomes the source of truth you check the payout against. That is the difference between a five-minute glance and a two-hour spreadsheet." },
+      { t: "h2", x: "The three numbers to check on every payout" },
+      { t: "p", x: "You do not need to audit every line. Each cycle, check three totals:" },
+      { t: "ul", items: [
+        "Order count — did the platform pay you for the same number of orders your kitchen fulfilled?",
+        "Effective commission rate — is the total commission in line with the rate in your contract, or has it crept up?",
+        "Cancelled-but-cooked orders — were you compensated for food that was made and then rejected or returned?",
+      ] },
+      { t: "p", x: "A gap in any one of these is money on the table. Two or three orders a week that were cooked but never paid for adds up to a serious sum across a year." },
+      { t: "h2", x: "Catch cancelled and 'not received' orders fast" },
+      { t: "p", x: "Disputes have a shelf life. A 'customer never received the order' claim or a wrongful cancellation is far easier to contest the same day, when your kitchen ticket and timing are fresh, than three weeks later from a payout statement. A system that flags mismatches quickly turns disputes from a lost cause into recovered revenue." },
+      { t: "callout", x: "Treat the aggregator payout like a shop that owes you money. Know the exact number per cycle, chase the gaps while they're fresh, and never accept the net figure on faith. Reconciliation is not paperwork — it's collection." },
+      { t: "p", x: "Delivery will keep growing as a share of most restaurants' revenue. That makes reconciliation not a back-office chore but a core discipline: the difference between delivery that quietly bleeds you and delivery that genuinely adds to the bottom line." },
+    ],
+  },
+  {
+    slug: "gst-invoicing-for-freelancers-and-services",
+    title: "GST Invoicing for Freelancers and Service Businesses: A Plain-English Guide",
+    description:
+      "SAC codes, the registration threshold, when to charge 18%, place of supply, and how to raise a compliant GST invoice for services in seconds — for freelancers, agencies, consultants and studios.",
+    category: "GST & Compliance",
+    author: "Vrikso Team",
+    date: "2026-06-28",
+    readMins: 7,
+    cover: 2,
+    image: "/post-gst-freelancers.png",
+    tags: ["GST", "freelancers", "services", "invoicing"],
+    body: [
+      { t: "p", x: "Product sellers figured out GST years ago — every carton has an HSN code and a tax rate printed on it. Service people, on the other hand, often wing it. A designer, a consultant, a marketing agency, a photographer — the work is clear, but the invoice is frequently a Word document with a total and no idea whether GST even applies. That is fine until a client's accounts team asks for a proper tax invoice, or your turnover crosses a line you weren't watching." },
+      { t: "p", x: "The good news: GST for services is simpler than it looks. A handful of rules cover almost everything a freelancer or service business needs." },
+      { t: "h2", x: "First: do you even need to register?" },
+      { t: "p", x: "You must register for GST once your turnover crosses the threshold — for most service providers that is ₹20 lakh a year (₹10 lakh in some special-category states). Below that, registration is optional. But two situations force it regardless of turnover: supplying services to clients in other states, and selling through certain e-commerce platforms. If either applies to you, register even if you're small — it's cheaper than a notice later." },
+      { t: "h2", x: "Services use SAC codes, not HSN" },
+      { t: "p", x: "Goods have HSN codes; services have SAC codes (Services Accounting Codes). Every service you bill has one, and it belongs on the invoice. You don't need to memorise them — find the code for your kind of work once (design, consulting, software, catering) and reuse it. Most services attract 18% GST, though some categories differ, so confirm the rate for your specific SAC rather than assuming." },
+      { t: "h2", x: "What a service tax invoice must show" },
+      { t: "ul", items: [
+        "Your name, address and GSTIN",
+        "A unique, sequential invoice number and the date",
+        "The client's name, address and GSTIN (for B2B)",
+        "A clear description of the service and its SAC code",
+        "Taxable value, the GST rate, and the tax amount split by head",
+        "Place of supply — which decides whether it's CGST/SGST or IGST",
+      ] },
+      { t: "image", src: "/app/billing/d-dashboard.png", cap: "A clean, structured invoice is what lets your client claim input credit — and what keeps your own returns simple." },
+      { t: "h2", x: "CGST/SGST vs IGST — place of supply for services" },
+      { t: "p", x: "The rule mirrors goods, but 'place of supply' for services can be less obvious. As a starting point: if your client is in the same state as you, the tax splits into CGST and SGST; if they're in another state, it's a single IGST at the full rate. For most straightforward service work, the client's location decides it. Get the place of supply right and the split takes care of itself." },
+      { t: "h2", x: "Reverse charge, TDS and the client who deducts" },
+      { t: "p", x: "Two things surprise first-time service billers. First, larger clients often deduct TDS on your fee — that's income tax withheld on your behalf, separate from GST, and you claim it back when you file your returns. Second, a few specific services fall under reverse charge, where the client pays the GST directly instead of you. Neither is a problem once you know it's coming; both cause panic when an unexpected deduction shows up on a payment." },
+      { t: "h2", x: "Billing the same clients every month? Don't start from scratch" },
+      { t: "p", x: "Retainers, AMCs and subscriptions mean raising nearly the same invoice over and over. Re-typing it each month is where numbers drift and invoices get forgotten. If that's your model, set the invoice to repeat automatically — we cover exactly how in our guide to recurring invoices." },
+      { t: "callout", x: "The cheapest compliance is automatic. Pick the client, pick the service, and let the app apply the right SAC, the right rate and the right tax split every time — so a compliant invoice takes thirty seconds, not a nervous phone call to your CA." },
+      { t: "p", x: "You don't need to become a tax expert to bill correctly. You need clean, structured invoices with the right codes and splits, raised the moment the work is done and shared where the client will actually see them — usually WhatsApp or email. Do that consistently and GST stops being a season and becomes a non-event." },
+    ],
+  },
+  {
+    slug: "recurring-invoices-get-paid-on-time",
+    title: "Recurring Invoices: How Retainer and Subscription Businesses Get Paid On Time",
+    description:
+      "If you bill the same clients every month, manual invoicing is a slow leak. How recurring invoices, unmissable due dates and gentle automated reminders keep your cash flow predictable.",
+    category: "Cash Flow",
+    author: "Vrikso Team",
+    date: "2026-06-20",
+    readMins: 6,
+    cover: 3,
+    image: "/post-recurring-invoices.png",
+    tags: ["recurring billing", "cash flow", "retainers"],
+    body: [
+      { t: "p", x: "Retainer revenue is supposed to be the easy money. The client is signed, the fee is fixed, the work is ongoing — the same invoice, every month, forever. And yet retainer businesses are often the ones chasing payments hardest. Not because the clients are bad, but because the invoicing is manual, and manual monthly work is the first thing that slips when you're busy doing the actual job." },
+      { t: "p", x: "The fix isn't discipline. It's removing the step that needs discipline in the first place." },
+      { t: "h2", x: "The hidden cost of billing by hand" },
+      { t: "p", x: "Say you have fifteen retainer clients. On the first of the month you sit down to raise fifteen invoices. It's dull, so it slips to the third. Two get missed entirely and you catch them a week later. One goes out with last month's figures copied over. Each small slip pushes payment later — and a retainer invoice sent on the 9th instead of the 1st is money that arrives eight days later, every single month, compounding across a year into a real dent in your working capital." },
+      { t: "h2", x: "Set the invoice to raise itself" },
+      { t: "p", x: "A recurring invoice is a template that fires on a schedule you set — monthly, quarterly, whatever the contract says. You define it once: this client, this amount, this service and SAC code, this GST treatment, due on this day. From then on it generates on time without you touching it, and lands with the client on the same date every cycle. The most reliable invoice is the one no human has to remember to send." },
+      { t: "image", src: "/app/billing/d-dashboard.png", cap: "A live view of what's billed, paid and overdue — the recurring engine keeps every cycle current." },
+      { t: "h2", x: "Make the due date unmissable" },
+      { t: "p", x: "'Payable immediately' is not a due date — it's a suggestion. Put a specific date on every invoice, keep your terms consistent (net 7, net 15, whatever you choose), and make the amount and the date the two clearest things on the page. Clients pay clear invoices faster than vague ones, simply because there's nothing to wonder about." },
+      { t: "h2", x: "Reminders that collect without nagging" },
+      { t: "p", x: "Most late payments aren't refusals — they're a to-do that fell down the client's list. A short, automatic reminder does the follow-up you'd otherwise dread doing yourself:" },
+      { t: "ul", items: [
+        "A gentle note a few days before the due date, so it's on their radar",
+        "A polite reminder on the day, with the exact amount and a way to pay",
+        "A firmer follow-up once it's overdue, referencing the invoice number",
+      ] },
+      { t: "p", x: "Because it's automatic and consistent, it never feels personal or awkward — it's just the system doing its job, and it collects far more than a reminder you keep meaning to send." },
+      { t: "h2", x: "Watch the metric that matters: on-time rate" },
+      { t: "p", x: "Track the share of invoices paid by their due date. That single number tells you more about your cash health than revenue does — a business billing ₹5 lakh a month with a 60% on-time rate is under more strain than one billing ₹4 lakh at 95%. When you can see which clients are chronically late, you can fix the relationship, tighten their terms, or ask for advance payment — decisions you can't make if it's all a blur." },
+      { t: "callout", x: "Predictable revenue deserves predictable collection. Automate the invoice, fix the due date, let the reminders run — and turn 'I must send those invoices' into something that already happened while you were working." },
+      { t: "p", x: "Recurring billing done right is invisible. You do the work, the invoices go out on time on their own, the reminders handle the follow-up, and the money arrives when it's supposed to. That's the whole point of a retainer — and now the billing finally matches the promise." },
+    ],
+  },
+  {
+    slug: "e-way-bills-for-distributors",
+    title: "E-Way Bills for Distributors: When You Need One (and How to Stop the Hassle)",
+    description:
+      "When an e-way bill is required, the ₹50,000 rule, Part A vs Part B, validity by distance, and the mistakes that get goods detained — plus how to generate one straight from your invoice.",
+    category: "GST & Compliance",
+    author: "Vrikso Team",
+    date: "2026-06-10",
+    readMins: 7,
+    cover: 4,
+    image: "/post-eway-bills.png",
+    tags: ["e-way bill", "GST", "logistics", "distribution"],
+    body: [
+      { t: "p", x: "The invoice is raised, the truck is loaded, the driver is waiting — and now someone logs into a separate portal to type the same details all over again to generate an e-way bill. It's the most avoidable delay in a distributor's day, and the one that most often holds up a delivery. Worse, a small slip on that form can get a whole consignment detained at a checkpoint. Understanding the rules — and generating the bill from data you already have — turns this from a daily chore into a non-event." },
+      { t: "h2", x: "When do you actually need an e-way bill?" },
+      { t: "p", x: "As a general rule, you need an e-way bill to move goods when the consignment value exceeds ₹50,000. It applies to both inter-state movement and, in most states, movement within the state — though intra-state thresholds and exemptions vary, so confirm the rule where you operate. It covers movement for a sale, but also transfers to your own branch, returns to a supplier, and goods sent for job work. If goods worth more than the threshold are on a vehicle, assume you need one until you've checked otherwise." },
+      { t: "h2", x: "Part A and Part B — what goes where" },
+      { t: "p", x: "An e-way bill has two parts. Part A is the consignment: the GSTINs, the invoice number and value, the HSN codes and the place of supply — essentially everything already on your invoice. Part B is the transport: the vehicle number and transporter details. Part A can be filled the moment the invoice exists; Part B is added when the vehicle is assigned. The bill is only valid for movement once both are complete." },
+      { t: "shot", name: "invoice", cap: "Everything Part A needs already lives on the invoice — the value, GSTINs, HSN and place of supply." },
+      { t: "h2", x: "How long is an e-way bill valid?" },
+      { t: "p", x: "Validity is tied to the distance the goods travel, not a flat number of days — roughly a day for the first stretch and additional time for longer hauls, counted from when Part B is filled. The practical takeaway: don't generate the bill too early. If you create it and then the vehicle is delayed a day, you can burn the validity before the goods have even moved, and a bill that expires in transit is treated the same as no bill at all." },
+      { t: "h2", x: "The mistakes that get goods detained" },
+      { t: "p", x: "Nearly every detention traces back to a mismatch between the e-way bill, the invoice and the physical goods. The usual culprits:" },
+      { t: "ul", items: [
+        "A wrong or outdated vehicle number in Part B after the goods were shifted to another truck",
+        "An expired e-way bill because it was generated too early or the trip took longer than expected",
+        "A value or tax figure that doesn't match the invoice travelling with the goods",
+        "A missing or wrong HSN code, or the wrong place of supply",
+      ] },
+      { t: "p", x: "Notice the pattern: none of these are about the goods being wrong. They're about the paperwork not matching itself. When the invoice and the e-way bill are typed separately by different people, mismatches are almost guaranteed." },
+      { t: "h2", x: "Generate it from the invoice, not a separate ritual" },
+      { t: "p", x: "The whole headache disappears when the e-way bill is built from the invoice you already raised. Part A fills itself from the invoice data — same value, same GSTINs, same HSN — so there's nothing to re-type and nothing to mismatch. You add the vehicle number when the truck is assigned, and the bill is ready. No second login, no re-keying, no checkpoint surprises." },
+      { t: "callout", x: "Count how many times the same consignment gets re-typed between your invoice and the e-way bill portal. Every hop you remove is a mismatch you prevent — and a delivery that isn't sitting at a checkpoint while someone fixes a form." },
+      { t: "p", x: "E-way bill compliance isn't hard; it's just tedious when done by hand. Get the rules right, generate the bill from the invoice instead of a blank portal form, and add the vehicle at the last moment — and the truck leaves on time with paperwork that matches itself, every trip." },
+    ],
+  },
+  {
     slug: "digitise-distribution-business-2026",
     title: "How to Digitise Your Distribution Business in 2026 (Without Buying a Computer)",
     description:
@@ -367,6 +559,10 @@ export const POSTS: BlogPost[] = [
 /** Posts newest-first. */
 export const POSTS_BY_DATE = [...POSTS].sort((a, b) => (a.date < b.date ? 1 : -1));
 
+/** Blog index pagination: page 1 at /blog, pages 2..N at /blog/page/N. */
+export const BLOG_PAGE_SIZE = 10;
+export const BLOG_PAGE_COUNT = Math.max(1, Math.ceil(POSTS_BY_DATE.length / BLOG_PAGE_SIZE));
+
 export const CATEGORIES = Array.from(new Set(POSTS.map((p) => p.category)));
 
 export function getPost(slug: string): BlogPost | undefined {
@@ -381,6 +577,40 @@ export function relatedPosts(slug: string, n = 3): BlogPost[] {
   const rest = POSTS_BY_DATE.filter((p) => p.slug !== slug && p.category !== current.category);
   return [...sameCat, ...rest].slice(0, n);
 }
+
+export type Vertical = "distribution" | "billing" | "restaurant";
+
+/** Which product a post belongs to, inferred from its tags. Defaults to
+    distribution so every existing post keeps its current CTA. */
+export function postVertical(post: BlogPost): Vertical {
+  const tags = post.tags.map((t) => t.toLowerCase());
+  const has = (...keys: string[]) => keys.some((k) => tags.includes(k));
+  if (has("restaurant", "restaurant pos", "zomato", "swiggy", "kot")) return "restaurant";
+  if (has("freelancers", "services", "recurring billing", "retainers")) return "billing";
+  return "distribution";
+}
+
+/** Per-vertical CTA copy for the bottom-of-article band. */
+export const POST_CTA: Record<Vertical, { title: string; sub: string; wa: string; href: string }> = {
+  distribution: {
+    title: "Run your distribution business from your phone.",
+    sub: "Orders, GST billing, stock and collections — one clean app.",
+    wa: "Hi! I read your blog and want a demo of Vrikso for my distribution business.",
+    href: "/distribution",
+  },
+  billing: {
+    title: "GST billing in seconds, from any phone.",
+    sub: "Invoices, recurring billing and payment tracking — shared on WhatsApp, ready for GSTR-1.",
+    wa: "Hi! I read your blog and want a demo of Vrikso Billing.",
+    href: "/billing",
+  },
+  restaurant: {
+    title: "Run the floor, the kitchen and the bills — one app.",
+    sub: "Tables, KOTs, aggregator orders and GST bills — on the phones your staff already carry.",
+    wa: "Hi! I read your blog and want a demo of Vrikso Restaurant.",
+    href: "/restaurant",
+  },
+};
 
 export function formatDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);

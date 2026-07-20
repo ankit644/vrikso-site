@@ -6,7 +6,7 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
 import PostCover from "@/components/post-cover";
-import { POSTS, getPost, relatedPosts, formatDate, type BlogBlock } from "@/lib/content/blog";
+import { POSTS, getPost, relatedPosts, formatDate, postVertical, POST_CTA, type BlogBlock } from "@/lib/content/blog";
 import { SITE, waLink } from "@/lib/site";
 
 import shotOrder from "../../../../public/app/m-order-new.png";
@@ -140,16 +140,16 @@ export default async function BlogPostPage({
           </div>
         </article>
 
-        {/* CTA band */}
+        {/* CTA band — copy adapts to the post's product vertical */}
         <section className="hero-night grain relative overflow-hidden text-on-hero">
           <div className="relative mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
             <h2 className="font-display text-2xl leading-tight font-medium md:text-3xl">
-              Run your distribution business from your phone.
+              {POST_CTA[postVertical(post)].title}
             </h2>
-            <p className="mt-3 text-on-hero-dim">Orders, GST billing, stock and collections — one clean app.</p>
+            <p className="mt-3 text-on-hero-dim">{POST_CTA[postVertical(post)].sub}</p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
               <a href={SITE.appUrl} className="btn-primary">Start free</a>
-              <a href={waLink("Hi! I read your blog and want a demo of Vrikso.")} className="btn-ghost-light">WhatsApp demo</a>
+              <a href={waLink(POST_CTA[postVertical(post)].wa)} className="btn-ghost-light">WhatsApp demo</a>
             </div>
           </div>
         </section>

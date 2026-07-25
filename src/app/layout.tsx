@@ -3,6 +3,7 @@ import { Fraunces, Schibsted_Grotesk } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
+import { JsonLd, ORGANIZATION, WEBSITE } from "@/lib/jsonld";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -39,7 +40,11 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${schibsted.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        <JsonLd data={ORGANIZATION} />
+        <JsonLd data={WEBSITE} />
+        {children}
+      </body>
       {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}
     </html>
   );

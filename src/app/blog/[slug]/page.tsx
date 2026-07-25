@@ -8,6 +8,7 @@ import Reveal from "@/components/reveal";
 import PostCover from "@/components/post-cover";
 import { POSTS, getPost, relatedPosts, formatDate, postVertical, POST_CTA, type BlogBlock } from "@/lib/content/blog";
 import { SITE, waLink } from "@/lib/site";
+import { JsonLd } from "@/lib/jsonld";
 
 import shotOrder from "../../../../public/app/m-order-new.png";
 import shotInvoice from "../../../../public/app/m-invoice.png";
@@ -74,23 +75,22 @@ export default async function BlogPostPage({
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
+    url: `${SITE.url}/blog/${post.slug}`,
+    ...(post.image ? { image: `${SITE.url}${post.image}` } : {}),
     datePublished: post.date,
     dateModified: post.date,
     author: { "@type": "Organization", name: post.author },
-    publisher: {
-      "@type": "Organization",
-      name: "Vrikso",
-      logo: { "@type": "ImageObject", url: `${SITE.url}/brand/vrikso-logo-512.png` },
-    },
+    publisher: { "@id": `${SITE.url}/#organization` },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE.url}/blog/${post.slug}` },
     keywords: post.tags.join(", "),
     articleSection: post.category,
+    inLanguage: "en",
   };
 
   return (
     <>
       <SiteHeader />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <JsonLd data={jsonLd} />
       <main>
         {/* Article header */}
         <section className="border-b border-line bg-paper">

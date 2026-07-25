@@ -4,6 +4,7 @@ import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
 import { PhoneShot, BrowserShot } from "@/components/device";
 import { SITE, waLink } from "@/lib/site";
+import { JsonLd, softwareApplication, faqPage } from "@/lib/jsonld";
 
 /** Shape of a vertical's content file — one file per industry, one template.
     Each vertical supplies its own screenshots (statically imported in its
@@ -40,6 +41,14 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
   return (
     <>
       <SiteHeader />
+      <JsonLd
+        data={softwareApplication({
+          name: v.metaTitle,
+          description: v.metaDescription,
+          path: `/${v.slug}`,
+        })}
+      />
+      <JsonLd data={faqPage(v.faqs)} />
       <main>
         {/* Hero */}
         <section className="hero-night grain relative overflow-hidden text-on-hero">

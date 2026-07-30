@@ -22,8 +22,8 @@ export const HOME = {
     titleA: "Run your whole",
     titleAccent: "business",
     titleB: "from your phone.",
-    sub: "Orders, GST billing, stock and payments one clean app for your salesmen, warehouse and accounts. No computer. No backups. No tension.",
-    proof: "Built inside a real distribution business not a software lab.",
+    sub: "Orders, GST billing, stock and payments — one clean app for your salesmen, warehouse and accounts. No computer. No backups. No tension.",
+    proof: "Built inside a real distribution business — not a software lab.",
     stats: [
       { k: "90 sec", v: "to place an order" },
       { k: "10 min", v: "to go live" },
@@ -46,9 +46,9 @@ export const HOME = {
     label: "Inside Vrikso",
     title: "Not a brochure.",
     titleAccent: "The real screens.",
-    p: "Every screenshot below is the live app the same one your salesman opens at the shop and your accountant opens at night.",
+    p: "Every screenshot below is the live app — the same one your salesman opens at the shop and your accountant opens at night.",
     shots: {
-      order: { cap: "Take an order", sub: "Tap products, set qty, place 90 seconds." },
+      order: { cap: "Take an order", sub: "Tap products, set qty, place — 90 seconds." },
       invoice: { cap: "GST invoice", sub: "Auto-generated, share on WhatsApp." },
       aging: { cap: "Money owed", sub: "Outstanding by shop, by age bucket." },
       products: { cap: "Your catalog", sub: "Every SKU, pack-size, stock & price." },
@@ -83,12 +83,12 @@ export const HOME = {
       {
         k: "01",
         h: "Salesman takes the order at the shop",
-        p: "Pick the shop, tap products, place order 90 seconds on a phone, even on 2G. Recent shops appear first.",
+        p: "Pick the shop, tap products, place order — 90 seconds on a phone, even on 2G. Recent shops appear first.",
       },
       {
         k: "02",
         h: "Warehouse picks and loads",
-        p: "Picking and loading lists generate themselves. Mark delivered stock decrements and the GST invoice is created automatically.",
+        p: "Picking and loading lists generate themselves. Mark delivered — stock decrements and the GST invoice is created automatically.",
       },
       {
         k: "03",
@@ -142,6 +142,13 @@ export const HOME = {
   final: {
     title: "Your business, in your pocket, tonight.",
     p: "Set up in 10 minutes. Your first order placed in 11.",
+  },
+
+  blogTeaser: {
+    label: "From the journal",
+    title: "Field notes for Indian trade.",
+    p: "Practical guides on GST, collections, stock and field sales — written for traders, not accountants.",
+    all: "Read all articles",
   },
 
   footer: {

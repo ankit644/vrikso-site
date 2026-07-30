@@ -1,12 +1,24 @@
 import Link from "next/link";
 import Logo from "./logo";
 import { HOME } from "@/lib/content/home";
-import { SITE } from "@/lib/site";
+import { SITE, waLink } from "@/lib/site";
 
 export default function SiteFooter() {
   const f = HOME.footer;
   return (
     <footer className="border-t border-line bg-paper-2">
+      {/* conversion band */}
+      <div className="border-b border-line">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-5 px-4 py-9 sm:px-6">
+          <p className="font-display max-w-sm text-xl leading-snug font-medium">
+            {HOME.final.title}
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a href={SITE.appUrl} className="btn-primary">{HOME.cta.start}</a>
+            <a href={waLink(HOME.waMessage)} className="btn-ghost-dark">{HOME.cta.demo}</a>
+          </div>
+        </div>
+      </div>
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2.5 font-semibold">

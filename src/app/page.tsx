@@ -3,7 +3,9 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
 import { PhoneShot, BrowserShot } from "@/components/device";
+import PostCover from "@/components/post-cover";
 import { HOME as c } from "@/lib/content/home";
+import { POSTS_BY_DATE, formatDate } from "@/lib/content/blog";
 import { SITE, waLink } from "@/lib/site";
 
 import shotOrder from "../../public/app/m-order-new.png";
@@ -26,6 +28,7 @@ export default function HomePage() {
         <Tree />
         <Compare />
         <PricingTeaser />
+        <BlogTeaser />
         <FinalCta />
       </main>
       <SiteFooter />
@@ -33,75 +36,102 @@ export default function HomePage() {
   );
 }
 
-/* ── Hero — ink-violet night, editorial serif, real app on a device cluster ── */
+/* ── Hero — light lavender ground; violet feature panel carrying the app ── */
 function Hero() {
   return (
-    <section className="hero-night grain relative overflow-hidden text-on-hero">
-      <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 pt-16 pb-4 sm:px-6 md:grid-cols-[1.08fr_0.92fr] md:gap-8 md:pt-24 md:pb-0">
-        <div className="relative z-10 pb-10 md:pb-28">
-          <p className="rise rule-label max-w-md text-on-hero-dim" style={d(0)}>
+    <section className="relative overflow-hidden bg-paper">
+      {/* soft ambient blooms */}
+      <div className="absolute -top-32 -right-24 h-96 w-96 rounded-full bg-lilac blur-3xl" aria-hidden />
+      <div className="absolute top-40 -left-32 h-80 w-80 rounded-full bg-lilac/70 blur-3xl" aria-hidden />
+
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pt-14 pb-16 sm:px-6 md:grid-cols-[1.04fr_0.96fr] md:gap-10 md:pt-20 md:pb-24">
+        <div className="relative z-10">
+          <p
+            className="rise inline-flex items-center gap-2 rounded-full border border-lilac-line bg-paper-3 px-4 py-1.5 text-[0.72rem] font-semibold tracking-[0.12em] text-violet-deep uppercase shadow-[var(--shadow-sm)]"
+            style={d(0)}
+          >
             {c.hero.eyebrow}
           </p>
-          <h1 className="font-display display-xl rise mt-6 font-medium" style={d(120)}>
+          <h1 className="font-display display-xl rise mt-7 font-medium text-ink" style={d(120)}>
             {c.hero.titleA}{" "}
             <em className="text-brand-gradient font-semibold not-italic">{c.hero.titleAccent}</em>
             <br />
             {c.hero.titleB}
           </h1>
-          <p className="rise mt-6 max-w-xl text-base leading-relaxed text-on-hero-dim sm:text-lg" style={d(240)}>
+          <p className="rise mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg" style={d(240)}>
             {c.hero.sub}
           </p>
           <div className="rise mt-9 flex flex-wrap items-center gap-3" style={d(360)}>
             <a href={SITE.appUrl} className="btn-primary">{c.cta.start}</a>
-            <a href={waLink(c.waMessage)} className="btn-ghost-light">{c.cta.demo}</a>
+            <a href={waLink(c.waMessage)} className="btn-ghost-dark">{c.cta.demo}</a>
           </div>
 
-          {/* stat row */}
-          <dl className="rise mt-11 flex max-w-md flex-wrap gap-x-8 gap-y-4 border-t border-white/12 pt-6" style={d(460)}>
-            {c.hero.stats.map((s) => (
-              <div key={s.k}>
-                <dt className="font-display text-2xl font-semibold text-on-hero">{s.k}</dt>
-                <dd className="text-xs text-on-hero-dim">{s.v}</dd>
+          {/* stat row — reference-style divided figures */}
+          <dl className="rise mt-11 flex max-w-md flex-wrap gap-x-0 gap-y-4 border-t border-line pt-6" style={d(460)}>
+            {c.hero.stats.map((s, i) => (
+              <div key={s.k} className={i === 0 ? "pr-7" : "border-l border-line px-7"}>
+                <dt className="font-display text-2xl font-semibold text-ink">{s.k}</dt>
+                <dd className="mt-0.5 text-xs text-ink-faint">{s.v}</dd>
               </div>
             ))}
           </dl>
 
-          <p className="rise mt-7 text-sm text-on-hero-dim/80 italic" style={d(560)}>
+          <p className="rise mt-7 text-sm text-ink-faint italic" style={d(560)}>
             — {c.hero.proof}
           </p>
         </div>
 
-        {/* device cluster — mobile: single phone in flow; sm+: floating cluster */}
-        <div className="rise relative mx-auto w-full max-w-[420px]" style={d(300)}>
-          <div className="absolute -inset-6 rounded-full bg-violet/25 blur-3xl" aria-hidden />
-
-          {/* mobile: one full, un-clipped phone */}
-          <div className="relative z-10 mx-auto w-[68%] min-w-[220px] max-w-[280px] pb-2 sm:hidden">
-            <PhoneShot src={shotOrder} alt="Taking an order in the Vrikso app" width={280} priority />
-          </div>
-
-          {/* sm+: layered floating cluster */}
-          <div className="relative hidden h-[520px] sm:block md:h-[600px]">
-            <div
-              className="floaty-slow absolute top-6 left-0 z-0 w-[200px] opacity-95 md:top-16"
-              style={{ ["--rot" as string]: "-7deg" }}
-            >
-              <PhoneShot src={shotInvoice} alt="GST invoice in the Vrikso app" width={200} />
+        {/* violet feature panel — phone + floating proof cards */}
+        <div className="rise relative" style={d(300)}>
+          <div className="hero-night relative overflow-hidden rounded-[2.5rem] px-6 pt-9 pb-7 shadow-[var(--shadow-lg)] sm:px-9">
+            <div className="relative z-10 mx-auto w-[64%] min-w-[210px] max-w-[260px]">
+              <PhoneShot src={shotOrder} alt="Taking an order in the Vrikso app" width={260} priority />
             </div>
-            <div
-              className="floaty absolute top-0 right-0 z-10 w-[240px] md:right-6 md:w-[272px]"
-              style={{ ["--rot" as string]: "3deg" }}
-            >
-              <PhoneShot src={shotOrder} alt="Taking an order in the Vrikso app" width={272} />
+
+            {/* floating cards */}
+            <div className="floaty-slow absolute top-9 right-4 z-20 rounded-2xl bg-paper-3 px-4 py-3 shadow-[var(--shadow-md)] sm:right-7">
+              <p className="text-[0.62rem] font-bold tracking-widest text-ink-faint uppercase">GST invoice</p>
+              <p className="mt-0.5 flex items-center gap-1.5 text-[0.8rem] font-semibold text-ink">
+                <CheckDot /> Shared on WhatsApp
+              </p>
             </div>
-            {/* <div className="glass absolute bottom-4 left-0 z-20 rounded-2xl px-4 py-3 text-on-hero shadow-lg md:bottom-12 md:left-6">
-              <p className="text-[0.6rem] font-semibold tracking-widest text-on-hero-dim uppercase">Total outstanding</p>
-              <p className="font-display text-xl font-semibold">₹6,133.00</p>
-            </div> */}
+            <div className="floaty absolute top-[46%] left-3 z-20 rounded-2xl bg-paper-3 px-4 py-3 shadow-[var(--shadow-md)] sm:left-6">
+              <p className="text-[0.62rem] font-bold tracking-widest text-ink-faint uppercase">Order placed</p>
+              <p className="mt-0.5 flex items-center gap-1.5 text-[0.8rem] font-semibold text-ink">
+                <CheckDot /> 90 seconds, at the shop
+              </p>
+            </div>
+
+            {/* in-band feature pair, like the reference */}
+            <div className="relative z-10 mt-7 grid grid-cols-2 gap-5 border-t border-white/20 pt-6 text-on-hero">
+              <div>
+                <p className="text-sm font-semibold">Orders from the field</p>
+                <p className="mt-1 text-xs leading-relaxed text-on-hero-dim">
+                  Salesmen order from any phone, even on 2G.
+                </p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold">Live outstanding</p>
+                <p className="mt-1 text-xs leading-relaxed text-on-hero-dim">
+                  Every shop&rsquo;s udhaar, current to the minute.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+/* tiny violet check chip used in the hero's floating cards */
+function CheckDot() {
+  return (
+    <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-lilac" aria-hidden>
+      <svg width="9" height="9" viewBox="0 0 10 10" fill="none">
+        <path d="M1.5 5.5 4 8l4.5-6" stroke="var(--violet)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
   );
 }
 
@@ -133,11 +163,11 @@ function Pains() {
         <div className="mt-12 grid gap-12 md:grid-cols-3 md:gap-8">
           {c.pains.items.map((item, i) => (
             <Reveal key={item.h} delay={i * 120}>
-              <article className="group border-t-2 border-ink pt-5">
-                <p className="font-display text-sm font-semibold tracking-wide text-violet-deep uppercase">
+              <article className="group h-full rounded-[var(--radius-card)] border border-line-2 bg-paper-3 p-7 shadow-[var(--shadow-sm)] transition-shadow hover:shadow-[var(--shadow-md)]">
+                <p className="inline-flex rounded-full bg-lilac px-3 py-1 text-[0.68rem] font-bold tracking-wide text-violet-deep uppercase">
                   {item.kicker}
                 </p>
-                <h3 className="font-display mt-3 text-2xl leading-snug font-medium">{item.h}</h3>
+                <h3 className="font-display mt-4 text-2xl leading-snug font-medium">{item.h}</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">{item.p}</p>
               </article>
             </Reveal>
@@ -189,8 +219,8 @@ function Gallery() {
         <div className="mt-16 grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
           {phones.map((p, i) => (
             <Reveal key={p.cap} delay={i * 90}>
-              <figure className="flex flex-col items-center text-center">
-                <PhoneShot src={p.src} alt={`${p.cap} — Vrikso app`} width={210} />
+              <figure className="flex h-full flex-col items-center rounded-[var(--radius-card)] border border-line-2 bg-paper-3 px-4 pt-6 pb-6 text-center shadow-[var(--shadow-sm)] transition-shadow hover:shadow-[var(--shadow-md)]">
+                <PhoneShot src={p.src} alt={`${p.cap} — Vrikso app`} width={190} />
                 <figcaption className="mt-5">
                   <p className="font-display text-lg font-medium">{p.cap}</p>
                   <p className="mt-1 text-[0.82rem] leading-snug text-ink-faint">{p.sub}</p>
@@ -377,17 +407,79 @@ function PricingTeaser() {
   );
 }
 
-/* ── Final CTA band ── */
+/* ── Blog teaser — latest three field notes ── */
+function BlogTeaser() {
+  const posts = POSTS_BY_DATE.slice(0, 3);
+  const t = c.blogTeaser;
+  return (
+    <section className="border-b border-line bg-paper">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+        <Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="rule-label text-violet-deep">{t.label}</p>
+              <h2 className="font-display display-md mt-7 font-medium">{t.title}</h2>
+              <p className="mt-3 max-w-xl text-[0.97rem] text-ink-soft">{t.p}</p>
+            </div>
+            <Link href="/blog" className="inline-flex items-center gap-1.5 font-semibold text-violet-deep hover:underline">
+              {t.all} →
+            </Link>
+          </div>
+        </Reveal>
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {posts.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 110}>
+              <Link
+                href={`/blog/${p.slug}`}
+                className="group block h-full overflow-hidden rounded-[var(--radius-card)] border border-line-2 bg-paper-3 shadow-[var(--shadow-sm)] transition-shadow hover:shadow-[var(--shadow-md)]"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  <PostCover
+                    image={p.image}
+                    cover={p.cover}
+                    category={p.category}
+                    alt={p.title}
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="text-xs font-semibold text-ink-faint">
+                    <span className="text-violet-deep">{p.category}</span> · {formatDate(p.date)}
+                  </p>
+                  <h3 className="font-display mt-2 text-lg leading-snug font-medium group-hover:underline">
+                    {p.title}
+                  </h3>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Final CTA — rounded violet band, tilted phone, reference-style ── */
 function FinalCta() {
   return (
-    <section className="hero-night grain relative overflow-hidden text-on-hero">
-      <div className="relative mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 md:py-28">
+    <section className="bg-paper pb-20 md:pb-28">
+      <div className="mx-auto max-w-6xl px-4 pt-16 sm:px-6 md:pt-20">
         <Reveal>
-          <h2 className="font-display display-lg font-medium">{c.final.title}</h2>
-          <p className="mt-4 text-lg text-on-hero-dim">{c.final.p}</p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href={SITE.appUrl} className="btn-primary">{c.cta.start}</a>
-            <a href={waLink(c.waMessage)} className="btn-ghost-light">{c.cta.demo}</a>
+          <div className="hero-night grain relative overflow-hidden rounded-[2.75rem] px-6 py-14 text-on-hero shadow-[var(--shadow-lg)] md:px-14 md:py-16">
+            <div className="relative z-10 grid items-center gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-14">
+              <div className="order-last mx-auto w-[200px] rotate-[-6deg] md:order-first md:w-[230px]">
+                <PhoneShot src={shotInvoice} alt="A GST invoice in the Vrikso app" width={230} />
+              </div>
+              <div className="text-center md:text-left">
+                <h2 className="font-display display-lg font-medium">{c.final.title}</h2>
+                <p className="mt-4 text-lg text-on-hero-dim">{c.final.p}</p>
+                <div className="mt-9 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+                  <a href={SITE.appUrl} className="btn-primary">{c.cta.start}</a>
+                  <a href={waLink(c.waMessage)} className="btn-ghost-light">{c.cta.demo}</a>
+                </div>
+              </div>
+            </div>
           </div>
         </Reveal>
       </div>

@@ -18,8 +18,8 @@ export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+    <header className="sticky top-0 z-40 px-3 pt-3 sm:px-4">
+      <div className="mx-auto flex h-[3.75rem] max-w-6xl items-center justify-between gap-3 rounded-full border border-white/70 bg-paper-3/85 px-4 shadow-[var(--shadow-md)] backdrop-blur-xl sm:px-5">
         <Link
           href="/"
           onClick={() => setOpen(false)}
@@ -97,9 +97,15 @@ export default function SiteHeader() {
           </a>
           <a
             href={waLink(c.waMessage)}
-            className="hidden min-h-10 items-center rounded-full bg-ink px-5 text-sm font-semibold whitespace-nowrap text-paper shadow-[var(--shadow-sm)] transition-transform hover:scale-[1.03] active:scale-95 md:inline-flex"
+            className="hidden min-h-10 items-center rounded-full border border-ink/15 bg-paper-3 px-5 text-sm font-semibold whitespace-nowrap text-ink shadow-[var(--shadow-sm)] transition-transform hover:scale-[1.03] active:scale-95 lg:inline-flex"
           >
             {c.cta.demo}
+          </a>
+          <a
+            href={SITE.appUrl}
+            className="btn-primary hidden !min-h-10 px-5 !text-sm whitespace-nowrap md:inline-flex"
+          >
+            {c.cta.start}
           </a>
 
           {/* hamburger — mobile only */}
@@ -133,11 +139,11 @@ export default function SiteHeader() {
 
       {/* mobile menu panel */}
       <div
-        className={`overflow-hidden border-line bg-paper/95 backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out md:hidden ${
-          open ? "max-h-[34rem] border-t opacity-100" : "max-h-0 opacity-0"
+        className={`mx-auto mt-2 max-w-6xl overflow-hidden rounded-[1.6rem] border-white/70 bg-paper-3/95 shadow-[var(--shadow-md)] backdrop-blur-xl transition-[max-height,opacity] duration-300 ease-out md:hidden ${
+          open ? "max-h-[34rem] border opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 sm:px-6">
+        <nav className="flex flex-col gap-1 px-4 py-3">
           {NAV.slice(0, 1).map((l) => (
             <Link
               key={l.href}
@@ -179,9 +185,16 @@ export default function SiteHeader() {
             {c.cta.login}
           </a>
           <a
-            href={waLink(c.waMessage)}
+            href={SITE.appUrl}
             onClick={() => setOpen(false)}
             className="btn-primary mt-2 w-full"
+          >
+            {c.cta.start}
+          </a>
+          <a
+            href={waLink(c.waMessage)}
+            onClick={() => setOpen(false)}
+            className="btn-ghost-dark mt-1 w-full"
           >
             {c.cta.demo}
           </a>

@@ -40,7 +40,10 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${schibsted.variable} antialiased`}
     >
-      <body>
+      {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla's
+          cz-shortcut-listen) inject attributes into <body> before React
+          hydrates; only this element's attribute diffs are ignored. */}
+      <body suppressHydrationWarning>
         <JsonLd data={ORGANIZATION} />
         <JsonLd data={WEBSITE} />
         {children}

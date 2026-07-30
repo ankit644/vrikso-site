@@ -1,42 +1,45 @@
 @import "tailwindcss";
 
 /* ══════════════════════════════════════════════════════════════════════
-   Vrikso — Editorial Premium design system
-   "The warm ledger": fine-stationery paper, deep ink-violet, Fraunces
-   serif display. Violet led; one warm saffron highlight used sparingly as
-   a nod to Indian trade. Brand accent mirrors My-business-crm.
+   Vrikso — Soft-lavender SaaS design system
+   Cool lavender-white canvas, white floating cards, periwinkle-violet
+   feature bands, pink-magenta CTA pills. Fraunces serif display carries
+   the brand voice; violet mirrors the app.
    ══════════════════════════════════════════════════════════════════════ */
 :root {
-  --paper:      #FAF8F4; /* warm off-white canvas */
-  --paper-2:    #F3EFE7; /* deeper paper for alt sections */
-  --paper-3:    #FCFBF8; /* raised card paper */
-  --ink:        #160E29; /* violet-black, near-ink */
-  --ink-soft:   #514864; /* secondary text on paper */
-  --ink-faint:  #897F9C;
-  --line:       #E7E1D5; /* warm hairline */
-  --line-2:     #EFEAE0;
+  --paper:      #F7F6FC; /* cool lavender-white canvas */
+  --paper-2:    #F1EFFA; /* deeper lavender for alt sections */
+  --paper-3:    #FFFFFF; /* raised white card */
+  --ink:        #171031; /* violet-black, near-ink */
+  --ink-soft:   #524A6B; /* secondary text on paper */
+  --ink-faint:  #8B81A4;
+  --line:       #E7E3F5; /* cool hairline */
+  --line-2:     #EFECFA;
 
   --violet:     #7C3AED; /* brand accent (mirror of app) */
   --violet-deep:#6D28D9;
   --purple:     #9333EA;
-  --lilac:      #F1ECFB; /* soft violet tint on paper */
-  --lilac-line: #DED2F4;
+  --lilac:      #EFEBFC; /* soft violet tint on paper */
+  --lilac-line: #DDD3F8;
   --saffron:    #E08A2B; /* warm highlight — used sparingly */
+  --pink:       #EC4899; /* CTA pill accent */
+  --pink-2:     #E879F9;
 
-  --hero:       #100A1F; /* hero/night sections */
-  --hero-2:     #1B1138;
-  --on-hero:    #F5F2FB;
-  --on-hero-dim:#A99FC9;
+  --hero:       #6C56E9; /* periwinkle-violet feature bands */
+  --hero-2:     #8E76F3;
+  --on-hero:    #FFFFFF;
+  --on-hero-dim:#E4DEFC;
 
-  --radius-card: 20px;
+  --radius-card: 24px;
   --radius-ctrl: 12px;
 
-  /* Premium elevation scale — warm-tinted, layered */
-  --shadow-sm:   0 1px 2px rgba(22,14,41,0.04), 0 2px 8px -2px rgba(22,14,41,0.06);
-  --shadow-md:   0 4px 12px -2px rgba(22,14,41,0.08), 0 12px 28px -8px rgba(22,14,41,0.10);
-  --shadow-lg:   0 12px 32px -8px rgba(22,14,41,0.14), 0 32px 64px -24px rgba(22,14,41,0.22);
-  --shadow-violet: 0 14px 34px -10px rgba(124,58,237,0.55);
-  --shadow-device: 0 8px 16px -8px rgba(10,5,30,0.5), 0 44px 90px -28px rgba(10,5,30,0.72);
+  /* Elevation scale — cool violet-tinted, layered */
+  --shadow-sm:   0 1px 2px rgba(38,24,90,0.04), 0 2px 10px -2px rgba(38,24,90,0.07);
+  --shadow-md:   0 4px 12px -2px rgba(38,24,90,0.07), 0 14px 30px -10px rgba(38,24,90,0.12);
+  --shadow-lg:   0 12px 32px -8px rgba(38,24,90,0.12), 0 32px 64px -24px rgba(38,24,90,0.22);
+  --shadow-violet: 0 14px 34px -10px rgba(108,86,233,0.5);
+  --shadow-pink:   0 14px 30px -10px rgba(236,72,153,0.45);
+  --shadow-device: 0 8px 16px -8px rgba(38,24,90,0.32), 0 44px 90px -28px rgba(38,24,90,0.45);
 }
 
 @theme inline {
@@ -106,21 +109,25 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* ── Hero atmosphere: layered aurora glows + faint grain on near-black ── */
+/* ── Feature band: periwinkle-violet, soft light blooms ── */
 .hero-night {
   background-color: var(--hero);
   background-image:
-    radial-gradient(1100px 640px at 82% -12%, rgba(124, 58, 237, 0.34), transparent 60%),
-    radial-gradient(820px 520px at -8% 8%, rgba(147, 51, 234, 0.20), transparent 58%),
-    radial-gradient(680px 520px at 50% 130%, rgba(124, 58, 237, 0.14), transparent 60%);
+    radial-gradient(900px 560px at 85% -10%, rgba(255, 255, 255, 0.10), transparent 60%),
+    radial-gradient(720px 480px at -10% 30%, rgba(147, 51, 234, 0.35), transparent 58%),
+    linear-gradient(150deg, #5f48e0, var(--hero-2));
 }
-/* Subtle violet vignette to seat content */
+/* Subtle deep-violet vignette to seat content */
 .hero-night::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(120% 90% at 50% -10%, transparent 55%, rgba(8,4,18,0.45) 100%);
+  background: radial-gradient(120% 90% at 50% -10%, transparent 60%, rgba(56, 34, 150, 0.30) 100%);
+}
+/* Brand-gradient text is violet-on-violet inside a band — lift it to pale pink */
+.hero-night .text-brand-gradient {
+  background-image: linear-gradient(115deg, #ffeaf9 5%, #fbc8ee 70%);
 }
 
 .grain::after {
@@ -134,7 +141,7 @@ body {
 
 /* Faint dot-grid texture (paper sections) */
 .dotgrid {
-  background-image: radial-gradient(rgba(22,14,41,0.05) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(38,24,90,0.06) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 
@@ -183,12 +190,31 @@ body {
   font-size: 0.95rem;
   font-weight: 600;
   color: #fff;
-  background-image: linear-gradient(120deg, var(--violet), var(--purple));
-  box-shadow: var(--shadow-violet);
+  background-image: linear-gradient(120deg, var(--pink), var(--pink-2));
+  box-shadow: var(--shadow-pink);
   transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), box-shadow 0.25s;
 }
-.btn-primary:hover { transform: translateY(-2px) scale(1.015); box-shadow: 0 20px 44px -10px rgba(124,58,237,0.6); }
+.btn-primary:hover { transform: translateY(-2px) scale(1.015); box-shadow: 0 20px 44px -10px rgba(236,72,153,0.55); }
 .btn-primary:active { transform: scale(0.97); }
+
+/* Quiet outline pill for light grounds */
+.btn-ghost-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  border-radius: 999px;
+  padding-inline: 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--paper-3);
+  border: 1px solid rgba(23,16,49,0.14);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.btn-ghost-dark:hover { border-color: rgba(23,16,49,0.32); transform: translateY(-2px); }
+.btn-ghost-dark:active { transform: scale(0.97); }
 
 .btn-ghost-light {
   display: inline-flex;

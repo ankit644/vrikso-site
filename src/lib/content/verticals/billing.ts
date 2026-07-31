@@ -1,10 +1,10 @@
 import type { VerticalContent } from "@/components/vertical-page";
-import shotInvoice from "../../../../public/app/billing/m-invoice.png";
-import shotInvoices from "../../../../public/app/billing/m-invoices.png";
-import shotCustomers from "../../../../public/app/billing/m-customers.png";
-import shotRecurring from "../../../../public/app/billing/m-recurring.png";
-import shotDashboardM from "../../../../public/app/billing/m-dashboard.png";
-import shotDashboardD from "../../../../public/app/billing/d-dashboard.png";
+import shotInvoice from "../../../../public/app/billing/m-invoice.webp";
+import shotInvoices from "../../../../public/app/billing/m-invoices.webp";
+import shotCustomers from "../../../../public/app/billing/m-customers.webp";
+import shotRecurring from "../../../../public/app/billing/m-recurring.webp";
+import shotDashboardM from "../../../../public/app/billing/m-dashboard.webp";
+import shotDashboardD from "../../../../public/app/billing/d-dashboard.webp";
 
 /** Vrikso Billing — standalone GST invoicing for any business that bills. */
 export const BILLING: VerticalContent = {

@@ -1,6 +1,8 @@
 /** All blog content in one place. Edit copy here, not in JSX.
     Body is structured blocks so the article template stays presentational. */
 
+/** Text fields ("x", list items, table cells, FAQ answers) support inline
+    markdown-style links: [label](/blog/some-post) or [label](https://…). */
 export type BlogBlock =
   | { t: "p"; x: string }
   | { t: "h2"; x: string }
@@ -8,7 +10,9 @@ export type BlogBlock =
   | { t: "quote"; x: string }
   | { t: "callout"; x: string }
   | { t: "image"; src: string; cap?: string }
-  | { t: "shot"; name: "order" | "invoice" | "aging" | "products" | "dashboard"; cap?: string };
+  | { t: "shot"; name: "order" | "invoice" | "aging" | "products" | "dashboard"; cap?: string }
+  | { t: "table"; head: string[]; rows: string[][]; cap?: string }
+  | { t: "faq"; items: { q: string; a: string }[] };
 
 export type BlogPost = {
   slug: string;
@@ -21,6 +25,8 @@ export type BlogPost = {
   cover: number; // 0-5 palette selector for the SVG fallback cover
   image?: string; // optional real cover image under /public (overrides the SVG)
   tags: string[];
+  /** Pin the bottom-CTA product vertical; when absent it is inferred from tags. */
+  vertical?: Vertical;
   body: BlogBlock[];
 };
 
@@ -33,6 +39,385 @@ export const BLOG_INDEX = {
 
 export const POSTS: BlogPost[] = [
   {
+    slug: "zomato-swiggy-commission-rates-2026",
+    title: "Zomato & Swiggy Commission Rates 2026: What You Actually Keep on a ₹500 Order",
+    description:
+      "Every fee itemised — commission, platform fee, GST, TDS, ads and funded discounts. See what actually lands in your bank on a ₹500 order, and five real ways to lower your effective commission.",
+    category: "Operations",
+    author: "Vrikso Team",
+    date: "2026-07-30",
+    readMins: 9,
+    cover: 3,
+    image: "/post-zomato-commission.webp",
+    tags: ["Zomato", "Swiggy", "commissions", "restaurant"],
+    body: [
+      { t: "p", x: "Ask a restaurant owner what commission they pay Zomato or Swiggy and most will quote the number from their contract — 18%, maybe 22%. Ask them what percentage of a ₹500 order actually reaches their bank account, and the room goes quiet. The two numbers are not close. Between the menu price and the settlement sit commission, payment charges, GST on the platform's fees, your share of discounts, ad spend and TDS — and none of it is presented in one place." },
+      { t: "p", x: "This is now a national argument. In March 2026 both platforms raised the customer platform fee to ₹17.58 per order — a 19% jump. The NRAI's antitrust case against the aggregators continues at the CCI. And from 15 August 2026, Bengaluru's hotel association has called a boycott of both platforms, with owners publicly showing the math: a ₹400 dish that nets roughly ₹220 after every deduction. Whatever side of that fight you're on, you should know your own number. Here is how to work it out." },
+      { t: "h2", x: "Every charge on an aggregator order in 2026" },
+      { t: "p", x: "Rates vary by city, plan and how much negotiating leverage you have — a new single-outlet restaurant pays more than a 40-outlet chain. But the stack itself is the same for everyone:" },
+      { t: "table",
+        head: ["Charge", "Typical rate", "Who bears it"],
+        rows: [
+          ["Commission on order value", "18–28% for delivery (8–15% on some dine-in/older plans)", "You"],
+          ["Payment & collection charges", "~2% (bundled into commission on some plans)", "You"],
+          ["GST on the platform's charges", "18% of commission + fees — and at 5% GST without ITC, you cannot claim it back", "You"],
+          ["Restaurant-funded discounts", "Your agreed share of offers like '50% off up to ₹100'", "You"],
+          ["Ads / visibility campaigns", "Optional on paper; in a crowded category, effectively the cost of being seen", "You"],
+          ["TDS under Section 194-O", "0.1% of gross sales (adjustable against income tax, but gone from this payout)", "You, upfront"],
+          ["Platform fee", "₹17.58 per order since March 2026", "The customer — but it shrinks baskets and order counts"],
+          ["GST on food (5%)", "Collected and remitted by the platform under Section 9(5) — you still report these sales in GSTR-3B", "The customer"],
+        ],
+        cap: "The 2026 fee stack on a delivery order. Exact rates depend on your plan, city and contract." },
+      { t: "h2", x: "The ₹500 order, line by line" },
+      { t: "p", x: "Here is a realistic worked example for a single-outlet restaurant on a mid-tier plan — 22% commission, 2% collection charges, funding ₹40 of a discount, and running modest ads. Your contract will differ; the point is to see the shape of it:" },
+      { t: "table",
+        head: ["Line", "Amount", "What's left"],
+        rows: [
+          ["Order value (menu price)", "₹500.00", "₹500.00"],
+          ["Commission @ 22%", "− ₹110.00", "₹390.00"],
+          ["Payment & collection @ 2%", "− ₹10.00", "₹380.00"],
+          ["GST @ 18% on platform charges (₹120)", "− ₹21.60", "₹358.40"],
+          ["Your share of the discount", "− ₹40.00", "₹318.40"],
+          ["Ads, averaged per delivered order", "− ₹10.00", "₹308.40"],
+          ["TDS @ 0.1%", "− ₹0.50", "₹307.90"],
+          ["Packaging (your own cost)", "− ₹18.00", "₹289.90"],
+        ],
+        cap: "Illustrative — but run your own payout report through this format and you will land in the same region." },
+      { t: "p", x: "That ₹500 order settles at about ₹290 before you have paid for a single ingredient. Your contract says 22%; your effective commission — everything the channel costs you as a share of the order — is over 40%. That is the number that decides whether delivery is profitable for you, and it is the number almost nobody tracks." },
+      { t: "callout", x: "Your commission rate is what the contract says. Your effective commission is what the channel actually costs you per order — commission, GST you can't claim back, funded discounts, ads and packaging together. Know both numbers. The gap between them is where delivery kitchens quietly lose money." },
+      { t: "h2", x: "Why the GST line stings more than it looks" },
+      { t: "p", x: "Most restaurants charge 5% GST on food under the no-input-tax-credit scheme. That means the 18% GST you pay on commission, payment charges and ads is a pure cost — you cannot offset it against anything. On the ₹500 example, that's ₹21.60 leaving forever. And since September 2025, the delivery fee the platforms charge customers also carries 18% GST, which has pushed checkout totals up and nudged order volumes down. Meanwhile, even though the platform collects and remits the 5% on your food under Section 9(5), those sales still have to be reported in your GSTR-3B — a detail that trips up plenty of owners at filing time." },
+      { t: "h2", x: "What the Bengaluru boycott is actually about" },
+      { t: "p", x: "From 15 August 2026, the Bruhat Bangalore Hotels Association has asked member restaurants to stop taking orders from both platforms. Their stated math is the same stack you just saw: commissions up to 28%, plus 18% GST on those charges, plus TDS, plus ~2% payment charges. The CCI closed one complaint against the platforms in July, while the NRAI's broader case continues. Nobody knows how the boycott will play out — but the pressure has already produced one real change: Eternal (Zomato's parent) has said publicly that it is reviewing its commission structure. If you run a restaurant, the practical takeaway is not to pick a side. It is to know your effective commission precisely, so that whatever rates emerge next, you can decide in minutes whether a channel still works for you." },
+      { t: "h2", x: "Five real ways to lower your effective commission" },
+      { t: "ul", items: [
+        "Move your regulars to direct orders. Every repeat customer who orders on [WhatsApp](/blog/whatsapp-for-distribution-business) instead of the app takes their order from a ~40% effective cost to nearly zero. Put a QR and a phone number on every box.",
+        "Get on ONDC. Network commissions run 3–5% against 18–28% on the aggregators. Volumes are smaller, but for the orders it brings, the margin difference is enormous.",
+        "Cap and measure ad spend. Ads are the most elastic line in the stack. Set a monthly budget as a percentage of aggregator revenue, and check every month whether the incremental orders covered it.",
+        "Engineer the delivery menu. Price delivery items to carry the channel's cost — bundles, combos and portions designed around what still tastes good after 25 minutes in a box. Your dine-in menu and your delivery menu do not have to match.",
+        "Renegotiate with data. If you can show consistent volumes and a low cancellation rate, you have leverage at review time. Chains negotiate single digits off their rate; independents who show up with numbers do too.",
+      ] },
+      { t: "h2", x: "Then check that you were actually paid it" },
+      { t: "p", x: "Everything above assumes the payout matches the math — and payouts routinely don't. Orders cooked but cancelled, discounts deducted twice, commission rates that creep after a plan change: that is a separate leak, and we wrote a full guide on it — [Zomato & Swiggy reconciliation: where your online profit leaks](/blog/zomato-swiggy-reconciliation-for-restaurants). If your POS pulls aggregator orders into the same system as dine-in, checking a payout takes minutes instead of an evening; our [restaurant POS buyer's guide](/blog/restaurant-pos-software-india-buyers-guide) covers what to look for." },
+      { t: "h2", x: "Frequently asked questions" },
+      { t: "faq", items: [
+        { q: "What percentage does Zomato take from restaurants in 2026?", a: "Delivery commissions typically run 18–28% of order value depending on your city, plan and negotiating leverage, plus ~2% payment charges and 18% GST on all of those fees. New single-outlet restaurants usually start near the top of the range." },
+        { q: "Is the ₹17.58 platform fee charged to the restaurant or the customer?", a: "The customer pays it at checkout. It doesn't appear in your deductions, but it raises the customer's total, which shows up for you as smaller baskets and fewer orders — especially on low-value items." },
+        { q: "Do restaurants pay GST on Zomato and Swiggy commission?", a: "Yes — 18% GST applies on commission, payment charges and ad services. If you bill food at 5% under the no-ITC scheme (most restaurants do), you cannot claim any of it back, so it is a pure cost." },
+        { q: "How can I get a lower commission rate?", a: "Volume and reliability are the levers: consistent order counts, low cancellations and good ratings give you a case at plan-review time. Beyond negotiation, shifting regulars to direct WhatsApp orders and listing on ONDC (3–5% commission) lower your blended cost even if the aggregator rate stays put." },
+        { q: "Can a small restaurant survive on Swiggy and Zomato alone?", a: "Only with the math done honestly. If your effective commission is ~40% of order value, your food cost, packaging and rent have to fit in the remaining ~60%. It works for high-margin menus (beverages, desserts, some cuisines) and fails silently for others — which is why knowing your per-order number matters more than any general answer." },
+      ] },
+      { t: "p", x: "The platforms are not going away, and for most restaurants they shouldn't — reach is real. But 2026 is the year the industry stopped taking the payout on faith. Work out your effective commission this week: pull one payout report, run it through the table above, and put the final number next to your food cost. Whatever you decide about boycotts and channels after that, you'll be deciding with your own math." },
+    ],
+  },
+  {
+    slug: "gstr-3b-itc-locked-ims-guide",
+    title: "GSTR-3B ITC Is Locked from July 2026: The Plain-English IMS Guide",
+    description:
+      "You can no longer edit input tax credit in GSTR-3B — it flows only from GSTR-2B and your IMS actions. What changed, the new monthly routine before the 20th, and what a supplier's late GSTR-1 now costs you.",
+    category: "GST & Compliance",
+    author: "Vrikso Team",
+    date: "2026-07-28",
+    readMins: 9,
+    cover: 5,
+    image: "/post-gstr3b-ims.webp",
+    tags: ["GST", "GSTR-3B", "ITC", "IMS"],
+    vertical: "billing",
+    body: [
+      { t: "p", x: "If you file GST, something changed this month that your CA has been worrying about since last year: from the July 2026 tax period, you can no longer manually edit the input tax credit figures in Table 4 of GSTR-3B. The credit you claim is now whatever auto-populates from GSTR-2B and the actions you take in the Invoice Management System (IMS). If an invoice isn't there, the credit isn't there — and there is no box to type it into anymore." },
+      { t: "p", x: "Tax portals are calling it 'hard-locking'. CA forums are running survival guides. But almost everything written so far is for practitioners, full of section numbers. This is the version for the person who actually runs the business — what changed, what your new monthly routine looks like, and the one habit that makes all of it a non-event." },
+      { t: "h2", x: "What locked, and when" },
+      { t: "table",
+        head: ["From tax period", "What you can no longer edit", "Where the number comes from instead"],
+        rows: [
+          ["July 2025", "Table 3 — your outward sales and tax liability", "Auto-filled from the GSTR-1 you filed (fix mistakes via GSTR-1A before filing 3B)"],
+          ["July 2026", "Table 4 — your input tax credit", "Auto-filled from GSTR-2B, shaped by your accept / reject / pending actions in IMS"],
+        ],
+        cap: "GSTR-3B has gone from a form you fill to a summary you confirm." },
+      { t: "p", x: "The intent is simple: the government wants the credit you claim to match, invoice for invoice, what your suppliers actually reported and paid. The era of claiming ITC on good faith and reconciling later is over." },
+      { t: "h2", x: "IMS in plain English" },
+      { t: "p", x: "The Invoice Management System is a screen on the GST portal (and an Excel-based offline tool, released July 2026, for doing it in bulk) where every purchase invoice your suppliers report shows up, waiting for you to act on it. For each invoice you have three buttons:" },
+      { t: "ul", items: [
+        "Accept — 'yes, this purchase is real and correct.' It flows into your GSTR-2B and becomes claimable credit.",
+        "Reject — 'this isn't mine, or it's wrong.' It stays out of your credit, and the supplier sees the rejection and must fix it on their side.",
+        "Pending — 'I'm not sure yet' (goods not received, amount disputed). The invoice waits, and the credit stays parked until you decide in a later period.",
+      ] },
+      { t: "p", x: "Do nothing, and invoices are treated as deemed-accepted when GSTR-2B is generated. That sounds convenient, but it means a wrong invoice slips into your credit — and a missing one simply never appears. Either way, the number in your 3B is now decided before you open the form." },
+      { t: "h2", x: "Your new monthly routine" },
+      { t: "p", x: "The whole change fits into three dates. Miss them and you are not filing wrong — you are filing blind:" },
+      { t: "table",
+        head: ["Date", "What happens", "What you should do"],
+        rows: [
+          ["11th", "Suppliers' GSTR-1 due — their invoices land in your IMS", "Nothing yet; the picture is still filling in"],
+          ["14th", "Your GSTR-2B generates from IMS", "Before this: review IMS, accept what's real, reject what's wrong, mark disputes pending"],
+          ["20th", "Your GSTR-3B due", "Confirm the auto-filled figures and file — the editing window is gone"],
+        ],
+        cap: "Three dates. The work moved from the 20th to the 14th." },
+      { t: "h2", x: "The real cost: your supplier's late GSTR-1 is now your problem" },
+      { t: "p", x: "Here is the part that hits distributors and traders hardest. Say you bought ₹5 lakh of stock in July and paid your supplier, GST included — ₹90,000 of it at 18%. If that supplier files their GSTR-1 late or misses your invoice, that ₹90,000 does not appear in your 2B, and you cannot claim it this month. You pay your full output tax in cash instead, and the credit arrives whenever your supplier gets around to filing. That is working capital — real money — sitting hostage to someone else's compliance." },
+      { t: "p", x: "The practical response: make supplier filing discipline part of how you buy. Prefer suppliers who file on time, chase the ones who don't in the window between the 11th and the 14th (a WhatsApp message with the invoice number works better than a phone call after the 20th), and check your IMS before the 2B generates, not after the credit has already gone missing." },
+      { t: "callout", x: "The rule of the new regime: your ITC is only as good as your purchase records and your suppliers' discipline. Clean invoices, matched to orders, chased before the 14th — that's the entire game. Businesses that already keep records this way will barely notice the change." },
+      { t: "h2", x: "Common mismatches, and what to do about each" },
+      { t: "ul", items: [
+        "Invoice in your books but not in IMS — the supplier hasn't reported it. Chase them before the 14th; the credit waits until they file.",
+        "Invoice in IMS that isn't yours — reject it. Deemed-accepting someone else's invoice inflates your credit and invites a notice later.",
+        "Amount or GSTIN is wrong — reject it and have the supplier amend in their next GSTR-1; don't accept 'approximately right' invoices anymore.",
+        "Goods not yet received — mark it pending. ITC rules still require receipt of goods; pending parks the credit legitimately until delivery.",
+        "Missed acting before the 2B generated — deemed acceptance applies; review the following month's IMS carefully and correct course there.",
+      ] },
+      { t: "p", x: "If you file quarterly under QRMP, the same logic applies around your quarter's dates — and composition dealers are outside this entirely (no GSTR-3B, no ITC). For a refresher on the other side of this handshake — filing your own sales cleanly so your buyers' credit lands — see our guide to [GSTR-1 filing](/blog/gstr1-filing-made-simple)." },
+      { t: "p", x: "One more reason this matters beyond compliance: your buyers now see, invoice by invoice, whether you file on time. A distributor whose retailers' credit lands like clockwork is a distributor retailers prefer to buy from. Clean [GST invoicing](/blog/gst-invoicing-guide-for-distributors) has quietly become a sales advantage — and if you still run billing on a [desktop package that can't keep up](/blog/signs-desktop-billing-software-holding-you-back), this is the change that will expose it." },
+      { t: "h2", x: "Frequently asked questions" },
+      { t: "faq", items: [
+        { q: "Can I still claim ITC that is not showing in GSTR-2B?", a: "No. From the July 2026 tax period, Table 4 of GSTR-3B cannot be edited manually — if the invoice isn't in your GSTR-2B (via your supplier's filing and your IMS actions), the credit cannot be claimed that month. It becomes claimable once the supplier reports it." },
+        { q: "What happens if I reject an invoice by mistake in IMS?", a: "The credit stays out of your 2B and the supplier is notified of the rejection. The fix flows through the supplier re-reporting or amending the invoice, after which you can accept it in a later period — so reject carefully, and use 'pending' when you're merely unsure." },
+        { q: "Is IMS mandatory?", a: "Acting on invoices is technically optional — anything you don't act on is deemed accepted when GSTR-2B generates. But since deemed acceptance can pull wrong invoices into your credit and hides missing ones, treating IMS review as mandatory is the only safe practice." },
+        { q: "What if my supplier files GSTR-1 after the 13th?", a: "Their invoices miss your GSTR-2B for that period, and the ITC becomes available only in the following month's 2B. You pay that month's output tax in cash in the meantime — which is why chasing late-filing suppliers before the 14th is now a monthly discipline." },
+        { q: "Does this apply to composition scheme dealers?", a: "No. Composition dealers don't file GSTR-3B or claim ITC, so hard-locking doesn't affect them. It applies to regular taxpayers filing monthly or under QRMP." },
+      ] },
+      { t: "p", x: "Rules like this reward the organised. Keep every purchase recorded the day it happens, check IMS on a fixed day each month, and chase stragglers with the invoice number in hand — and the scariest GST change in years becomes a ten-minute monthly routine." },
+    ],
+  },
+  {
+    slug: "gst-notice-upi-payments-what-to-do",
+    title: "Got a GST Notice for UPI Payments? Exactly What to Do (2026 Guide)",
+    description:
+      "States are using UPI data to send GST notices to small traders — thousands went out in Karnataka, and more states are following. The ₹40/₹20 lakh limits, a step-by-step response plan, and why going cash-only makes it worse.",
+    category: "GST & Compliance",
+    author: "Vrikso Team",
+    date: "2026-07-20",
+    readMins: 9,
+    cover: 2,
+    image: "/post-upi-gst-notice.webp",
+    tags: ["GST", "UPI", "GST notice", "small traders"],
+    vertical: "billing",
+    body: [
+      { t: "p", x: "In July 2025, thousands of small traders across Karnataka — kirana owners, vegetable vendors, condiment sellers — opened envelopes from the commercial taxes department demanding GST on years of turnover. The department hadn't visited their shops. It had simply pulled their UPI collection data and added it up. One vegetable vendor's notice demanded ₹29 lakh. Within weeks, 'No UPI — only cash' posters appeared on shopfronts across the state, and the panic made national news." },
+      { t: "p", x: "The state eventually softened — old dues were waived for traders who registered — but the method worked, and it is spreading. Andhra Pradesh, Uttar Pradesh, Tamil Nadu and Gujarat have since sought UPI merchant data of their own. If you take digital payments and you're not registered for GST, this guide is for you: what triggers a notice, exactly what to do if one arrives, and why the obvious-seeming response — going back to cash — is the worst one available." },
+      { t: "h2", x: "Why these notices are going out" },
+      { t: "p", x: "GST registration becomes compulsory once your annual turnover crosses a threshold: ₹40 lakh for goods (₹20 lakh in some special-category states) and ₹20 lakh for services. For years, small traders past those lines simply weren't visible. UPI changed that — every collection lands against your mobile number or QR, timestamped and totalled. Tax departments now buy that visibility wholesale: pull merchant UPI data, flag everyone whose credits crossed the threshold, and mail notices to the whole list at once." },
+      { t: "p", x: "The catch: UPI credits are not the same thing as taxable turnover. The data can't tell a sale from a personal transfer, a friend repaying a loan, or money moved between your own accounts. The notice assumes it is all sales — and the burden of proving otherwise falls on you. That is why the response matters more than the notice." },
+      { t: "h2", x: "Got a notice? Do these five things, in order" },
+      { t: "ul", items: [
+        "Don't panic, and don't ignore it. The demand on the first page is an estimate built from raw UPI data, not a final bill — but it becomes final if you never reply. Note the deadline (typically 30 days) and treat it as real.",
+        "Reconstruct your actual turnover. Go through the period the notice covers and separate genuine sales from everything else — personal credits, loans returned, transfers between your own accounts, refunds. Bank statements, purchase bills and any sales records you kept are your evidence.",
+        "Reply in writing, with the math. State your actual taxable turnover, list what the UPI total wrongly includes, and attach the proof. If your true turnover is under the threshold, say so plainly and show it.",
+        "Get a professional involved if the amount is serious. For a demand in lakhs, a few thousand rupees of a CA's time changes outcomes — especially on what qualifies as exempt (many unprocessed food items, for instance, carry nil GST even above the threshold).",
+        "If you genuinely crossed the threshold, register now. Registration going forward is cheap; years of assessed back-tax with penalties is not. In Karnataka, traders who came forward and registered had old dues waived — early cooperation consistently earns better terms.",
+      ] },
+      { t: "h2", x: "Registered because of this? Your two options" },
+      { t: "table",
+        head: ["", "Composition scheme", "Regular GST"],
+        rows: [
+          ["Who it suits", "Traders and small manufacturers up to ₹1.5 crore turnover selling locally", "Anyone; compulsory if you sell inter-state or on e-commerce platforms"],
+          ["Tax", "A flat ~1% of turnover for traders (5% for restaurants)", "Full rate per item (0/5/18%), minus input credit on purchases"],
+          ["Paperwork", "One quarterly payment (CMP-08) + one annual return", "Monthly or quarterly returns (GSTR-1, GSTR-3B)"],
+          ["Fine print", "Can't collect GST from customers or claim input credit", "Full compliance, but credit on purchases lowers real cost"],
+        ],
+        cap: "For most small shops crossing the line for the first time, composition is the gentler landing." },
+      { t: "h2", x: "Why 'cash only' makes it worse, not better" },
+      { t: "p", x: "The instinct behind the QR codes coming down is understandable — if UPI data caused this, remove the UPI. But it fails on every count. The liability already exists: past UPI data doesn't vanish when you stop accepting it, and departments can look back several years. Suddenly switching to cash after years of digital collections is itself a red flag that invites closer scrutiny, not less. And the daily cost is real — customers who can't pay by UPI walk to the shop next door that takes it." },
+      { t: "p", x: "The traders who come out of these drives unscathed aren't the ones who hid — they're the ones who could show their numbers. If every sale is billed, your turnover is a fact you can prove in an afternoon, not an estimate a tax officer builds from your bank feed. That's the actual protection: not less visibility, but better records than the department's. A simple [GST billing app](/blog/gst-invoicing-guide-for-distributors) — free, on the phone you already own — gives you exactly that, and [freelancers and service providers](/blog/gst-invoicing-for-freelancers-and-services) have their own ₹20 lakh version of the same story." },
+      { t: "callout", x: "A notice is only scary when your records are a mess. Bill every sale, keep purchases filed, and the difference between UPI credits and taxable turnover becomes something you can prove — instead of something you have to argue." },
+      { t: "h2", x: "Where this is happening (and where it's heading)" },
+      { t: "p", x: "Karnataka ran the playbook first — thousands of notices in July 2025, a trader backlash, then a settlement offer for those who registered. Since then, Andhra Pradesh, Uttar Pradesh, Tamil Nadu and Gujarat have requested merchant UPI data, and there is no reason to think the list stops there: the data is cheap, the recoveries are large, and the method survived its first public test. If your collections are anywhere near the thresholds, assume your state is next and get your records in order now — it costs nothing and removes the fear entirely. If you're growing past the thresholds anyway, do it properly: our guide on [scaling from kirana to distributor](/blog/kirana-to-distributor-scaling) covers what formalising actually unlocks." },
+      { t: "h2", x: "Frequently asked questions" },
+      { t: "faq", items: [
+        { q: "Is there GST on UPI transactions?", a: "No. UPI payments themselves carry no GST, and no tax is deducted when customers pay you by UPI. The notices are not a tax on UPI — they use UPI data as evidence of business turnover that may have crossed the GST registration threshold." },
+        { q: "What is the UPI limit for GST registration?", a: "There is no UPI-specific limit. GST registration becomes compulsory when annual taxable turnover crosses ₹40 lakh for goods (₹20 lakh in special-category states) or ₹20 lakh for services — however customers pay. UPI just makes crossing it visible." },
+        { q: "Can GST officers really see my UPI transactions?", a: "Yes. State tax departments have obtained merchant transaction data from payment platforms and used it to identify unregistered traders — that is exactly how the Karnataka notices were generated, and other states have requested the same data." },
+        { q: "What happens if I ignore a GST notice?", a: "The department proceeds with a best-judgment assessment based on the UPI figures — the whole estimate becomes a confirmed demand with interest and penalties, and recovery can follow. Replying with your actual numbers, even late, is always better than silence." },
+        { q: "Do I need GST registration if I only accept cash?", a: "Yes, if your turnover crosses the threshold — the law is about turnover, not payment method. Switching to cash doesn't erase past liability visible in old data, and it costs you customers today while signalling exactly the wrong thing to an assessing officer." },
+      ] },
+      { t: "p", x: "Digital payments aren't the trap; invisible bookkeeping is. Take the UPI, bill the sale, and let your records — not a data pull — be the version of your business the tax department sees." },
+    ],
+  },
+  {
+    slug: "become-fmcg-distributor-india-cost-margin",
+    title: "How to Become an FMCG Distributor in India: Real Costs, Margins & ROI (2026)",
+    description:
+      "What an FMCG distributorship really costs in 2026 — investment bands by company tier, the true 3–5% margins nobody advertises, how appointment actually works, and the first-90-days playbook.",
+    category: "Playbooks",
+    author: "Vrikso Team",
+    date: "2026-07-22",
+    readMins: 10,
+    cover: 1,
+    image: "/post-fmcg-distributor.webp",
+    tags: ["distribution", "FMCG", "distributorship", "playbooks"],
+    body: [
+      { t: "p", x: "Search for how to become a distributor and you'll find the same article rewritten fifty times: pick a company, apply, invest, profit. What you won't find is the number that actually decides whether you should do it — the margin. FMCG distribution runs on 3–5% gross margin. Not 30%. Not 15%. Three to five, before your godown rent, salesman salaries, vehicle and the credit you'll extend to every retailer on your beat." },
+      { t: "p", x: "That is not a reason to stay away — lakhs of distributors build steady, compounding businesses on exactly that margin. It is a reason to walk in knowing the real math. Here is the honest version: what it costs, what it pays, how appointment actually happens, and what your first ninety days look like." },
+      { t: "h2", x: "How the chain works, and where you sit" },
+      { t: "p", x: "A typical FMCG chain runs company → C&F agent (state-level warehouse) → distributor (you) → retailers → consumer. You buy stock outright from the company at distributor price, sell it to shops on your assigned beats at a small markup, and earn the difference plus scheme incentives. Two things define the job: you own the inventory (and the risk on it), and you are the company's credit desk — retailers pay you in 7–21 days while the company expects your payment on or near delivery." },
+      { t: "h2", x: "What it really costs to start" },
+      { t: "table",
+        head: ["Level", "Typical all-in investment", "What that buys"],
+        rows: [
+          ["Sub-distributor / rural or small-town beat", "₹2–5 lakh", "Opening stock for a small territory, deposit, basic setup"],
+          ["District-level distributorship, regional brands", "₹5–10 lakh", "Stock, security deposit, godown setup, one vehicle arrangement"],
+          ["National brands (biscuit/snack majors)", "₹8–20 lakh", "Larger opening stock commitments, deposits, delivery vehicle, staff"],
+          ["Premium national FMCG territories", "₹15–20 lakh+", "Metro or dense-territory volumes, multiple salesmen, working-capital float"],
+        ],
+        cap: "Indicative 2026 bands — the exact figure sits in the company's distributor agreement, not in any blog." },
+      { t: "p", x: "Whatever the headline figure, split it mentally into three parts: stock (the biggest), infrastructure (godown, vehicle, software), and working capital float — the money that sits in retailer credit from day one and never really comes home. First-time distributors consistently budget the first two and get squeezed by the third." },
+      { t: "h2", x: "The margin truth: where the money actually leaks" },
+      { t: "p", x: "On paper, 3–5% gross on good turnover looks workable — ₹20 lakh a month at 4% is ₹80,000. But gross margin is not what you keep. The leaks: schemes you pass on to push volume, damaged and expired stock the company only partly credits back, retailer credit that stretches from 14 days to 40, fuel and salaries, and dumped stock — targets pushed into your godown at quarter-end that tie up capital for months. A well-run distributorship nets 2–4%; the benchmark most companies quote for a healthy operation is 12–20% annual return on your total investment. If someone promises you more, ask what they're selling." },
+      { t: "callout", x: "The distributor's real business is not moving boxes — it is rotating capital. The same ₹10 lakh rotated 18 times a year at 4% beats ₹10 lakh rotated 10 times at 5%. Every decision — which brands, which beats, how much credit — is really a decision about rotation speed." },
+      { t: "h2", x: "How appointment actually works" },
+      { t: "ul", items: [
+        "Reach the company through its website's 'become a distributor' page or, faster, through the area sales manager (ASM) who owns the territory you want — vacant territories are their problem to fill.",
+        "Expect a market visit: they will check your godown (or plan for one), your funds, any existing trade relationships, and whether you can service the beat count they have mapped.",
+        "Read the agreement for the four clauses that matter: security deposit terms, return/damage policy, credit period (if any) from the company, and exit terms — what happens to unsold stock if either side walks away.",
+        "Red flags: pressure to lift a large opening order before the agreement is signed, vague verbal promises on returns, territories 'shared' with another distributor, and any brand whose pitch is the distributorship fee rather than the product's retail movement.",
+      ] },
+      { t: "h2", x: "Your first 90 days" },
+      { t: "p", x: "The distributors who make it treat the first quarter as systems-building, not just selling. Map your [beats and route plan](/blog/routes-and-beats-planning) before the first carton arrives — which salesman covers which shops on which weekday. Decide your credit policy per shop on day one and track it weekly; outstanding that isn't watched [quietly becomes your biggest asset](/blog/cut-outstanding-collect-faster). Count stock honestly from the start — [guesswork in the godown](/blog/stock-management-for-wholesalers) is where margin evaporates. And put [order-taking on your salesmen's phones](/blog/field-sales-order-book-to-app) from the first week, so every order, scheme and outstanding lives in one place instead of six notebooks. (Choosing tools? Here's [what to check in distribution software](/blog/choosing-distribution-software-india) — and why the whole thing [runs fine without buying a computer](/blog/digitise-distribution-business-2026).)" },
+      { t: "h2", x: "Frequently asked questions" },
+      { t: "faq", items: [
+        { q: "How much money do I need to start a distributorship?", a: "Realistically ₹2–5 lakh for a small-town or sub-distributor territory, ₹5–10 lakh for a district-level regional-brand territory, and ₹8–20 lakh+ for national brands — covering opening stock, security deposit, godown, vehicle and the working-capital float retailer credit demands." },
+        { q: "What is the real margin of an FMCG distributor?", a: "Gross margins run 3–5% depending on category, and 2–4% net after schemes, damages, credit costs and operating expenses. Healthy operations target a 12–20% annual return on total capital — earned through fast stock rotation, not fat margins." },
+        { q: "How do I get a distributorship from a big FMCG company?", a: "Apply through the company's distributor-enquiry page or approach the area sales manager for the territory. Expect scrutiny of your funds, godown and market standing, then a distributor agreement — read the deposit, returns, credit and exit clauses before signing anything or lifting stock." },
+        { q: "Is FMCG distribution still profitable with quick commerce growing?", a: "Yes — traditional trade still moves the overwhelming majority of FMCG volume in India, and companies still need distributors to reach the kiranas that serve it. Margins are thin and getting more data-driven, which rewards distributors who run tight systems over those running on notebooks." },
+        { q: "Can I start with ₹2 lakh?", a: "At the sub-distributor or rural-beat level, yes — regional brands and smaller territories start around there. Under-capitalisation is the classic first-year killer though: if ₹2 lakh is everything you have, a smaller territory you can stock properly beats a bigger one you can't." },
+      ] },
+      { t: "p", x: "Distribution rewards a specific temperament: patience with thin margins, discipline with credit, and genuine attention to boring systems. If that's you, it remains one of the most durable small businesses in India — the products move every single day, in every economy. Just walk in with the real numbers, not the brochure's." },
+    ],
+  },
+  {
+    slug: "kirana-store-profit-margin-india",
+    title: "Kirana Store Profit Margins in India: Real 2026 Numbers, Category by Category",
+    description:
+      "Category-wise kirana margins (2–20%), what a shop really spends every month, honest monthly-income scenarios — and what the quick-commerce panic actually looks like in the data.",
+    category: "Growth",
+    author: "Vrikso Team",
+    date: "2026-07-24",
+    readMins: 9,
+    cover: 0,
+    image: "/post-kirana-margins.webp",
+    tags: ["kirana", "retail", "margins", "small business"],
+    body: [
+      { t: "p", x: "Every few months a post goes viral claiming a kirana store earns some astonishing number — last year it was a 300-square-foot shop supposedly clearing ₹70 lakh a year, and the argument reached the news channels. Meanwhile a trade body warns that quick commerce has already shut two lakh urban kiranas. Both stories travel because nobody publishes the boring middle: what a kirana actually earns, category by category, after expenses." },
+      { t: "p", x: "We work with kiranas and the distributors who supply them every day, so here is the boring middle — real margin ranges, real monthly costs, and honest income scenarios. Not as exciting as ₹70 lakh; considerably more useful if you run a shop or are thinking of opening one." },
+      { t: "h2", x: "Margin by category: the mix decides everything" },
+      { t: "table",
+        head: ["Category", "Typical retail margin", "The catch"],
+        rows: [
+          ["Staples — atta, rice, dal, sugar, oil", "2–8%", "Highest volume, thinnest margin; often near-cost to keep footfall"],
+          ["Branded packaged FMCG — biscuits, snacks, tea, soaps", "8–15%", "The workhorse of the shop; schemes and offers decide the real number"],
+          ["Personal care & cosmetics", "10–20%", "Best margins, slower rotation; needs shelf discipline"],
+          ["Loose / unbranded goods and regional brands", "12–25%", "Great margins but you carry quality risk and no brand pull"],
+          ["Cold drinks, dairy, bread", "5–12%", "Traffic drivers; fridge costs and expiry eat the edge"],
+        ],
+        cap: "Blended shop-level margin typically lands at 8–12% — the mix, not any single category, sets it." },
+      { t: "p", x: "This is why two shops with identical footfall earn very differently. A staples-heavy shop grinds at a 5–6% blend; a shop that deliberately grows its personal-care and impulse shelves can blend 12% on the same counter. The single highest-leverage move in the business is knowing your margin per category and shifting the mix — which requires actually tracking it, not sensing it." },
+      { t: "h2", x: "What the shop spends every month" },
+      { t: "table",
+        head: ["Expense", "Small shop (own premises)", "Mid-size shop (rented, 1 helper)"],
+        rows: [
+          ["Rent", "—", "₹10,000–25,000"],
+          ["Helper / staff", "—", "₹8,000–15,000"],
+          ["Electricity, fridge, misc.", "₹2,000–4,000", "₹4,000–8,000"],
+          ["Spoilage, expiry, pilferage", "₹2,000–5,000", "₹5,000–12,000"],
+          ["Interest cost of udhaar (money parked in credit)", "₹1,000–3,000", "₹3,000–10,000"],
+          ["Total", "₹5,000–12,000", "₹30,000–70,000"],
+        ],
+        cap: "The two lines owners forget — spoilage and the cost of udhaar — are usually the difference between the shop that grows and the one that treads water." },
+      { t: "h2", x: "So what does a kirana actually earn?" },
+      { t: "p", x: "Put the two tables together. A small owner-run shop doing ₹3–4 lakh a month at a 9% blend grosses ₹27,000–36,000 and nets ₹20,000–30,000 after its light expenses. A mid-size rented shop doing ₹8–10 lakh at 10% grosses ₹80,000–1,00,000 and nets ₹30,000–60,000. Large, well-located shops with strong mix genuinely clear ₹1 lakh+ — and that is where the viral stories come from; they're the top of the distribution, not the middle of it. Sale hi sab kuch nahi hai — a ₹10 lakh-turnover shop with sloppy credit and expiry can take home less than a ₹4 lakh shop run tight." },
+      { t: "callout", x: "Run the numbers for your own counter: last month's sales × your honest blended margin − rent, staff, power, spoilage and the interest sitting in udhaar. Most owners have never done this once. The ones who do it monthly are the ones whose mix — and income — improves." },
+      { t: "h2", x: "Is quick commerce actually killing kiranas?" },
+      { t: "p", x: "Both viral narratives are wrong. The panic version — trade bodies claim two lakh urban stores shut and predict a quarter of kiranas gone by 2030 — treats every closure as a quick-commerce casualty. The complacent version points out that kiranas still hold roughly 90% of India's grocery market, so nothing has changed. The data supports something narrower: quick commerce is real but concentrated — young, urban, top-up purchases in the big metros. What it's actually taking from nearby kiranas is the emergency top-up trip. What it can't take is credit, trust, single-item purchases without delivery fees, and the two-minute walk. The kiranas genuinely losing are the ones competing on convenience alone with no relationship, no udhaar discipline and no reason to be preferred." },
+      { t: "h2", x: "Seven levers that actually move the margin" },
+      { t: "ul", items: [
+        "Shift the mix — grow personal care, impulse and regional high-margin lines shelf by shelf; the blend follows.",
+        "Put a number on udhaar — cap credit per customer, [collect on fixed days](/blog/cut-outstanding-collect-faster), and know the total parked at all times.",
+        "Buy better, not just cheaper — compare distributor schemes properly; a 2% better buy is worth more than a 10% sales push. (Buying enough volume? At some point [becoming the distributor](/blog/become-fmcg-distributor-india-cost-margin) is the upgrade.)",
+        "Count the shelf — expiry and pilferage are silent; [stock that is counted](/blog/stock-management-for-wholesalers) is stock that stops leaking.",
+        "Take orders on [WhatsApp](/blog/whatsapp-for-distribution-business) and deliver nearby yourself — the quick-commerce playbook, minus the commission.",
+        "Bill every sale — it's what makes margin-by-category knowable at all, and it keeps you clean if [UPI data ever brings a tax notice](/blog/gst-notice-upi-payments-what-to-do).",
+        "Price loose goods deliberately — they're your highest-margin shelf; weigh the price against the branded alternative, not against habit.",
+      ] },
+      { t: "h2", x: "Frequently asked questions" },
+      { t: "faq", items: [
+        { q: "How much does a kirana store owner earn per month?", a: "Most owner-run shops net ₹20,000–60,000 a month depending on location, turnover and category mix. Small shops on ₹3–4 lakh monthly sales typically take home ₹20,000–30,000; larger, well-located shops with strong mix can clear ₹1 lakh+. Viral claims far above that describe outliers." },
+        { q: "Which items give a kirana store the highest margin?", a: "Personal care and cosmetics (10–20%), loose and unbranded goods (12–25%) and impulse categories lead; staples like atta, rice and oil trail at 2–8% despite driving the most volume. The shop's blended margin — usually 8–12% — is set by the mix." },
+        { q: "Is a kirana store still profitable in 2026?", a: "Yes — kiranas still command roughly 90% of Indian grocery sales, and a tightly run shop earns steady money. The pressure from quick commerce is real but concentrated in metro top-up purchases; shops competing on relationships, credit and mix remain durable." },
+        { q: "How much investment does a kirana store need?", a: "A small shop starts around ₹2–5 lakh (stock, racks, fridge, deposit) and a mid-size one ₹5–15 lakh, with rent and location driving the range. Keep a cushion for udhaar — customer credit absorbs working capital from the first week." },
+        { q: "Will quick commerce finish kirana stores?", a: "The data says no — but it is redrawing the map. Metro shops relying purely on convenience are losing top-up trips, while shops with credit relationships, WhatsApp ordering and their own quick local delivery are holding or growing. The threat is real for the undifferentiated, not for the well-run." },
+      ] },
+      { t: "p", x: "The kirana is not dying; the unmeasured kirana is. Know your blend, watch your udhaar, count your shelf — the shop that knows its numbers has outlived every retail revolution India has thrown at it, and it will outlive this one too." },
+    ],
+  },
+  {
+    slug: "how-to-start-cloud-kitchen-india",
+    title: "How to Start a Cloud Kitchen in India in 2026 — The Honest Guide",
+    description:
+      "Setup costs of ₹4–10 lakh, the 2026 licence list, post-commission unit economics on a ₹300 order — and why a quarter of cloud kitchens close in year one. The playbook, minus the hype.",
+    category: "Playbooks",
+    author: "Vrikso Team",
+    date: "2026-07-26",
+    readMins: 10,
+    cover: 4,
+    image: "/post-cloud-kitchen.webp",
+    tags: ["cloud kitchen", "restaurant", "playbooks"],
+    body: [
+      { t: "p", x: "The cloud kitchen pitch writes itself: no dining room, no waiters, a fraction of a restaurant's rent — just a kitchen, two apps and a dream. The market is real and still growing fast, heading past ₹4,000 crore this year. What the pitch leaves out is the other statistic: roughly a quarter to a third of cloud kitchens shut within their first year. Not because the model is broken — because the founders ran somebody's blog post instead of a P&L." },
+      { t: "p", x: "This is the guide we'd want a friend to read before signing a kitchen lease: real setup costs, the licences as they stand in 2026, unit economics after the aggregators take their share, and the questions that decide success before the first order is cooked." },
+      { t: "h2", x: "Why kitchens fail (read this before the costs)" },
+      { t: "p", x: "The post-mortems repeat three causes. First, saturated categories: another biryani or generic North Indian kitchen in a metro enters the most crowded SERP on Zomato with no brand pull and buys visibility through ads and discounts it can't afford. Second, unit economics done at menu price instead of net-of-commission price. Third, under-capitalisation — most kitchens need four to six months of order-volume ramp to break even, and founders budget for two. Every section below exists to attack one of these three." },
+      { t: "h2", x: "What it really costs to start" },
+      { t: "table",
+        head: ["Item", "Lean setup", "Serious setup"],
+        rows: [
+          ["Kitchen space (deposit + first months, 200–400 sq ft)", "₹80,000–1,50,000", "₹1,50,000–3,00,000"],
+          ["Equipment — burners, fridge/freezer, prep, exhaust", "₹1,50,000–2,50,000", "₹2,50,000–4,50,000"],
+          ["Licences & registrations (see below)", "₹10,000–25,000", "₹25,000–50,000"],
+          ["Packaging stock, trials, menu shoots", "₹30,000–60,000", "₹60,000–1,00,000"],
+          ["Working capital — 4–6 months of ramp", "₹1,00,000–2,00,000", "₹2,00,000–4,00,000"],
+          ["Total", "≈ ₹4–6 lakh", "≈ ₹7–10 lakh+"],
+        ],
+        cap: "The line founders cut is working capital — which is the line that kills them." },
+      { t: "h2", x: "Licences in 2026" },
+      { t: "ul", items: [
+        "FSSAI — basic registration (₹100/year) only if turnover is under ₹12 lakh; a real delivery kitchen should plan for the state licence (₹2,000–5,000/year). Note the turnover-slab revisions effective April 2026 — check the current schedule, not a 2024 blog post.",
+        "GST registration — required from day one to list on Zomato/Swiggy. Food delivery bills at 5%; the platform collects and remits it under Section 9(5), but you still report those sales in GSTR-3B.",
+        "Trade licence from the municipal body, and a fire NOC — scale and city dependent; your landlord's kitchen-use permission matters more than founders expect.",
+        "If you're cooking from home to start: FSSAI basic registration covers small home operations, and it's the cheapest way to test a menu before leasing anything.",
+      ] },
+      { t: "h2", x: "The ₹300 order, after everyone eats first" },
+      { t: "table",
+        head: ["Line", "Amount", "What's left"],
+        rows: [
+          ["Order value", "₹300.00", "₹300.00"],
+          ["Aggregator commission @ 24% + GST on it", "− ₹85.00", "₹215.00"],
+          ["Your share of discounts (blended)", "− ₹25.00", "₹190.00"],
+          ["Ads per delivered order (ramp phase)", "− ₹15.00", "₹175.00"],
+          ["Packaging", "− ₹20.00", "₹155.00"],
+          ["Food cost @ 32% of menu price", "− ₹96.00", "₹59.00"],
+        ],
+        cap: "Illustrative mid-range numbers. ₹59 per order pays your rent, staff, gas and salary — before a single rupee of profit." },
+      { t: "p", x: "At ₹59 contribution per order and ₹75,000 of monthly fixed costs (rent, two cooks, power, gas), break-even is about 42 orders a day, every day. That is the whole business in one sentence — and why the full breakdown of [what the platforms actually charge](/blog/zomato-swiggy-commission-rates-2026) should be read before the lease is signed, not after. Kitchens that make it push the contribution up: menus engineered for delivery margins, packaging bought right, ads capped and measured, and [payouts reconciled order by order](/blog/zomato-swiggy-reconciliation-for-restaurants) so the math they planned is the math they're actually paid." },
+      { t: "callout", x: "Before you spend a rupee: write down your realistic orders/day at month six, your contribution per order after commission and food cost, and your fixed costs. If the three numbers don't clear break-even with room to spare, change the menu or the city — not the spreadsheet." },
+      { t: "h2", x: "Picking a lane the market hasn't crowded" },
+      { t: "p", x: "Category choice is the highest-leverage decision after capital. Biryani, generic North Indian and Chinese are brutally saturated in the metros — established brands with review counts you can't match own the top of every search. The open ground in 2026: regional cuisines with proof of demand and thin supply, health-positioned menus with genuine repeat behaviour, dessert and beverage add-on brands with high margins, and — most interestingly — tier-2 cities, where the market is growing at the national 25–28% clip but the competition is a fraction of Bengaluru's. Run the test yourself: search your intended category on the apps in your intended pin code and count who you're up against and their ratings. That half-hour is worth more than any market report." },
+      { t: "h2", x: "The 90-day launch plan" },
+      { t: "ul", items: [
+        "Days 1–30: lock the menu at 12–20 items that share ingredients and survive 25 minutes in a box; file FSSAI and GST; fit out the kitchen; get a [POS that pulls both aggregators into one screen](/blog/restaurant-pos-software-india-buyers-guide) from day one.",
+        "Days 31–60: soft launch on one platform; obsess over ratings, prep times and packaging failures; fix the menu ruthlessly — kill anything that travels badly or returns badly.",
+        "Days 61–90: go live on the second platform; start measured ad spend against a weekly budget; begin the direct channel early — a QR and WhatsApp number in every single box, because every regular you move off the apps is commission you stop paying forever.",
+      ] },
+      { t: "h2", x: "Frequently asked questions" },
+      { t: "faq", items: [
+        { q: "How much does it cost to start a cloud kitchen in India?", a: "A lean single-brand kitchen realistically needs ₹4–6 lakh all-in, and a serious setup ₹7–10 lakh+ — including the 4–6 months of working capital most first-timers under-budget. Claims of launching on ₹1–2 lakh usually assume a home kitchen and no ramp funding." },
+        { q: "Is a cloud kitchen profitable in 2026?", a: "It can be — the market is growing 25–28% a year — but roughly a quarter of kitchens close within year one. Profitability comes down to contribution per order after commissions and food cost clearing your fixed costs; kitchens that model this before launching, and pick uncrowded categories, do fine." },
+        { q: "Which licences does a cloud kitchen need?", a: "FSSAI (state licence for any serious delivery volume; fee slabs revised April 2026), GST registration (required to list on aggregators), a municipal trade licence, and a fire NOC depending on scale and city. Budget ₹10,000–50,000 and a few weeks of lead time." },
+        { q: "Can I run a cloud kitchen from home?", a: "Yes — with FSSAI basic registration (turnover under ₹12 lakh) and GST registration to list on platforms. It's the cheapest way to validate a menu; most home kitchens that find traction move to commercial space within months for capacity and licence headroom." },
+        { q: "How many orders a day does a cloud kitchen need to break even?", a: "Depends entirely on contribution per order and fixed costs — in the worked example above (₹59 contribution, ₹75,000 fixed), about 42 orders a day. Compute your own version of those two numbers before signing anything; it is the single most important calculation in the business." },
+      ] },
+      { t: "p", x: "The cloud kitchen model isn't hype and isn't a trap — it's a thin-margin manufacturing business wearing a startup's clothes. Treat it that way: pick an uncrowded lane, know your per-order math cold, fund the ramp, and start pulling customers into your own channel from the first box you seal." },
+    ],
+  },
+  {
     slug: "restaurant-pos-software-india-buyers-guide",
     title: "Restaurant POS Software in India: The 2026 Buyer's Guide",
     description:
@@ -42,7 +427,7 @@ export const POSTS: BlogPost[] = [
     date: "2026-07-18",
     readMins: 8,
     cover: 0,
-    image: "/post-restaurant-pos.png",
+    image: "/post-restaurant-pos.webp",
     tags: ["restaurant POS", "buyer's guide", "restaurant software"],
     body: [
       { t: "p", x: "Most restaurant owners choose a POS the way they choose a supplier at a trade fair — on a smooth demo and a good price. Then the first Saturday dinner rush arrives, the kitchen misses three tickets, a table waits twenty minutes for its bill, and the 'smart' system becomes the thing everyone works around. The demo is calm. Your restaurant is not." },
@@ -51,7 +436,7 @@ export const POSTS: BlogPost[] = [
       { t: "p", x: "Any POS looks good when one waiter places one order in a quiet showroom. The real test is peak service: ten tables turning, two waiters punching orders, the kitchen firing continuously, and three bills being settled by cash, UPI and card at once. Every question below is really asking the same thing — will it hold up then?" },
       { t: "h2", x: "1. Do the floor, the kitchen and the bill actually talk to each other?" },
       { t: "p", x: "This is the whole game. When a waiter punches an order, the kitchen should see it instantly as a KOT — no shouting, no paper chits, no walking to the pass. When the food is served and the guest asks for the bill, it should already reflect exactly what was ordered, including that extra portion added mid-meal. If order-taking, the kitchen board and billing are three separate steps someone re-enters, you have bought three problems, not one solution." },
-      { t: "image", src: "/app/restaurant/d-dashboard.png", cap: "One system for the floor, the kitchen and the counter — orders, KOTs and bills from the same source." },
+      { t: "image", src: "/app/restaurant/d-dashboard.webp", cap: "One system for the floor, the kitchen and the counter — orders, KOTs and bills from the same source." },
       { t: "h2", x: "2. Can a waiter punch an order in seconds — on a phone?" },
       { t: "p", x: "Your waiters are not typists. If placing an order means squinting at a tiny screen and hunting through nested menus, they will go back to a notepad and enter it later — which is when items get missed and the kitchen gets it wrong. The test: can a new waiter pick a table, add five items with variations and modifiers, and fire it to the kitchen in under a minute, on the same phone he already owns?" },
       { t: "h2", x: "3. Does it handle Zomato and Swiggy without double entry?" },
@@ -78,7 +463,7 @@ export const POSTS: BlogPost[] = [
     date: "2026-07-08",
     readMins: 7,
     cover: 1,
-    image: "/post-zomato-swiggy.png",
+    image: "/post-zomato-swiggy.webp",
     tags: ["Zomato", "Swiggy", "reconciliation", "restaurant"],
     body: [
       { t: "p", x: "Aggregators bring you covers you would never reach on your own — a customer three kilometres away, at 11pm, who has never seen your board. That reach is real. So is the payout statement at the end of the week that nobody in the restaurant fully understands. Orders worth a lakh went out; far less landed in the bank. Where did the rest go?" },
@@ -96,14 +481,14 @@ export const POSTS: BlogPost[] = [
       { t: "p", x: "None of these is hidden. But spread across a weekly statement with hundreds of orders, they blur into one net figure — and 'the net looked a bit low this week' is not something you can act on." },
       { t: "h2", x: "Reconcile at the order level, not the payout level" },
       { t: "p", x: "The single habit that changes everything: check the payout order by order, not as one lump sum. For each order, you want three things side by side — what the platform says the order was, what it says it deducted, and what your own kitchen recorded. When those three agree, move on. When they don't, you have found a leak worth a real amount of money." },
-      { t: "image", src: "/app/restaurant/d-dashboard.png", cap: "Dine-in and aggregator orders in one place — so the payout can be checked against what the kitchen actually made." },
+      { t: "image", src: "/app/restaurant/d-dashboard.webp", cap: "Dine-in and aggregator orders in one place — so the payout can be checked against what the kitchen actually made." },
       { t: "h2", x: "Bring aggregator orders into the same system as dine-in" },
       { t: "p", x: "If your Zomato orders live only in the Zomato dashboard and your Swiggy orders only in Swiggy's, reconciliation means logging into three places and matching by hand. When every channel — dine-in, takeaway, delivery and both aggregators — flows into one POS, your own record becomes the source of truth you check the payout against. That is the difference between a five-minute glance and a two-hour spreadsheet." },
       { t: "h2", x: "The three numbers to check on every payout" },
       { t: "p", x: "You do not need to audit every line. Each cycle, check three totals:" },
       { t: "ul", items: [
         "Order count — did the platform pay you for the same number of orders your kitchen fulfilled?",
-        "Effective commission rate — is the total commission in line with the rate in your contract, or has it crept up?",
+        "Effective commission rate — is the total commission in line with the rate in your contract, or has it crept up? (Here's [how to calculate what the channel really costs you](/blog/zomato-swiggy-commission-rates-2026).)",
         "Cancelled-but-cooked orders — were you compensated for food that was made and then rejected or returned?",
       ] },
       { t: "p", x: "A gap in any one of these is money on the table. Two or three orders a week that were cooked but never paid for adds up to a serious sum across a year." },
@@ -123,7 +508,7 @@ export const POSTS: BlogPost[] = [
     date: "2026-06-28",
     readMins: 7,
     cover: 2,
-    image: "/post-gst-freelancers.png",
+    image: "/post-gst-freelancers.webp",
     tags: ["GST", "freelancers", "services", "invoicing"],
     body: [
       { t: "p", x: "Product sellers figured out GST years ago — every carton has an HSN code and a tax rate printed on it. Service people, on the other hand, often wing it. A designer, a consultant, a marketing agency, a photographer — the work is clear, but the invoice is frequently a Word document with a total and no idea whether GST even applies. That is fine until a client's accounts team asks for a proper tax invoice, or your turnover crosses a line you weren't watching." },
@@ -141,7 +526,7 @@ export const POSTS: BlogPost[] = [
         "Taxable value, the GST rate, and the tax amount split by head",
         "Place of supply — which decides whether it's CGST/SGST or IGST",
       ] },
-      { t: "image", src: "/app/billing/d-dashboard.png", cap: "A clean, structured invoice is what lets your client claim input credit — and what keeps your own returns simple." },
+      { t: "image", src: "/app/billing/d-dashboard.webp", cap: "A clean, structured invoice is what lets your client claim input credit — and what keeps your own returns simple." },
       { t: "h2", x: "CGST/SGST vs IGST — place of supply for services" },
       { t: "p", x: "The rule mirrors goods, but 'place of supply' for services can be less obvious. As a starting point: if your client is in the same state as you, the tax splits into CGST and SGST; if they're in another state, it's a single IGST at the full rate. For most straightforward service work, the client's location decides it. Get the place of supply right and the split takes care of itself." },
       { t: "h2", x: "Reverse charge, TDS and the client who deducts" },
@@ -162,7 +547,7 @@ export const POSTS: BlogPost[] = [
     date: "2026-06-20",
     readMins: 6,
     cover: 3,
-    image: "/post-recurring-invoices.png",
+    image: "/post-recurring-invoices.webp",
     tags: ["recurring billing", "cash flow", "retainers"],
     body: [
       { t: "p", x: "Retainer revenue is supposed to be the easy money. The client is signed, the fee is fixed, the work is ongoing — the same invoice, every month, forever. And yet retainer businesses are often the ones chasing payments hardest. Not because the clients are bad, but because the invoicing is manual, and manual monthly work is the first thing that slips when you're busy doing the actual job." },
@@ -171,7 +556,7 @@ export const POSTS: BlogPost[] = [
       { t: "p", x: "Say you have fifteen retainer clients. On the first of the month you sit down to raise fifteen invoices. It's dull, so it slips to the third. Two get missed entirely and you catch them a week later. One goes out with last month's figures copied over. Each small slip pushes payment later — and a retainer invoice sent on the 9th instead of the 1st is money that arrives eight days later, every single month, compounding across a year into a real dent in your working capital." },
       { t: "h2", x: "Set the invoice to raise itself" },
       { t: "p", x: "A recurring invoice is a template that fires on a schedule you set — monthly, quarterly, whatever the contract says. You define it once: this client, this amount, this service and SAC code, this GST treatment, due on this day. From then on it generates on time without you touching it, and lands with the client on the same date every cycle. The most reliable invoice is the one no human has to remember to send." },
-      { t: "image", src: "/app/billing/d-dashboard.png", cap: "A live view of what's billed, paid and overdue — the recurring engine keeps every cycle current." },
+      { t: "image", src: "/app/billing/d-dashboard.webp", cap: "A live view of what's billed, paid and overdue — the recurring engine keeps every cycle current." },
       { t: "h2", x: "Make the due date unmissable" },
       { t: "p", x: "'Payable immediately' is not a due date — it's a suggestion. Put a specific date on every invoice, keep your terms consistent (net 7, net 15, whatever you choose), and make the amount and the date the two clearest things on the page. Clients pay clear invoices faster than vague ones, simply because there's nothing to wonder about." },
       { t: "h2", x: "Reminders that collect without nagging" },
@@ -198,7 +583,7 @@ export const POSTS: BlogPost[] = [
     date: "2026-06-10",
     readMins: 7,
     cover: 4,
-    image: "/post-eway-bills.png",
+    image: "/post-eway-bills.webp",
     tags: ["e-way bill", "GST", "logistics", "distribution"],
     body: [
       { t: "p", x: "The invoice is raised, the truck is loaded, the driver is waiting — and now someone logs into a separate portal to type the same details all over again to generate an e-way bill. It's the most avoidable delay in a distributor's day, and the one that most often holds up a delivery. Worse, a small slip on that form can get a whole consignment detained at a checkpoint. Understanding the rules — and generating the bill from data you already have — turns this from a daily chore into a non-event." },
@@ -234,7 +619,7 @@ export const POSTS: BlogPost[] = [
     date: "2026-05-28",
     readMins: 7,
     cover: 0,
-    image: "/abstract_blog_4.png",
+    image: "/abstract_blog_4.webp",
     tags: ["distribution", "digitisation", "small business"],
     body: [
       { t: "p", x: "For most distributors, the business already works. Orders come in, goods go out, money comes back. The problem is that it all lives in three places at once: a diary, a desktop in the corner, and the owner's head. The day that memory takes a holiday, the business limps." },
@@ -246,7 +631,7 @@ export const POSTS: BlogPost[] = [
       { t: "shot", name: "order", cap: "Field order entry — recent shops first, schemes applied automatically." },
       { t: "h2", x: "Step 3 — Let billing and stock follow automatically" },
       { t: "p", x: "The whole point of one system is that you stop typing the same thing twice. When the warehouse marks an order delivered, stock should drop and a GST invoice should generate on its own. No re-keying, no mismatch between the bill and the godown." },
-      { t: "image", src: "/abstract_blog_2.png", cap: "One phone, one record — orders, invoices and reports flowing from the same source." },
+      { t: "image", src: "/abstract_blog_2.webp", cap: "One phone, one record — orders, invoices and reports flowing from the same source." },
       { t: "h2", x: "Step 4 — Make outstanding visible to everyone who needs it" },
       { t: "p", x: "A live, per-shop ledger turns 'how much does Sharma Store owe?' from a 20-minute hunt into a two-second glance. That single change is usually what pays for the software in the first month." },
       { t: "callout", x: "Rule of thumb: if a step needs a computer, a licence key or an engineer visit, it will slow you down. Pick tools that run in a browser and update themselves." },
@@ -265,11 +650,11 @@ export const POSTS: BlogPost[] = [
     date: "2026-05-12",
     readMins: 8,
     cover: 1,
-    image: "/gst_abstract_2.png",
+    image: "/gst_abstract_2.webp",
     tags: ["GST", "invoicing", "compliance"],
     body: [
       { t: "p", x: "A GST invoice is not just a bill — it is the document your buyer uses to claim input tax credit, and the record the department checks against your returns. Get the basics right and filing becomes routine. Get them wrong and you spend month-end fixing mismatches." },
-      { t: "image", src: "/gst_blog_abstract_1.png", cap: "Every invoice is a node in your GST trail — keep them clean and the returns take care of themselves." },
+      { t: "image", src: "/gst_blog_abstract_1.webp", cap: "Every invoice is a node in your GST trail — keep them clean and the returns take care of themselves." },
       { t: "h2", x: "What every tax invoice must show" },
       { t: "ul", items: [
         "Your name, address and GSTIN",
@@ -580,9 +965,11 @@ export function relatedPosts(slug: string, n = 3): BlogPost[] {
 
 export type Vertical = "distribution" | "billing" | "restaurant";
 
-/** Which product a post belongs to, inferred from its tags. Defaults to
-    distribution so every existing post keeps its current CTA. */
+/** Which product a post belongs to: explicit `vertical` if set, otherwise
+    inferred from tags. Defaults to distribution so every existing post keeps
+    its current CTA. */
 export function postVertical(post: BlogPost): Vertical {
+  if (post.vertical) return post.vertical;
   const tags = post.tags.map((t) => t.toLowerCase());
   const has = (...keys: string[]) => keys.some((k) => tags.includes(k));
   if (has("restaurant", "restaurant pos", "zomato", "swiggy", "kot")) return "restaurant";
@@ -611,6 +998,16 @@ export const POST_CTA: Record<Vertical, { title: string; sub: string; wa: string
     href: "/restaurant",
   },
 };
+
+/** Strip inline [label](href) links down to their labels — for JSON-LD and meta text. */
+export function plainText(x: string): string {
+  return x.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
+}
+
+/** All FAQ items in a post's body (used for FAQPage structured data). */
+export function postFaq(post: BlogPost): { q: string; a: string }[] {
+  return post.body.flatMap((b) => (b.t === "faq" ? b.items : []));
+}
 
 export function formatDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);

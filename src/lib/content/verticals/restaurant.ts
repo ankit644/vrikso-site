@@ -1,9 +1,9 @@
 import type { VerticalContent } from "@/components/vertical-page";
-import shotOrder from "../../../../public/app/restaurant/m-order.png";
-import shotTables from "../../../../public/app/restaurant/m-tables.png";
-import shotKitchen from "../../../../public/app/restaurant/m-kitchen.png";
-import shotTickets from "../../../../public/app/restaurant/m-tickets.png";
-import shotDashboardD from "../../../../public/app/restaurant/d-dashboard.png";
+import shotOrder from "../../../../public/app/restaurant/m-order.webp";
+import shotTables from "../../../../public/app/restaurant/m-tables.webp";
+import shotKitchen from "../../../../public/app/restaurant/m-kitchen.webp";
+import shotTickets from "../../../../public/app/restaurant/m-tickets.webp";
+import shotDashboardD from "../../../../public/app/restaurant/d-dashboard.webp";
 
 /** Vrikso Restaurant — POS, KOTs, tables and billing for eateries. */
 export const RESTAURANT: VerticalContent = {

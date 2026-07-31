@@ -6,15 +6,15 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
 import PostCover from "@/components/post-cover";
-import { POSTS, getPost, relatedPosts, formatDate, postVertical, POST_CTA, type BlogBlock } from "@/lib/content/blog";
+import { POSTS, getPost, relatedPosts, formatDate, postVertical, postFaq, plainText, POST_CTA, type BlogBlock } from "@/lib/content/blog";
 import { SITE, waLink } from "@/lib/site";
 import { JsonLd } from "@/lib/jsonld";
 
-import shotOrder from "../../../../public/app/m-order-new.png";
-import shotInvoice from "../../../../public/app/m-invoice.png";
-import shotAging from "../../../../public/app/m-aging.png";
-import shotProducts from "../../../../public/app/m-products.png";
-import shotDashboardD from "../../../../public/app/d-dashboard.png";
+import shotOrder from "../../../../public/app/m-order-new.webp";
+import shotInvoice from "../../../../public/app/m-invoice.webp";
+import shotAging from "../../../../public/app/m-aging.webp";
+import shotProducts from "../../../../public/app/m-products.webp";
+import shotDashboardD from "../../../../public/app/d-dashboard.webp";
 
 const SHOTS: Record<string, { src: StaticImageData; portrait: boolean }> = {
   order: { src: shotOrder, portrait: true },
@@ -87,10 +87,24 @@ export default async function BlogPostPage({
     inLanguage: "en",
   };
 
+  const faq = postFaq(post);
+  const faqJsonLd = faq.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: plainText(f.a) },
+        })),
+      }
+    : null;
+
   return (
     <>
       <SiteHeader />
       <JsonLd data={jsonLd} />
+      {faqJsonLd && <JsonLd data={faqJsonLd} />}
       <main>
         {/* Article header */}
         <section className="border-b border-line bg-paper">
@@ -183,20 +197,41 @@ export default async function BlogPostPage({
   );
 }
 
+/* ── Inline [label](href) links in body text ── */
+function Inline({ x }: { x: string }) {
+  const parts = x.split(/(\[[^\]]+\]\([^)]+\))/g);
+  if (parts.length === 1) return <>{x}</>;
+  return (
+    <>
+      {parts.map((part, i) => {
+        const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (!m) return part;
+        const [, label, href] = m;
+        const cls = "font-medium text-violet-deep underline decoration-lilac-line underline-offset-2 transition-colors hover:decoration-violet";
+        return href.startsWith("/") ? (
+          <Link key={i} href={href} className={cls}>{label}</Link>
+        ) : (
+          <a key={i} href={href} rel="noopener" className={cls}>{label}</a>
+        );
+      })}
+    </>
+  );
+}
+
 /* ── Body block renderer ── */
 function Block({ block }: { block: BlogBlock }) {
   switch (block.t) {
     case "h2":
       return <h2 className="font-display mt-12 mb-4 text-2xl leading-snug font-medium">{block.x}</h2>;
     case "p":
-      return <p className="mt-5 text-[1.05rem] leading-[1.8] text-ink-soft first:mt-0">{block.x}</p>;
+      return <p className="mt-5 text-[1.05rem] leading-[1.8] text-ink-soft first:mt-0"><Inline x={block.x} /></p>;
     case "ul":
       return (
         <ul className="mt-5 space-y-2.5">
           {block.items.map((it) => (
             <li key={it} className="flex gap-3 text-[1.02rem] leading-relaxed text-ink-soft">
               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet" aria-hidden />
-              {it}
+              <span><Inline x={it} /></span>
             </li>
           ))}
         </ul>
@@ -210,8 +245,45 @@ function Block({ block }: { block: BlogBlock }) {
     case "callout":
       return (
         <aside className="my-8 rounded-[var(--radius-card)] border border-lilac-line bg-lilac px-6 py-5">
-          <p className="text-[1rem] leading-relaxed font-medium text-ink">{block.x}</p>
+          <p className="text-[1rem] leading-relaxed font-medium text-ink"><Inline x={block.x} /></p>
         </aside>
+      );
+    case "table":
+      return (
+        <figure className="my-8">
+          <div className="overflow-x-auto rounded-[var(--radius-card)] border border-line bg-paper-2">
+            <table className="w-full border-collapse text-[0.95rem]">
+              <thead>
+                <tr>
+                  {block.head.map((h) => (
+                    <th key={h} className="border-b border-line px-4 py-3 text-left text-xs font-semibold tracking-wide text-ink-faint uppercase">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {block.rows.map((row, ri) => (
+                  <tr key={ri} className={ri < block.rows.length - 1 ? "border-b border-line" : ""}>
+                    {row.map((cell, ci) => (
+                      <td key={ci} className="px-4 py-3 align-top leading-relaxed text-ink-soft"><Inline x={cell} /></td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {block.cap && <figcaption className="mt-3 text-center text-sm text-ink-faint">{block.cap}</figcaption>}
+        </figure>
+      );
+    case "faq":
+      return (
+        <div className="mt-5 space-y-6">
+          {block.items.map((f) => (
+            <div key={f.q} className="rounded-[var(--radius-card)] border border-line bg-paper-2 px-6 py-5">
+              <h3 className="font-display text-lg leading-snug font-medium">{f.q}</h3>
+              <p className="mt-2 leading-relaxed text-ink-soft"><Inline x={f.a} /></p>
+            </div>
+          ))}
+        </div>
       );
     case "image":
       return (

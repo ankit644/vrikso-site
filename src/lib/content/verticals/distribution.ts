@@ -1,9 +1,9 @@
 import type { VerticalContent } from "@/components/vertical-page";
-import shotOrder from "../../../../public/app/m-order-new.png";
-import shotInvoice from "../../../../public/app/m-invoice.png";
-import shotAging from "../../../../public/app/m-aging.png";
-import shotProducts from "../../../../public/app/m-products.png";
-import shotDashboardD from "../../../../public/app/d-dashboard.png";
+import shotOrder from "../../../../public/app/m-order-new.webp";
+import shotInvoice from "../../../../public/app/m-invoice.webp";
+import shotAging from "../../../../public/app/m-aging.webp";
+import shotProducts from "../../../../public/app/m-products.webp";
+import shotDashboardD from "../../../../public/app/d-dashboard.webp";
 
 /**
  * Vrikso Distribution — the flagship vertical.

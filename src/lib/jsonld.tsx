@@ -36,6 +36,7 @@ export const ORGANIZATION = {
     availableLanguage: ["English", "Hindi"],
   },
   areaServed: { "@type": "Country", name: "India" },
+  sameAs: Object.values(SITE.socials),
 };
 
 export const WEBSITE = {

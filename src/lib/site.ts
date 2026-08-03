@@ -5,6 +5,11 @@ export const SITE = {
   /** TODO(owner): replace with the real WhatsApp Business number (country code, no +). */
   whatsapp: "919555665689",
   supportEmail: "support.vrikso@gmail.com",
+  socials: {
+    linkedin: "https://www.linkedin.com/in/vrikso-erp-085940417/",
+    instagram: "https://www.instagram.com/vrikso_erp/",
+    facebook: "https://www.facebook.com/share/1DSTbLvScQ",
+  },
 } as const;
 
 export function waLink(message: string) {

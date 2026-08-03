@@ -45,7 +45,7 @@ export const POSTS: BlogPost[] = [
       "The complete 2026 list of restaurant licenses in India — FSSAI, eating house, fire NOC, liquor, GST and more — with real costs, documents and timelines.",
     category: "Playbooks",
     author: "Vrikso Team",
-    date: "2026-08-03",
+    date: "2026-08-02",
     readMins: 12,
     cover: 1,
     image: "/post-restaurant-licenses.webp",

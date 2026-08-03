@@ -3,7 +3,7 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
 import PostCover from "@/components/post-cover";
-import { BLOG_INDEX, POSTS_BY_DATE, CATEGORIES, formatDate, BLOG_PAGE_SIZE, BLOG_PAGE_COUNT } from "@/lib/content/blog";
+import { BLOG_INDEX, POSTS_BY_DATE, CATEGORIES, formatDate, BLOG_FIRST_PAGE_SIZE, BLOG_PAGE_SIZE, BLOG_PAGE_COUNT } from "@/lib/content/blog";
 
 export const BLOG_TOTAL_PAGES = BLOG_PAGE_COUNT;
 
@@ -14,8 +14,9 @@ export function blogPageHref(n: number) {
 
 /** Shared blog index, rendered by both /blog and /blog/page/[page]. */
 export default function BlogListing({ page }: { page: number }) {
-  const start = (page - 1) * BLOG_PAGE_SIZE;
-  const pagePosts = POSTS_BY_DATE.slice(start, start + BLOG_PAGE_SIZE);
+  const start = page === 1 ? 0 : BLOG_FIRST_PAGE_SIZE + (page - 2) * BLOG_PAGE_SIZE;
+  const size = page === 1 ? BLOG_FIRST_PAGE_SIZE : BLOG_PAGE_SIZE;
+  const pagePosts = POSTS_BY_DATE.slice(start, start + size);
 
   // The newest post gets a large featured card — but only on page 1.
   const featured = page === 1 ? pagePosts[0] : undefined;

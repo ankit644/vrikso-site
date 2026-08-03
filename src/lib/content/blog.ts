@@ -1067,8 +1067,13 @@ export const POSTS: BlogPost[] = [
 export const POSTS_BY_DATE = [...POSTS].sort((a, b) => (a.date < b.date ? 1 : -1));
 
 /** Blog index pagination: page 1 at /blog, pages 2..N at /blog/page/N. */
-export const BLOG_PAGE_SIZE = 10;
-export const BLOG_PAGE_COUNT = Math.max(1, Math.ceil(POSTS_BY_DATE.length / BLOG_PAGE_SIZE));
+/** Page 1 shows 10 posts (1 featured + a 3×3 grid); later pages show 9 (a clean 3×3). */
+export const BLOG_FIRST_PAGE_SIZE = 10;
+export const BLOG_PAGE_SIZE = 9;
+export const BLOG_PAGE_COUNT =
+  POSTS_BY_DATE.length <= BLOG_FIRST_PAGE_SIZE
+    ? 1
+    : 1 + Math.ceil((POSTS_BY_DATE.length - BLOG_FIRST_PAGE_SIZE) / BLOG_PAGE_SIZE);
 
 export const CATEGORIES = Array.from(new Set(POSTS.map((p) => p.category)));
 

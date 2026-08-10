@@ -3,8 +3,8 @@
 /* ══════════════════════════════════════════════════════════════════════
    Vrikso — Soft-lavender SaaS design system
    Cool lavender-white canvas, white floating cards, periwinkle-violet
-   feature bands, pink-magenta CTA pills. Fraunces serif display carries
-   the brand voice; violet mirrors the app.
+   feature bands, pink-magenta CTA pills. Geist (variable) carries both
+   display and body type; violet mirrors the app.
    ══════════════════════════════════════════════════════════════════════ */
 :root {
   --paper:      #F7F6FC; /* cool lavender-white canvas */
@@ -43,8 +43,8 @@
 }
 
 @theme inline {
-  --font-display: var(--font-fraunces), Georgia, serif;
-  --font-body: var(--font-schibsted), ui-sans-serif, sans-serif;
+  --font-display: var(--font-geist), ui-sans-serif, sans-serif;
+  --font-body: var(--font-geist), ui-sans-serif, sans-serif;
 
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);

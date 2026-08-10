@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Schibsted_Grotesk } from "next/font/google";
+import { Geist } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
@@ -7,14 +7,9 @@ import { JsonLd, ORGANIZATION, WEBSITE } from "@/lib/jsonld";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
-const fraunces = Fraunces({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  axes: ["opsz"],
-});
-const schibsted = Schibsted_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-schibsted",
+  variable: "--font-geist",
 });
 
 export const metadata: Metadata = {
@@ -38,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${schibsted.variable} antialiased`}
+      className={`${geist.variable} antialiased`}
     >
       {/* suppressHydrationWarning: browser extensions (e.g. ColorZilla's
           cz-shortcut-listen) inject attributes into <body> before React

@@ -11,15 +11,15 @@ import shotDashboardD from "../../../../public/app/d-dashboard.webp";
  */
 export const DISTRIBUTION: VerticalContent = {
   slug: "distribution",
-  metaTitle: "Vrikso Distribution — CRM for distributors & wholesalers",
+  metaTitle: "Distribution Management Software for Small Distributors",
   metaDescription:
-    "Field order taking, warehouse picking, GST invoicing, payments and outstanding — the complete cloud CRM for Indian distribution businesses.",
+    "Cloud distribution management software (DMS) for Indian distributors and wholesalers — field order app, warehouse picking, GST invoicing, payments and outstanding. Published pricing from ₹0/month. No dealer, no AMC, live in 10 minutes.",
 
   hero: {
     eyebrow: "Vrikso Distribution · Live now",
-    title: "Built for the distribution trade,",
-    titleAccent: "by the distribution trade.",
-    sub: "From the salesman's first order of the morning to the evening's outstanding report one app runs the whole day. Born inside a real FMCG distribution business.",
+    title: "Distribution management software",
+    titleAccent: "built for the small distributor.",
+    sub: "One cloud app for the whole trade day — salesmen take orders in the market, the godown picks and loads, GST invoices reach shops on WhatsApp, outstanding updates live. Born inside a real FMCG distribution business.",
   },
 
   heroShots: [
@@ -129,6 +129,14 @@ export const DISTRIBUTION: VerticalContent = {
   },
 
   faqs: [
+    {
+      q: "Which is the best distribution management software for a small distributor in India?",
+      a: "It depends on who the software is for. Enterprise DMS platforms like Bizom and FieldAssist are built for FMCG brands to monitor their distributor network, not for a distributor to run their own business — and their deployments cost lakhs. Desktop ERPs like Marg need a Windows PC and a trained operator. Billing apps like Vyapar have no field-sales or warehouse workflow. Vrikso is built specifically for a small distribution team — salesman, godown and counter on one live cloud system — with published pricing from ₹0 to ₹799/month.",
+    },
+    {
+      q: "How much does distribution software cost in India?",
+      a: "Desktop packages like Marg ERP run roughly ₹7,200–₹25,200 one-time plus 18% GST, dealer charges and a yearly AMC of ₹2,000–₹5,000. Enterprise DMS platforms don't publish pricing; mid-size deployments are typically quoted in tens of thousands per month plus implementation fees. Vrikso publishes its full price list: Free (₹0, 1 user, 200 orders/month), Shop (₹299/month) and Business (₹799/month for 10 users) — no installation, AMC or hidden charges.",
+    },
     {
       q: "Will it work on my salesmen's cheap Android phones?",
       a: "Yes. Vrikso is built mobile-first and stays fast on low-end phones and 2G/3G networks. There's nothing to install it runs in the browser and can be added to the home screen like an app.",

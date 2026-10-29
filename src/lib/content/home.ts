@@ -160,6 +160,8 @@ export const HOME = {
       distribution: "Vrikso Distribution",
       billing: "Vrikso Billing",
       restaurant: "Vrikso Restaurant",
+      fmcg: "For FMCG distributors",
+      wholesale: "For wholesalers",
       pricing: "Pricing",
       blog: "Blog",
       contact: "Contact",

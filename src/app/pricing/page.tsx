@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Pricing",
   description:
     "Simple monthly pricing for Vrikso — Free, Shop and Business plans. No licence fees, no AMC, cancel anytime.",
+  alternates: { canonical: "/pricing" },
 };
 
 export default function PricingPage() {

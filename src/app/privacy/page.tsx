@@ -6,6 +6,7 @@ import { SITE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "How Vrikso collects, uses and protects your data.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

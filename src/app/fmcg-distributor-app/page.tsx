@@ -5,6 +5,7 @@ import { FMCG } from "@/lib/content/verticals/fmcg";
 export const metadata: Metadata = {
   title: FMCG.metaTitle,
   description: FMCG.metaDescription,
+  alternates: { canonical: "/fmcg-distributor-app" },
 };
 
 export default function FmcgDistributorAppPage() {

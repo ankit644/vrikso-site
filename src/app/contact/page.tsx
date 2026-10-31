@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Talk to Vrikso — book a demo, ask about pricing, or get help migrating from your current software. Fill the form or message us on WhatsApp.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

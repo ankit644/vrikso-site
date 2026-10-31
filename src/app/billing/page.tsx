@@ -5,6 +5,7 @@ import { BILLING } from "@/lib/content/verticals/billing";
 export const metadata: Metadata = {
   title: BILLING.metaTitle,
   description: BILLING.metaDescription,
+  alternates: { canonical: "/billing" },
 };
 
 export default function BillingPage() {

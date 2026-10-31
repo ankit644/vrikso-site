@@ -5,6 +5,7 @@ import { DISTRIBUTION } from "@/lib/content/verticals/distribution";
 export const metadata: Metadata = {
   title: DISTRIBUTION.metaTitle,
   description: DISTRIBUTION.metaDescription,
+  alternates: { canonical: "/distribution" },
 };
 
 export default function DistributionPage() {

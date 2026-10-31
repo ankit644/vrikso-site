@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
@@ -14,6 +15,10 @@ import shotAging from "../../public/app/m-aging.webp";
 import shotProducts from "../../public/app/m-products.webp";
 import shotPicking from "../../public/app/m-picking.webp";
 import shotDashboardD from "../../public/app/d-dashboard.webp";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function HomePage() {
   return (

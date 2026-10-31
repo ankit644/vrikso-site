@@ -5,6 +5,7 @@ import { RESTAURANT } from "@/lib/content/verticals/restaurant";
 export const metadata: Metadata = {
   title: RESTAURANT.metaTitle,
   description: RESTAURANT.metaDescription,
+  alternates: { canonical: "/restaurant" },
 };
 
 export default function RestaurantPage() {

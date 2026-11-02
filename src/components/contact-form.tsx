@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { sendGAEvent } from "@next/third-parties/google";
 import { FORM_ENDPOINT, SITE, waLink } from "@/lib/site";
 
 /**
@@ -102,9 +103,16 @@ export default function ContactForm({
         .catch(() => ({}));
       const ok = json.success === true || json.success === "true";
       if (!ok) throw new Error(json.message || "Submission rejected");
+      sendGAEvent("event", "generate_lead", {
+        business_type: data.business || "(not specified)",
+        page_path: window.location.pathname,
+      });
       setStatus("success");
       form.reset();
     } catch {
+      sendGAEvent("event", "lead_form_error", {
+        page_path: window.location.pathname,
+      });
       setStatus("error");
     }
   }

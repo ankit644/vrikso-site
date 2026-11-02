@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import { JsonLd, ORGANIZATION, WEBSITE } from "@/lib/jsonld";
+import AnalyticsEvents from "@/components/analytics-events";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -41,6 +42,7 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <JsonLd data={ORGANIZATION} />
         <JsonLd data={WEBSITE} />
+        <AnalyticsEvents />
         {children}
       </body>
       {GA_ID ? <GoogleAnalytics gaId={GA_ID} /> : null}

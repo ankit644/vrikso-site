@@ -134,8 +134,8 @@ export const HOME = {
     seeAll: "See full pricing",
     plans: [
       { name: "Free", price: "₹0", per: "forever", pitch: "Try it properly. 1 user.", featured: false },
-      { name: "Shop", price: "₹299", per: "/month", pitch: "For a single store. 3 users.", featured: false },
-      { name: "Business", price: "₹799", per: "/month", pitch: "Distributors & wholesalers. 10 users, routes, reports.", featured: true },
+      { name: "Shop", price: "₹250", per: "/mo · billed yearly", pitch: "₹2,999 a year (or ₹349 month-to-month). For a single store. 3 users.", featured: false },
+      { name: "Business", price: "₹750", per: "/mo · billed yearly", pitch: "₹8,999 a year (or ₹999 month-to-month). Distributors & wholesalers. 10 users, routes, reports.", featured: true },
     ],
   },
 

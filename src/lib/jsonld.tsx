@@ -70,10 +70,11 @@ export function softwareApplication(opts?: {
     offers: PLANS.map((p) => ({
       "@type": "Offer",
       name: `${p.name} plan`,
-      price: p.priceINR,
+      price: p.prices?.yearly ?? 0,
       priceCurrency: "INR",
-      description:
-        p.priceINR === 0 ? `${p.pitch} Free forever.` : `${p.pitch} ${p.price} per month.`,
+      description: p.prices
+        ? `${p.pitch} ₹${p.prices.yearly.toLocaleString("en-IN")} per year (≈₹${Math.round(p.prices.yearly / 12)}/month), or ₹${p.prices.monthly}/month billed monthly.`
+        : `${p.pitch} Free forever.`,
       url: `${SITE.url}/pricing`,
       availability: "https://schema.org/InStock",
     })),

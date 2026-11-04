@@ -131,11 +131,11 @@ export const DISTRIBUTION: VerticalContent = {
   faqs: [
     {
       q: "Which is the best distribution management software for a small distributor in India?",
-      a: "It depends on who the software is for. Enterprise DMS platforms like Bizom and FieldAssist are built for FMCG brands to monitor their distributor network, not for a distributor to run their own business — and their deployments cost lakhs. Desktop ERPs like Marg need a Windows PC and a trained operator. Billing apps like Vyapar have no field-sales or warehouse workflow. Vrikso is built specifically for a small distribution team — salesman, godown and counter on one live cloud system — with published pricing from ₹0 to ₹799/month.",
+      a: "It depends on who the software is for. Enterprise DMS platforms like Bizom and FieldAssist are built for FMCG brands to monitor their distributor network, not for a distributor to run their own business — and their deployments cost lakhs. Desktop ERPs like Marg need a Windows PC and a trained operator. Billing apps like Vyapar have no field-sales or warehouse workflow. Vrikso is built specifically for a small distribution team — salesman, godown and counter on one live cloud system — with published pricing from ₹0 to ₹8,999/year.",
     },
     {
       q: "How much does distribution software cost in India?",
-      a: "Desktop packages like Marg ERP run roughly ₹7,200–₹25,200 one-time plus 18% GST, dealer charges and a yearly AMC of ₹2,000–₹5,000. Enterprise DMS platforms don't publish pricing; mid-size deployments are typically quoted in tens of thousands per month plus implementation fees. Vrikso publishes its full price list: Free (₹0, 1 user, 200 orders/month), Shop (₹299/month) and Business (₹799/month for 10 users) — no installation, AMC or hidden charges.",
+      a: "Desktop packages like Marg ERP run roughly ₹7,200–₹25,200 one-time plus 18% GST, dealer charges and a yearly AMC of ₹2,000–₹5,000. Enterprise DMS platforms don't publish pricing; mid-size deployments are typically quoted in tens of thousands per month plus implementation fees. Vrikso publishes its full price list: Free (₹0 — 1 user, 200 orders/month), Shop (₹2,999/year, ≈₹250/month) and Business (₹8,999/year, ≈₹750/month for 10 users), with month-to-month options at ₹349 and ₹999 — no installation, AMC or hidden charges.",
     },
     {
       q: "Will it work on my salesmen's cheap Android phones?",

@@ -155,7 +155,7 @@ export const WHOLESALE: VerticalContent = {
     },
     {
       q: "What does it cost?",
-      a: "Published pricing: Free (₹0 — 1 user, 200 orders/month), Shop (₹299/month) and Business (₹799/month for 10 users). No licence fee, no AMC, no engineer visits — cancel anytime.",
+      a: "Published pricing: Free (₹0 — 1 user, 200 orders/month), Shop (₹2,999/year, ≈₹250/month) and Business (₹8,999/year, ≈₹750/month for 10 users) — or month-to-month at ₹349/₹999. No licence fee, no AMC, no engineer visits — cancel anytime.",
     },
   ],
 

@@ -131,7 +131,7 @@ export const FMCG: VerticalContent = {
   faqs: [
     {
       q: "Which app is best for an FMCG distributor in India?",
-      a: "Depends who it's for. Enterprise platforms like Bizom and FieldAssist are bought by FMCG brands to monitor their distributor network. For a distributor running their own operation — beats, schemes, godown, GST billing, collections — Vrikso is built for exactly that, with published pricing from ₹0 to ₹799/month and nothing to install.",
+      a: "Depends who it's for. Enterprise platforms like Bizom and FieldAssist are bought by FMCG brands to monitor their distributor network. For a distributor running their own operation — beats, schemes, godown, GST billing, collections — Vrikso is built for exactly that, with published pricing from ₹0 to ₹8,999/year and nothing to install.",
     },
     {
       q: "Does it handle company schemes like 10+1 and quantity slabs?",
@@ -155,7 +155,7 @@ export const FMCG: VerticalContent = {
     },
     {
       q: "What does it cost?",
-      a: "Published pricing, no dealer quotes: Free (₹0 — 1 user, 200 orders/month), Shop (₹299/month) and Business (₹799/month for 10 users, ₹99 per extra user). No installation, training or AMC charges.",
+      a: "Published pricing, no dealer quotes: Free (₹0 — 1 user, 200 orders/month), Shop (₹2,999/year) and Business (₹8,999/year for 10 users, ₹999 per extra user) — monthly plans available. No installation, training or AMC charges.",
     },
   ],
 

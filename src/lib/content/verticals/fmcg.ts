@@ -11,14 +11,14 @@ import shotDashboardD from "../../../../public/app/d-dashboard.webp";
  */
 export const FMCG: VerticalContent = {
   slug: "fmcg-distributor-app",
-  metaTitle: "FMCG Distributor App — Orders, Schemes & GST Billing on One Phone",
+  metaTitle: "FMCG Distribution Software & Order Booking App",
   metaDescription:
-    "The FMCG distributor app for Indian trade: salesmen book orders on the beat, schemes apply automatically, the godown gets picking lists, GST invoices reach shops on WhatsApp. Free plan to start — no PC, no licence, no AMC.",
+    "Cloud FMCG distribution software for Indian distributors: salesmen book orders on the beat from the order booking app, schemes apply automatically, the godown gets picking lists, GST invoices reach shops on WhatsApp. Published pricing from ₹0 — no PC, no licence, no AMC.",
 
   hero: {
     eyebrow: "Vrikso for FMCG distribution · Live now",
-    title: "The FMCG distributor app",
-    titleAccent: "your beats actually run on.",
+    title: "FMCG distribution software",
+    titleAccent: "and the order app your beats run on.",
     sub: "Multi-company catalog, scheme discounts, beat-wise salesmen, same-day picking and GST billing — born inside a real FMCG distribution business, and priced for one.",
   },
 
@@ -129,6 +129,14 @@ export const FMCG: VerticalContent = {
   },
 
   faqs: [
+    {
+      q: "Which software should a small FMCG distributor in India use to manage orders and billing?",
+      a: "For a small distributor running their own operation, the software has to cover four things in one system: order booking on the salesman's phone, company schemes applied automatically, GST invoicing from the godown, and party-wise outstanding. Desktop packages like Marg, BUSY and SWIL do this well but need a Windows PC, a trained operator and a dealer quote. Vrikso does it on the phones your team already carries, with pricing published openly — free to start, ₹2,999/year for a single counter, ₹8,999/year for a team of ten.",
+    },
+    {
+      q: "What is FMCG distribution software?",
+      a: "FMCG distribution software runs the daily cycle of a fast-moving-consumer-goods distributor: taking orders from retailers on beats, applying company schemes and slabs, picking and loading at the godown, raising GST invoices on delivery, and tracking collections and outstanding per shop. It differs from plain billing software (which only makes invoices) and from enterprise DMS platforms like Bizom or FieldAssist, which brands buy to monitor their distributor network rather than to run a distributor's own business.",
+    },
     {
       q: "Which app is best for an FMCG distributor in India?",
       a: "Depends who it's for. Enterprise platforms like Bizom and FieldAssist are bought by FMCG brands to monitor their distributor network. For a distributor running their own operation — beats, schemes, godown, GST billing, collections — Vrikso is built for exactly that, with published pricing from ₹0 to ₹8,999/year and nothing to install.",

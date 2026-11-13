@@ -72,6 +72,7 @@ export default function SiteFooter() {
             <li><Link className="hover:text-ink" href="/restaurant">{f.links.restaurant}</Link></li>
             <li><Link className="hover:text-ink" href="/fmcg-distributor-app">{f.links.fmcg}</Link></li>
             <li><Link className="hover:text-ink" href="/wholesale-billing-software">{f.links.wholesale}</Link></li>
+            <li><Link className="hover:text-ink" href="/super-stockist-software">{f.links.superStockist}</Link></li>
           </ul>
         </div>
 
@@ -80,6 +81,7 @@ export default function SiteFooter() {
           <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
             <li><Link className="hover:text-ink" href="/pricing">{f.links.pricing}</Link></li>
             <li><Link className="hover:text-ink" href="/blog">{f.links.blog}</Link></li>
+            <li><Link className="hover:text-ink" href="/glossary">{f.links.glossary}</Link></li>
             <li><a className="hover:text-ink" href={SITE.appUrl}>Login</a></li>
             <li><Link className="hover:text-ink" href="/contact">{f.links.contact}</Link></li>
             <li><Link className="hover:text-ink" href="/privacy">{f.links.privacy}</Link></li>

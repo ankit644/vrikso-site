@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/lib/site";
 import { POSTS_BY_DATE, BLOG_PAGE_COUNT } from "@/lib/content/blog";
+import { TERMS } from "@/lib/content/glossary";
 
 const APP_DIR = path.join(process.cwd(), "src", "app");
 const PAGE_FILE = /^page\.(tsx|ts|jsx|js|mdx)$/;
@@ -63,5 +64,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  return [...staticEntries, ...postEntries, ...pageEntries];
+  // Glossary term pages (/glossary/<slug>); the /glossary index is a static route above.
+  const termEntries: MetadataRoute.Sitemap = TERMS.map((term) => ({
+    url: `${SITE.url}/glossary/${term.slug}`,
+    changeFrequency: "yearly",
+    priority: 0.5,
+  }));
+
+  return [...staticEntries, ...postEntries, ...pageEntries, ...termEntries];
 }

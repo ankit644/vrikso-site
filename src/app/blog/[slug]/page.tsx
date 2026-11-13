@@ -6,6 +6,7 @@ import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import Reveal from "@/components/reveal";
 import PostCover from "@/components/post-cover";
+import InlineText from "@/components/inline-text";
 import { POSTS, getPost, relatedPosts, formatDate, postVertical, postFaq, plainText, POST_CTA, type BlogBlock } from "@/lib/content/blog";
 import { SITE, waLink } from "@/lib/site";
 import { JsonLd } from "@/lib/jsonld";
@@ -209,25 +210,8 @@ export default async function BlogPostPage({
 }
 
 /* ── Inline [label](href) links in body text ── */
-function Inline({ x }: { x: string }) {
-  const parts = x.split(/(\[[^\]]+\]\([^)]+\))/g);
-  if (parts.length === 1) return <>{x}</>;
-  return (
-    <>
-      {parts.map((part, i) => {
-        const m = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-        if (!m) return part;
-        const [, label, href] = m;
-        const cls = "font-medium text-violet-deep underline decoration-lilac-line underline-offset-2 transition-colors hover:decoration-violet";
-        return href.startsWith("/") ? (
-          <Link key={i} href={href} className={cls}>{label}</Link>
-        ) : (
-          <a key={i} href={href} rel="noopener" className={cls}>{label}</a>
-        );
-      })}
-    </>
-  );
-}
+/** Inline [label](href) links — shared with the glossary. */
+const Inline = InlineText;
 
 /* ── Body block renderer ── */
 function Block({ block }: { block: BlogBlock }) {

@@ -4,8 +4,10 @@ import { BILLING } from "@/lib/content/verticals/billing";
 import { RESTAURANT } from "@/lib/content/verticals/restaurant";
 import { FMCG } from "@/lib/content/verticals/fmcg";
 import { WHOLESALE } from "@/lib/content/verticals/wholesale";
+import { SUPER_STOCKIST } from "@/lib/content/verticals/super-stockist";
 import { PLANS, PRICING_FAQS, PRICING_VERTICALS } from "@/lib/content/pricing";
 import { POSTS_BY_DATE } from "@/lib/content/blog";
+import { TERMS_SORTED, plainTerm } from "@/lib/content/glossary";
 import type { VerticalContent } from "@/components/vertical-page";
 
 export const dynamic = "force-static";
@@ -14,7 +16,7 @@ export const dynamic = "force-static";
     (https://llmstxt.org). Built from the same content files as the pages,
     so it stays in sync automatically. */
 
-const VERTICALS: VerticalContent[] = [DISTRIBUTION, FMCG, WHOLESALE, BILLING, RESTAURANT];
+const VERTICALS: VerticalContent[] = [DISTRIBUTION, FMCG, WHOLESALE, SUPER_STOCKIST, BILLING, RESTAURANT];
 
 function vertical(v: VerticalContent) {
   const lines = [
@@ -74,6 +76,12 @@ ${PRICING_FAQS.map((f) => `- Q: ${f.q}\n  A: ${f.a}`).join("\n")}
 Practical guides for Indian distributors, wholesalers, retailers and restaurants: ${SITE.url}/blog
 
 ${POSTS_BY_DATE.map((p) => `- [${p.title}](${SITE.url}/blog/${p.slug}): ${p.description}`).join("\n")}
+
+## Trade glossary
+
+Plain-English definitions of the terms Indian distribution, wholesale and retail trade runs on: ${SITE.url}/glossary
+
+${TERMS_SORTED.map((t) => `- [${t.term}](${SITE.url}/glossary/${t.slug})${t.aka?.length ? ` (also: ${t.aka.join(", ")})` : ""}: ${plainTerm(t.short)}`).join("\n")}
 
 ## Contact
 

@@ -19,14 +19,14 @@ export const HOME = {
   waMessage: "Hi! I want a demo of Vrikso for my business.",
 
   hero: {
-    eyebrow: "For distributors · wholesalers · retailers",
+    eyebrow: "Distribution · Billing · Restaurant · Jewellery",
     titleA: "Run your whole",
     titleAccent: "business",
     titleB: "from your phone.",
-    sub: "Orders, GST billing, stock and payments — one clean app for your salesmen, warehouse and accounts. No computer. No backups. No tension.",
-    proof: "Built inside a real distribution business — not a software lab.",
+    sub: "One clean system that takes the shape of your trade — distributor, shop, restaurant or jewellery showroom. GST billing, stock, payments and your team's whole day, on the phones you already own.",
+    proof: "Born inside a real distribution business — now running four trades.",
     stats: [
-      { k: "90 sec", v: "to place an order" },
+      { k: "4", v: "trades, one platform" },
       { k: "10 min", v: "to go live" },
       { k: "100%", v: "cloud-backed, always" },
     ],
@@ -38,23 +38,50 @@ export const HOME = {
     "Works on any Android phone",
     "Automatic cloud backup",
     "Hindi + English",
-    "Live outstanding, per shop",
+    "Live outstanding, per customer",
     "No PC · No licence · No AMC",
     "Built for Bharat's trade",
   ],
 
-  gallery: {
-    label: "Inside Vrikso",
-    title: "Not a brochure.",
-    titleAccent: "The real screens.",
-    p: "Every screenshot below is the live app — the same one your salesman opens at the shop and your accountant opens at night.",
-    shots: {
-      order: { cap: "Take an order", sub: "Tap products, set qty, place — 90 seconds." },
-      invoice: { cap: "GST invoice", sub: "Auto-generated, share on WhatsApp." },
-      aging: { cap: "Money owed", sub: "Outstanding by shop, by age bucket." },
-      products: { cap: "Your catalog", sub: "Every SKU, pack-size, stock & price." },
-      dashboard: { cap: "The whole day, one screen", sub: "Orders, sales, outstanding and top products live, on any laptop or phone." },
-    },
+  /** The four product lines, each shown with its own real screenshots. */
+  products: {
+    label: "Pick your trade",
+    title: "Four products.",
+    titleAccent: "One calm core.",
+    p: "Every line below is the same trusted system wearing your industry's rules — shown in real screenshots of the live app, not mockups.",
+    dashboardCap: "Your control room",
+    dashboardSub: "Today's sales, outstanding and top items — live, on any laptop or phone, whatever your trade.",
+    explore: "Explore",
+    items: [
+      {
+        key: "distribution",
+        href: "/distribution",
+        name: "Distribution",
+        desc: "Orders, warehouse & GST billing for distributors and wholesalers.",
+        points: ["Salesman order app, beats & routes", "Picking lists & automatic GST invoices", "Outstanding & aging, per shop"],
+      },
+      {
+        key: "billing",
+        href: "/billing",
+        name: "Billing",
+        desc: "GST invoicing for any business, from any phone.",
+        points: ["Invoices, estimates & challans in seconds", "Recurring billing & payment tracking", "GSTR-1 export for your CA"],
+      },
+      {
+        key: "restaurant",
+        href: "/restaurant",
+        name: "Restaurant",
+        desc: "POS, KOTs, tables & bills for eateries.",
+        points: ["Tables, KOTs & a live kitchen board", "Zomato / Swiggy orders in one place", "GST bills & customer khata"],
+      },
+      {
+        key: "jewellery",
+        href: "/jewellery-software",
+        name: "Jewellery",
+        desc: "Tags, rates, old gold & schemes for jewellers.",
+        points: ["Tags with HUID & net weight", "Daily rates — making & wastage maths done", "Old gold, savings schemes & girvi"],
+      },
+    ],
   },
 
   pains: {
@@ -63,7 +90,7 @@ export const HOME = {
       {
         kicker: "The register",
         h: "Paper ledgers lie.",
-        p: "Outstanding scattered across diaries and memory. Vrikso keeps one live ledger every order, invoice and payment, per shop, always current.",
+        p: "Outstanding scattered across diaries and memory. Vrikso keeps one live ledger — every order, invoice and payment, per customer, always current.",
       },
       {
         kicker: "The desktop",
@@ -79,22 +106,22 @@ export const HOME = {
   },
 
   tour: {
-    label: "A day on Vrikso",
+    label: "One platform, three trade days",
     steps: [
       {
         k: "01",
-        h: "Salesman takes the order at the shop",
-        p: "Pick the shop, tap products, place order — 90 seconds on a phone, even on 2G. Recent shops appear first.",
+        h: "The distributor's morning",
+        p: "A salesman picks the shop, taps products, places the order — 90 seconds on a phone, even on 2G. Back at the godown, the picking list builds itself.",
       },
       {
         k: "02",
-        h: "Warehouse picks and loads",
-        p: "Picking and loading lists generate themselves. Mark delivered — stock decrements and the GST invoice is created automatically.",
+        h: "The restaurant's lunch rush",
+        p: "Orders fly to the kitchen board as KOTs, tables turn, and every bill lands as a clean GST invoice — no shouting across the pass, no paper slips.",
       },
       {
         k: "03",
-        h: "Invoice lands on WhatsApp",
-        p: "A clean GST invoice PDF, sent to the shop in one tap. Payments recorded against it; outstanding always visible.",
+        h: "The jeweller's evening sale",
+        p: "Scan the tag and the bill does the gold maths — today's rate, making and wastage — with the customer's old gold tested and credited on the same invoice.",
       },
     ],
   },
@@ -122,7 +149,7 @@ export const HOME = {
     rows: [
       ["Works on any phone", "Needs a Windows PC"],
       ["Automatic cloud backup", "Manual backups, local files"],
-      ["Salesmen take orders in the field", "Orders dictated over phone calls"],
+      ["Your team works from the market, kitchen or counter", "Everything queues behind one PC"],
       ["Updates & support included", "Paid AMC for every update"],
     ],
     us: "Vrikso",
@@ -137,7 +164,7 @@ export const HOME = {
     plans: [
       { name: "Free", price: "₹0", per: "forever", pitch: "Try it properly. 1 user.", featured: false },
       { name: "Shop", price: "₹250", per: "/mo · billed yearly", pitch: "₹2,999 a year (or ₹349 month-to-month). For a single store. 3 users.", featured: false },
-      { name: "Business", price: "₹750", per: "/mo · billed yearly", pitch: "₹8,999 a year (or ₹999 month-to-month). Distributors & wholesalers. 10 users, routes, reports.", featured: true },
+      { name: "Business", price: "₹750", per: "/mo · billed yearly", pitch: "₹8,999 a year (or ₹999 month-to-month). For teams — distributors, restaurants, showrooms. 10 users, roles, reports.", featured: true },
     ],
   },
 

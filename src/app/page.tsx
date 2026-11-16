@@ -9,12 +9,15 @@ import { HOME as c } from "@/lib/content/home";
 import { POSTS_BY_DATE, formatDate } from "@/lib/content/blog";
 import { SITE, waLink } from "@/lib/site";
 
+import type { StaticImageData } from "next/image";
 import shotOrder from "../../public/app/m-order-new.webp";
 import shotInvoice from "../../public/app/m-invoice.webp";
-import shotAging from "../../public/app/m-aging.webp";
-import shotProducts from "../../public/app/m-products.webp";
-import shotPicking from "../../public/app/m-picking.webp";
 import shotDashboardD from "../../public/app/d-dashboard.webp";
+import shotBillingInvoice from "../../public/app/billing/m-invoice.webp";
+import shotRestaurantTables from "../../public/app/restaurant/m-tables.webp";
+import shotRestaurantKitchen from "../../public/app/restaurant/m-kitchen.webp";
+import shotJewelleryTags from "../../public/app/jewellery/m-tags.webp";
+import shotJewellerySale from "../../public/app/jewellery/m-sale.webp";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -27,8 +30,8 @@ export default function HomePage() {
       <main>
         <Hero />
         <Strip />
+        <Products />
         <Pains />
-        <Gallery />
         <Tour />
         <Tree />
         <Compare />
@@ -110,15 +113,15 @@ function Hero() {
             {/* in-band feature pair, like the reference */}
             <div className="relative z-10 mt-7 grid grid-cols-2 gap-5 border-t border-white/20 pt-6 text-on-hero">
               <div>
-                <p className="text-sm font-semibold">Orders from the field</p>
+                <p className="text-sm font-semibold">Takes your trade&rsquo;s shape</p>
                 <p className="mt-1 text-xs leading-relaxed text-on-hero-dim">
-                  Salesmen order from any phone, even on 2G.
+                  Beats, tables, tags or invoices — same calm core.
                 </p>
               </div>
               <div>
                 <p className="text-sm font-semibold">Live outstanding</p>
                 <p className="mt-1 text-xs leading-relaxed text-on-hero-dim">
-                  Every shop&rsquo;s udhaar, current to the minute.
+                  Every customer&rsquo;s udhaar, current to the minute.
                 </p>
               </div>
             </div>
@@ -183,15 +186,16 @@ function Pains() {
   );
 }
 
-/* ── Gallery — the premium product proof: real screens in real frames ── */
-function Gallery() {
-  const g = c.gallery;
-  const phones = [
-    { src: shotOrder, ...g.shots.order },
-    { src: shotInvoice, ...g.shots.invoice },
-    { src: shotAging, ...g.shots.aging },
-    { src: shotProducts, ...g.shots.products },
-  ];
+/* ── Products — the four trades, each with its own real screens ── */
+const PRODUCT_SHOTS: Record<string, StaticImageData> = {
+  distribution: shotOrder,
+  billing: shotBillingInvoice,
+  restaurant: shotRestaurantTables,
+  jewellery: shotJewelleryTags,
+};
+
+function Products() {
+  const g = c.products;
   return (
     <section className="relative overflow-hidden border-b border-line bg-paper-2">
       <div className="dotgrid absolute inset-0 opacity-60" aria-hidden />
@@ -204,9 +208,40 @@ function Gallery() {
           <p className="mt-4 max-w-xl text-[0.97rem] leading-relaxed text-ink-soft">{g.p}</p>
         </Reveal>
 
+        {/* the four trades */}
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 sm:gap-7">
+          {g.items.map((v, i) => (
+            <Reveal key={v.key} delay={i * 90}>
+              <Link
+                href={v.href}
+                className="group flex h-full flex-col rounded-[var(--radius-card)] border border-line-2 bg-paper-3 px-5 pt-7 pb-6 shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-md)]"
+              >
+                <div className="mx-auto">
+                  <PhoneShot src={PRODUCT_SHOTS[v.key]} alt={`Vrikso ${v.name} — the real app`} width={170} />
+                </div>
+                <h3 className="font-display mt-6 text-xl font-medium">
+                  Vrikso <span className="text-brand-gradient">{v.name}</span>
+                </h3>
+                <p className="mt-1.5 text-[0.85rem] leading-snug text-ink-soft">{v.desc}</p>
+                <ul className="mt-4 space-y-1.5 text-[0.82rem] leading-snug text-ink-soft">
+                  {v.points.map((pt) => (
+                    <li key={pt} className="flex gap-1.5">
+                      <span className="mt-px shrink-0 text-violet">✓</span>
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+                <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-violet-deep group-hover:underline">
+                  {g.explore} {v.name} →
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
         {/* desktop dashboard in a browser frame */}
         <Reveal delay={120}>
-          <div className="relative mt-12">
+          <div className="relative mt-20">
             <div className="absolute -inset-x-8 -top-8 bottom-8 -z-0 rounded-[32px] bg-violet/10 blur-2xl" aria-hidden />
             <BrowserShot
               src={shotDashboardD}
@@ -214,34 +249,18 @@ function Gallery() {
               className="relative z-10"
             />
             <p className="mt-4 max-w-md text-sm text-ink-soft">
-              <span className="font-semibold text-ink">{g.shots.dashboard.cap}.</span>{" "}
-              {g.shots.dashboard.sub}
+              <span className="font-semibold text-ink">{g.dashboardCap}.</span> {g.dashboardSub}
             </p>
           </div>
         </Reveal>
-
-        {/* phone row */}
-        <div className="mt-16 grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
-          {phones.map((p, i) => (
-            <Reveal key={p.cap} delay={i * 90}>
-              <figure className="flex h-full flex-col items-center rounded-[var(--radius-card)] border border-line-2 bg-paper-3 px-4 pt-6 pb-6 text-center shadow-[var(--shadow-sm)] transition-shadow hover:shadow-[var(--shadow-md)]">
-                <PhoneShot src={p.src} alt={`${p.cap} — Vrikso app`} width={190} />
-                <figcaption className="mt-5">
-                  <p className="font-display text-lg font-medium">{p.cap}</p>
-                  <p className="mt-1 text-[0.82rem] leading-snug text-ink-faint">{p.sub}</p>
-                </figcaption>
-              </figure>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );
 }
 
-/* ── Tour — numbered day-in-the-life, each step paired with a real screen ── */
+/* ── Tour — three different trades' days, each paired with that trade's real screen ── */
 function Tour() {
-  const shots = [shotOrder, shotPicking, shotInvoice];
+  const shots = [shotOrder, shotRestaurantKitchen, shotJewellerySale];
   return (
     <section className="border-b border-line bg-paper">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">

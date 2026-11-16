@@ -5,6 +5,7 @@ import { RESTAURANT } from "@/lib/content/verticals/restaurant";
 import { FMCG } from "@/lib/content/verticals/fmcg";
 import { WHOLESALE } from "@/lib/content/verticals/wholesale";
 import { SUPER_STOCKIST } from "@/lib/content/verticals/super-stockist";
+import { JEWELLERY } from "@/lib/content/verticals/jewellery";
 import { PLANS, PRICING_FAQS, PRICING_VERTICALS } from "@/lib/content/pricing";
 import { POSTS_BY_DATE } from "@/lib/content/blog";
 import { TERMS_SORTED, plainTerm } from "@/lib/content/glossary";
@@ -16,7 +17,7 @@ export const dynamic = "force-static";
     (https://llmstxt.org). Built from the same content files as the pages,
     so it stays in sync automatically. */
 
-const VERTICALS: VerticalContent[] = [DISTRIBUTION, FMCG, WHOLESALE, SUPER_STOCKIST, BILLING, RESTAURANT];
+const VERTICALS: VerticalContent[] = [DISTRIBUTION, FMCG, WHOLESALE, SUPER_STOCKIST, BILLING, RESTAURANT, JEWELLERY];
 
 function vertical(v: VerticalContent) {
   const lines = [

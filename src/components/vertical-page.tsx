@@ -14,8 +14,10 @@ export type VerticalContent = {
   metaTitle: string;
   metaDescription: string;
   hero: { eyebrow: string; title: string; titleAccent: string; sub: string };
-  /** 1–2 phone screenshots floated in the hero; [0] is the main (front) one. */
-  heroShots: { src: StaticImageData; alt: string }[];
+  /** 1–2 phone screenshots floated in the hero; [0] is the main (front) one.
+      Omit for a vertical whose app screens haven't been captured yet — the hero
+      then runs full width rather than showing another product's screenshots. */
+  heroShots?: { src: StaticImageData; alt: string }[];
   waMessage: string;
   stats?: { k: string; v: string }[];
   features: { h: string; p: string; icon?: FeatureIconName }[];
@@ -52,7 +54,11 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
       <main>
         {/* Hero */}
         <section className="hero-night grain relative overflow-hidden text-on-hero">
-          <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:py-28">
+          <div
+            className={`relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 md:py-28 ${
+              v.heroShots?.length ? "md:grid-cols-[1.1fr_0.9fr]" : "md:grid-cols-1"
+            }`}
+          >
             <div className="relative z-10">
               <p className="rise rule-label max-w-md text-on-hero-dim">{v.hero.eyebrow}</p>
               <h1
@@ -74,26 +80,28 @@ export default function VerticalPage({ v }: { v: VerticalContent }) {
               </div>
             </div>
 
-            <div className="rise relative mx-auto w-full max-w-[380px]" style={{ ["--rise-delay" as string]: "300ms" }}>
-              <div className="absolute -inset-6 rounded-full bg-violet/25 blur-3xl" aria-hidden />
+            {v.heroShots?.length ? (
+              <div className="rise relative mx-auto w-full max-w-[380px]" style={{ ["--rise-delay" as string]: "300ms" }}>
+                <div className="absolute -inset-6 rounded-full bg-violet/25 blur-3xl" aria-hidden />
 
-              {/* mobile: one full phone in flow */}
-              <div className="relative z-10 mx-auto w-[68%] min-w-[220px] max-w-[280px] sm:hidden">
-                <PhoneShot src={v.heroShots[0].src} alt={v.heroShots[0].alt} width={280} priority />
-              </div>
+                {/* mobile: one full phone in flow */}
+                <div className="relative z-10 mx-auto w-[68%] min-w-[220px] max-w-[280px] sm:hidden">
+                  <PhoneShot src={v.heroShots[0].src} alt={v.heroShots[0].alt} width={280} priority />
+                </div>
 
-              {/* sm+: floating cluster */}
-              <div className="relative hidden h-[440px] sm:block">
-                {v.heroShots[1] && (
-                  <div className="floaty-slow absolute top-10 left-0 z-0 w-[190px]" style={{ ["--rot" as string]: "-7deg" }}>
-                    <PhoneShot src={v.heroShots[1].src} alt={v.heroShots[1].alt} width={190} />
+                {/* sm+: floating cluster */}
+                <div className="relative hidden h-[440px] sm:block">
+                  {v.heroShots[1] && (
+                    <div className="floaty-slow absolute top-10 left-0 z-0 w-[190px]" style={{ ["--rot" as string]: "-7deg" }}>
+                      <PhoneShot src={v.heroShots[1].src} alt={v.heroShots[1].alt} width={190} />
+                    </div>
+                  )}
+                  <div className="floaty absolute top-0 right-0 z-10 w-[240px] md:w-[260px]" style={{ ["--rot" as string]: "4deg" }}>
+                    <PhoneShot src={v.heroShots[0].src} alt={v.heroShots[0].alt} width={260} />
                   </div>
-                )}
-                <div className="floaty absolute top-0 right-0 z-10 w-[240px] md:w-[260px]" style={{ ["--rot" as string]: "4deg" }}>
-                  <PhoneShot src={v.heroShots[0].src} alt={v.heroShots[0].alt} width={260} />
                 </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </section>
 

@@ -1772,7 +1772,7 @@ export function relatedPosts(slug: string, n = 3): BlogPost[] {
   return [...sameCat, ...rest].slice(0, n);
 }
 
-export type Vertical = "distribution" | "billing" | "restaurant";
+export type Vertical = "distribution" | "billing" | "restaurant" | "jewellery";
 
 /** Which product a post belongs to: explicit `vertical` if set, otherwise
     inferred from tags. Defaults to distribution so every existing post keeps
@@ -1805,6 +1805,12 @@ export const POST_CTA: Record<Vertical, { title: string; sub: string; wa: string
     sub: "Tables, KOTs, aggregator orders and GST bills — on the phones your staff already carry.",
     wa: "Hi! I read your blog and want a demo of Vrikso Restaurant.",
     href: "/restaurant",
+  },
+  jewellery: {
+    title: "Rates, tags and old gold — one system.",
+    sub: "Today's rate set once, HUID on every tag, making and wastage calculated, schemes and girvi in the same place.",
+    wa: "Hi! I read your blog and want a demo of Vrikso Jewellery.",
+    href: "/jewellery-software",
   },
 };
 

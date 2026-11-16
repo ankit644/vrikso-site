@@ -8,11 +8,12 @@ export const HOME = {
     contact: "Contact",
   },
 
-  /** The three product lines shown under the "Software" nav dropdown. */
+  /** The product lines shown under the "Software" nav dropdown. */
   softwareMenu: [
     { href: "/distribution", name: "Vrikso Distribution", desc: "Orders, warehouse & GST billing for distributors" },
     { href: "/billing", name: "Vrikso Billing", desc: "GST invoicing, payments & GSTR-1 for any business" },
     { href: "/restaurant", name: "Vrikso Restaurant", desc: "POS, KOTs, tables & bills for eateries" },
+    { href: "/jewellery-software", name: "Vrikso Jewellery", desc: "Tags, HUID, old gold, schemes & girvi for jewellers" },
   ],
   cta: { start: "Start free", demo: "WhatsApp demo", login: "Login" },
   waMessage: "Hi! I want a demo of Vrikso for my business.",
@@ -102,13 +103,14 @@ export const HOME = {
     label: "One tree, many branches",
     title: "One platform.",
     titleAccent: "Every business.",
-    p: "Vrikso is one system that takes the shape of your trade. Distribution, Billing and Restaurant are live today; every new line is the same trusted core wearing your industry's rules.",
+    p: "Vrikso is one system that takes the shape of your trade. Distribution, Billing, Restaurant and Jewellery are live today; every new line is the same trusted core wearing your industry's rules.",
     live: "Live now",
     soon: "Coming",
     branches: [
       { name: "Distribution", live: true, href: "/distribution" },
       { name: "Billing", live: true, href: "/billing" },
       { name: "Restaurant", live: true, href: "/restaurant" },
+      { name: "Jewellery", live: true, href: "/jewellery-software" },
       { name: "Kirana & Retail", live: false },
       { name: "Pharma", live: false },
       { name: "Garments", live: false },
@@ -160,6 +162,7 @@ export const HOME = {
       distribution: "Vrikso Distribution",
       billing: "Vrikso Billing",
       restaurant: "Vrikso Restaurant",
+      jewellery: "Vrikso Jewellery",
       fmcg: "For FMCG distributors",
       wholesale: "For wholesalers",
       superStockist: "For super stockists",

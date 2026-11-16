@@ -70,6 +70,7 @@ export default function SiteFooter() {
             <li><Link className="hover:text-ink" href="/distribution">{f.links.distribution}</Link></li>
             <li><Link className="hover:text-ink" href="/billing">{f.links.billing}</Link></li>
             <li><Link className="hover:text-ink" href="/restaurant">{f.links.restaurant}</Link></li>
+            <li><Link className="hover:text-ink" href="/jewellery-software">{f.links.jewellery}</Link></li>
             <li><Link className="hover:text-ink" href="/fmcg-distributor-app">{f.links.fmcg}</Link></li>
             <li><Link className="hover:text-ink" href="/wholesale-billing-software">{f.links.wholesale}</Link></li>
             <li><Link className="hover:text-ink" href="/super-stockist-software">{f.links.superStockist}</Link></li>

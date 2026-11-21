@@ -1,0 +1,49 @@
+# Push-to-deploy for the marketing site on the Oracle VM (replaces the Vercel
+# Git integration after cutover; both run in parallel until then).
+# The site runs as the `site` service inside the CRM's compose stack on the VM
+# (/srv/app/deploy/docker-compose.yml) — this workflow pulls THIS repo on the VM
+# and rebuilds only that service.
+#
+# Required repository secrets: VM_HOST, VM_USER, VM_SSH_KEY (same values as the
+# My-business-crm repo uses). Skips with a warning until they exist.
+
+name: deploy-vm
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-vm
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint --if-present
+      - run: npm run build
+
+      - name: Deploy over SSH
+        env:
+          VM_HOST: ${{ secrets.VM_HOST }}
+          VM_USER: ${{ secrets.VM_USER }}
+          VM_SSH_KEY: ${{ secrets.VM_SSH_KEY }}
+        run: |
+          if [ -z "$VM_HOST" ] || [ -z "$VM_USER" ] || [ -z "$VM_SSH_KEY" ]; then
+            echo "::warning::VM deploy not configured — set VM_HOST / VM_USER / VM_SSH_KEY repo secrets. Skipping."
+            exit 0
+          fi
+          mkdir -p ~/.ssh
+          echo "$VM_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "$VM_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -i ~/.ssh/deploy_key "$VM_USER@$VM_HOST" \
+            "git -C /srv/site pull --ff-only && cd /srv/app/deploy && docker compose build site && docker compose up -d site"

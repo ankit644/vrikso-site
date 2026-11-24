@@ -83,6 +83,7 @@ export default function SiteFooter() {
             <li><Link className="hover:text-ink" href="/pricing">{f.links.pricing}</Link></li>
             <li><Link className="hover:text-ink" href="/blog">{f.links.blog}</Link></li>
             <li><Link className="hover:text-ink" href="/glossary">{f.links.glossary}</Link></li>
+            <li><Link className="hover:text-ink" href="/tools">{f.links.tools}</Link></li>
             <li><a className="hover:text-ink" href={SITE.appUrl}>Login</a></li>
             <li><Link className="hover:text-ink" href="/contact">{f.links.contact}</Link></li>
             <li><Link className="hover:text-ink" href="/privacy">{f.links.privacy}</Link></li>

@@ -196,6 +196,7 @@ export const HOME = {
       pricing: "Pricing",
       blog: "Blog",
       glossary: "Trade glossary",
+      tools: "Free tools",
       contact: "Contact",
       privacy: "Privacy",
       terms: "Terms",

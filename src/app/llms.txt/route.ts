@@ -78,6 +78,13 @@ Practical guides for Indian distributors, wholesalers, retailers and restaurants
 
 ${POSTS_BY_DATE.map((p) => `- [${p.title}](${SITE.url}/blog/${p.slug}): ${p.description}`).join("\n")}
 
+## Free tools
+
+Free, no-signup calculators for Indian trade: ${SITE.url}/tools
+
+- [Distributor ROI calculator](${SITE.url}/tools/distributor-roi-calculator): computes return on investment as annual net earnings ÷ (average stock + retailer credit + deposits), judged against the 12–20% band FMCG companies consider healthy.
+- [Scheme discount calculator](${SITE.url}/tools/scheme-discount-calculator): converts any buy-X-get-Y-free trade scheme to its true effective discount (10+1 = 9.09%, not 10%) and compares it with a flat percentage discount.
+
 ## Trade glossary
 
 Plain-English definitions of the terms Indian distribution, wholesale and retail trade runs on: ${SITE.url}/glossary

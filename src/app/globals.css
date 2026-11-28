@@ -308,6 +308,11 @@ body {
   opacity: 1;
   transform: none;
 }
+/* Without scripting nothing can ever add .is-visible, so the reveal must not
+   hide anything — otherwise the page renders blank. */
+@media (scripting: none) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
 
 /* gentle float for hero devices */
 @keyframes floaty {
